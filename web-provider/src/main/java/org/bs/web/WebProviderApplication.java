@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableEurekaClient
-@MapperScan("org.bs.web.mapper.dyl")
+@MapperScan("org.bs.web.mapper.*")
 public class WebProviderApplication {
 
     public static void main(String[] args) {

@@ -9,6 +9,11 @@ public class page {
 
     @RequestMapping("toMain")
     public String toMian(){
-        return "view/Main";
+        return "dyl/view/Main";
+    }
+
+    @RequestMapping("toIndex")
+    public String toIndex(){
+        return "dyl/view/index";
     }
 }

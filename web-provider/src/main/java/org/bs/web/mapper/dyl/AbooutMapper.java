@@ -1,7 +1,7 @@
 package org.bs.web.mapper.dyl;
 
 import org.apache.ibatis.annotations.Select;
-import org.bs.web.dyl.pojo.MovieAboutBean;
+import org.bs.web.pojo.MovieBean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,5 +13,5 @@ public interface AbooutMapper {
             "                          left join t_movie_performer tmp on tm.id = tmp.movieId " +
             "                          left join t_performer tp on tmp.performerId = tp.id " +
             " where tm.name = #{value}")
-    MovieAboutBean queryMovieByName(String name);
+    MovieBean queryMovieByName(String name);
 }

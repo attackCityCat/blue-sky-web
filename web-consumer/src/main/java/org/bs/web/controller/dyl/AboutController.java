@@ -1,6 +1,7 @@
 package org.bs.web.controller.dyl;
 
-import org.bs.web.dyl.pojo.MovieAboutBean;
+
+import org.bs.web.pojo.MovieBean;
 import org.bs.web.service.dyl.AboutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ public class AboutController {
     private AboutService aboutService;
 
     @RequestMapping("queryMovieByName")
-    public MovieAboutBean queryMovieBynMame(String name){
+    public MovieBean queryMovieBynMame(String name){
         return aboutService.queryMovieByName(name);
     }
 
