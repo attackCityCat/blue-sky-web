@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<script type="text/javascript" src="/js/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="/js/easyui_util.js"></script>
+
+<script type="text/javascript" src="/js/kindeditor-4.1.10/kindeditor-all.js"></script>
+<link rel="styleSheet" href="/js/kindeditor-4.1.10/themes/default/default.css" type="text/css">
+
+<script type="text/javascript" src="/js/easyui1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="/js/easyui1.5/themes/default/easyui.css" type="text/css"></link>
+<link rel="stylesheet" href="/js/easyui1.5/themes/icon.css" type="text/css"></link>
+
+<script type="text/javascript" src="/js/util-js.js"></script>
+
+<link rel="stylesheet" href="/js/uploadify/uploadify.css" type="text/css"></link>
+<script type="text/javascript" src="/js/uploadify/jquery.uploadify.js"></script>
+<head>
+    <title>后台管理系统</title>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north',title:'上'" height="20%">
+    <div style="line-height:70px">
+        <center>
+            <img src="<%=path%>/js/jk.png" width="300px" height="100px">
+        </center>
+    </div>
+</div>
+<div data-options="region:'west',title:'左'" width="20%">
+    <div class="easyui-accordion" data-options="fit:true">
+        <div title="导航树">
+            <ul id="navEast"></ul>
+        </div>
+
+        <div title="util导航树">
+            <ul id="navUtilEast"></ul>
+        </div>
+    </div>
+</div>
+<div data-options="region:'center',title:'中'">
+    <div class="easyui-tabs" id="myTabs" style="height:100%"></div>
+</div>
+
+<!-- 添加详细资料窗口 -->
+<div id="editMyDetailDialog" class="easyui-dialog" data-options="modal:true,closed:true,buttons:[{
+    	text:'保存',
+    	iconCls:'icon-save',
+    	handler:function(){
+
+    	}
+    },{
+    	text:'关闭',
+    	iconCls:'icon-cancel',
+    	handler:function(){
+    		closeDialog('editMyDetailDialog');
+    	}
+    }]" style="width:800px;height:500px">
+    <center>
+        <form id="editMyDetailForm">
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </form>
+    </center>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        //同步树
+        createSyncTree('navEast','../nav/findTree','myTabs');
+        //util树
+        //initUtilTree('navEast','nav/findTree','myTabs');
+    });
+
+</script>
+</html>

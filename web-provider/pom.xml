@@ -29,12 +29,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- druid连接池 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -43,6 +37,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bs.web</groupId>
+            <artifactId>movie-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <!-- mysql驱动包 -->
@@ -59,10 +59,6 @@
             <version>1.3.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.bs.web</groupId>
-            <artifactId>movie-api</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
