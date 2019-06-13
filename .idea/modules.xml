@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/blue-sky-web.iml" filepath="$PROJECT_DIR$/blue-sky-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/movie-api/movie-api.iml" filepath="$PROJECT_DIR$/movie-api/movie-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-consumer/web-consumer.iml" filepath="$PROJECT_DIR$/web-consumer/web-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-eureka/web-eureka.iml" filepath="$PROJECT_DIR$/web-eureka/web-eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web-provider/web-provider.iml" filepath="$PROJECT_DIR$/web-provider/web-provider.iml" />
+    </modules>
+  </component>
+</project>

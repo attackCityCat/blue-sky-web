@@ -1,0 +1,33 @@
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka
+spring:
+  application:
+    name: front-user-consumer
+
+  profiles: default
+  freemarker:
+    template-loader-path: classpath:/templates
+    cache: true
+    check-template-location: true
+    content-type: text/html; charset=UTF-8
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+
+  main:
+    allow-bean-definition-overriding: true #允许相同key情况下beanDefinition实例的覆盖
+  thymeleaf:
+    cache: false
+    enabled: true
+feign:
+  hystrix:
+    enabled: true
+  httpclient:
+    connection-timeout: 30000
+
+

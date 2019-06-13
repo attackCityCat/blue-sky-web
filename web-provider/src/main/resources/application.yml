@@ -14,4 +14,9 @@ eureka:
 spring:
   application:
     name: web-provider #应用名称  保证唯一   一般采用项目名
+  datasource:
+    username: root
+    password:
+    url: jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
+    driver-class-name: com.mysql.jdbc.Driver
 
