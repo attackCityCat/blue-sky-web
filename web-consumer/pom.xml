@@ -38,6 +38,13 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
+        <!-- api -->
+        <dependency>
+            <groupId>org.bs.web</groupId>
+            <artifactId>movie-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- 熔断器 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
