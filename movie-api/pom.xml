@@ -36,10 +36,10 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
+<!--        <dependency>
             <groupId>org.elasticsearch</groupId>
             <artifactId>elasticsearch</artifactId>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
