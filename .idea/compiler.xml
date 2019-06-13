@@ -6,14 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="blue-sky-web" />
         <module name="web-eureka" />
+        <module name="movie-api" />
+        <module name="web-movie-provider" />
+        <module name="web-movie-consumer" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="web-eureka" options="-parameters" />
+      <module name="web-movie-consumer" options="-parameters" />
+      <module name="web-movie-provider" options="-parameters" />
     </option>
   </component>
 </project>
