@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://www.daeyes.com.cn/reg.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>注册_大眼睛票务.电影</title>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="大眼睛,大眼睛票务，大眼睛电影，电影，票务">
+    <meta name="description" content="大眼睛票务是覆盖全国的电影票在线选座平台，同时还提供全国电影排期，影院信息查询、电影行业资讯等服务。看电影，来大眼睛票务选座">
+    <link href="/llp/css/base.min.css" rel="stylesheet">
+    <link href="/llp/css/main.min.css" rel="stylesheet">
+    <script src="/llp/js/jquery.1.7.2.min.js" type="text/javascript"></script>
+    <script src="/llp/js/json2.min.js" type="text/javascript"></script>
+    <script src="/llp/js//jquery.tool.tabs.min.js" type="text/javascript"></script>
+    <script src="/llp/js//helper.min.js" type="text/javascript"></script>
+    <script src="/llp/js//layer.js" type="text/javascript"></script>
+    <link rel="/llp/css/layer.css" id="layuicss-skinlayercss">
+    <style type="text/css">
+        .code {
+            font-family: Arial, 宋体;
+            font-style: italic;
+            color: green;
+            border: 0;
+            padding: 2px 3px;
+            letter-spacing: 3px;
+            font-weight: bolder;
+        }
+
+        .unchanged {
+            border: 0;
+        }
+    </style>
+    <script>
+        $(function () {
+            createCode();
+            var regMobile = /^((\(\d{2,4}\))|(\d{3,4}\-))?1[3|4|5|6|7|8|9]\d{9}$/;
+            var regPassword = /^.{6,20}$/;
+            var regCheckcode = /^[a-zA-Z0-9]{4,6}$/;
+            var regMsg = /^[a-z0-9]{4,6}$/;
+
+            var tipMobile = "完成验证后，可以使用手机登录和找回密码";
+            var tipPassword = "密码由6-20个字符组成，可使用字母、数字、符号，区分大小写";
+            var tipConfirm = "请再次输入密码";
+            var tipCheckcode = "请输入图形验证码";
+            var tipMsg = "请输入短信验证码";
+
+            var tipMobileError = "手机号码格式错误";
+            var tipPasswordError = "密码格式不正确";
+            var tipConfirmError = "两次输入的密码不一致";
+            var tipCheckcodeError = "图形验证码输入错误";
+            var tipMsgError = "短信验证码输入错误";
+
+            var sessionid = "";
+            //设置sessionid
+            $.ajax({
+                url: '/GetSid.aspx',
+                type: 'get',
+                success: function (respDate) {
+                    sessionid = respDate;
+                },
+                error: function () {
+                    //alert(msgErrorGlobal);
+                }
+            })
+
+            //input活动焦点处理
+            $("input:not(.check)").on("focus", function () {
+                var _self = $(this);
+                _self.parent().addClass("act");
+                var name = _self.attr("name");
+                if (name == "mobile") {
+                    _self.parent().siblings(".tip").removeClass("hide red").html(tipMobile);
+                } else if (name == "password") {
+                    _self.parent().siblings(".tip").removeClass("hide red").html(tipPassword);
+                } else if (name == "confirm") {
+                    _self.parent().siblings(".tip").removeClass("hide red").html(tipConfirm);
+                } else if (name == "checkcode") {
+                    _self.parent().parent().siblings(".tip").removeClass("hide red").html(tipCheckcode);
+                } else if (name == "msg") {
+                    _self.parent().parent().siblings(".tip").removeClass("hide red").html(tipMsg);
+                }
+            });
+
+            //input失去焦点验证
+            $("input").on("blur", function () {
+                var _self = $(this);
+                _self.parent().removeClass("act");
+                var name = _self.attr("name");
+                var val = $.trim(_self.val());
+                if (name == "mobile") {
+                    if (val) {
+                        if (regMobile.test(val)) {
+                            _self.parent().siblings(".tip").addClass("hide");
+                        } else {
+                            _self.parent().siblings(".tip").addClass("red").text(tipMobileError);
+                        }
+                    } else {
+                        _self.parent().siblings(".tip").addClass("hide");
+                    }
+                } else if (name == "password") {
+                    if (val) {
+                        if (regPassword.test(val)) {
+                            _self.parent().siblings(".tip").addClass("hide");
+                        } else {
+                            _self.parent().siblings(".tip").removeClass("hide").addClass("red").text(tipPasswordError);
+                        }
+                    } else {
+                        _self.parent().siblings(".tip").addClass("hide");
+                    }
+                } else if (name == "confirm") {
+                    var pwd = $("input[name=password]").val();
+                    if (val) {
+                        if (regPassword.test(val)) {
+                            if (pwd == val) {
+                                _self.parent().siblings(".tip").addClass("hide");
+                            } else {
+                                _self.parent().siblings(".tip").removeClass("hide").addClass("red").text(tipConfirmError);
+                            }
+                        } else {
+                            _self.parent().siblings(".tip").removeClass("hide").addClass("red").text(tipPasswordError);
+                        }
+                    } else {
+                        _self.parent().siblings(".tip").addClass("hide");
+                    }
+                } else if (name == "checkcode") {
+                    if (val) {
+                        if (regCheckcode.test(val)) {
+                            _self.parent().parent().siblings(".tip").addClass("hide");
+                        } else {
+                            _self.parent().parent().siblings(".tip").addClass("red").text(tipCheckcodeError);
+                        }
+                    } else {
+                        _self.parent().parent().siblings(".tip").addClass("hide");
+                    }
+                } else if (name == "msg") {
+                    if (val) {
+                        if (regMsg.test(val)) {
+                            _self.parent().parent().siblings(".tip").addClass("hide");
+                        } else {
+                            _self.parent().parent().siblings(".tip").addClass("red").text(tipMsgError);
+                        }
+                    } else {
+                        _self.parent().parent().siblings(".tip").addClass("hide");
+                    }
+                }
+
+            });
+
+            //实时密码强度验证
+            $("input[name=password]").on("keyup ", function (event) {
+                var _self = $(this);
+                var password = _self.val();
+                var letter = 0;
+                var number = 0;
+                var special = 0;
+                var regLetters = new RegExp('[a-zA-Z]');
+                var regNumbers = new RegExp('[0-9]');
+                var regSpecialchars = new RegExp('([!,%,&,@,#,$,^,*,?,_,~])');
+                var regAll = new RegExp('[a-zA-Z0-9,!,%,&,@,#,$,^,*,?,_,~]');
+                var chartLast = password.substr(-1, 1);
+                if (!regAll.test(chartLast)) {
+                    var passwordTemp = password.substring(0, password.length - 1);
+                    _self.val(passwordTemp);
+                }
+                check_strength(password, "regStrong");
+
+                function check_strength(thisval, thisid) {
+                    var total = 0;
+                    if (thisval.length > 5) {
+                        if (regLetters.test(thisval)) {
+                            letter = 1
+                        } else {
+                            letter = 0;
+                        }
+
+                        if (regNumbers.test(thisval)) {
+                            number = 1
+                        } else {
+                            number = 0;
+                        }
+
+                        if (regSpecialchars.test(thisval)) {
+                            special = 1
+                        } else {
+                            special = 0;
+                        }
+
+                        total = letter + number + special;
+                    }
+                    get_total(total, thisid);
+                }
+
+                function get_total(total, thisid) {
+                    var dom = $("#" + thisid);
+                    if (total == 1) {
+                        //弱
+                        dom.find(".enough").addClass("on").siblings().removeClass("on");
+                        dom.removeClass("hide");
+                    } else if (total == 2) {
+                        //中
+                        dom.find(".medium").addClass("on").siblings().removeClass("on");
+                        dom.removeClass("hide");
+                    } else if (total == 3) {
+                        //强
+                        dom.find(".strong").addClass("on").siblings().removeClass("on");
+                        dom.removeClass("hide");
+                    } else {
+                        //错误
+                        dom.addClass("hide");
+                    }
+                }
+            });
+
+            //密码明文和密文切换
+            $(".password .tt .show").on("click", function () {
+                var _self = $(this);
+                if (_self.attr("data-flag") == 1) {
+                    _self.attr("data-flag", 0);
+                    //_self.parent().siblings("input").attr("type", "password");
+                } else {
+                    _self.attr("data-flag", 1);
+                    //_self.parent().siblings("input").attr("type", "text");
+                }
+            });
+
+
+            //发送验证码
+            $("#sendmsg").on("click", function () {
+                var mobile = $.trim($("input[name=mobile]").val());
+                var password = $.trim($("input[name=password]").val());
+                var confirm = $.trim($("input[name=confirm]").val());
+                var checkcode = $.trim($("input[name=checkcode]").val());
+                var check = $("#checkCode").val();
+                var flag = 0;
+                if (mobile) {
+                    if (!regMobile.test(mobile)) {
+                        $(".mobile .tip").removeClass("hide").addClass("red").text(tipMobileError);
+                    } else {
+                        flag++;
+                    }
+                } else {
+                    $(".mobile .tip").removeClass("hide").addClass("red").text("请输入手机号");
+                }
+                //判断密码格式
+                if (password) {
+                    if (!regPassword.test(password)) {
+                        $(".set .tip").removeClass("hide").addClass("red").text(tipPasswordError);
+                    } else {
+                        flag++;
+                    }
+                } else {
+                    $(".password .tip").removeClass("hide").addClass("red").text("请输入密码");
+                }
+                if (confirm) {
+                    if (!regPassword.test(confirm)) {
+                        $(".confirm .tip").removeClass("hide").addClass("red").text("密码格式不正确");
+                    } else {
+                        if (confirm == password) {
+                            flag++;
+                        } else {
+                            $(".confirm .tip").removeClass("hide").addClass("red").text(tipConfirmError);
+                        }
+                    }
+                } else {
+                    $(".confirm .tip").removeClass("hide").addClass("red").text("请再次输入密码");
+                }
+                if (checkcode == check) {
+
+                    flag++;
+                } else {
+                    $(".reg-checkcode").siblings(".tip").removeClass("hide").addClass("red").text(tipCheckcodeError);
+                }
+
+                if (flag != 4) return;
+
+                $.ajax({
+                    url: '/llp/getVerify',
+                    data: {
+                        phone: mobile
+                    },
+                    success: function (respDate) {
+                        alert(respDate.msg)
+                    }
+                });
+            });
+
+            //提交注册
+            $(".submit").on("click", function () {
+                var mobile = $.trim($("input[name=mobile]").val());
+                var password = $.trim($("input[name=password]").val());
+                var confirm = $.trim($("input[name=confirm]").val());
+                var checkcode = $.trim($("input[name=checkcode]").val());
+                var readRule = $("input[name=check]").prop("checked");
+                var check = $("#checkCode").val();
+                var flag = 0;
+                if (mobile) {
+                    if (!regMobile.test(mobile)) {
+                        $(".mobile .tip").removeClass("hide").addClass("red").text(tipMobileError);
+                    } else {
+                        flag++;
+                    }
+                } else {
+                    $(".mobile .tip").removeClass("hide").addClass("red").text("请输入手机号");
+                }
+
+                if (password) {
+                    if (!regPassword.test(password)) {
+                        $(".set .tip").removeClass("hide").addClass("red").text(tipPasswordError);
+                    } else {
+                        flag++;
+                    }
+                } else {
+                    $(".password .tip").removeClass("hide").addClass("red").text("请输入密码");
+                }
+
+                if (confirm) {
+                    if (!regPassword.test(confirm)) {
+                        $(".confirm .tip").removeClass("hide").addClass("red").text("密码格式不正确");
+                    } else {
+                        if (confirm == password) {
+                            flag++;
+                        } else {
+                            $(".confirm .tip").removeClass("hide").addClass("red").text(tipConfirmError);
+                        }
+                    }
+                } else {
+                    $(".confirm .tip").removeClass("hide").addClass("red").text("请再次输入密码");
+                }
+
+                if (checkcode == check) {
+
+                    flag++;
+                } else {
+                    $(".reg-checkcode").siblings(".tip").removeClass("hide").addClass("red").text(tipCheckcodeError);
+                }
+
+                var msg = $.trim($("input[name=msg]").val());
+
+                if (msg != null) {
+                    flag++;
+                } else {
+                    $(".reg-msg").siblings(".tip").removeClass("hide").addClass("red").text("请输入短信验证码");
+                }
+
+                if (!readRule) {
+                    alert("请仔细阅读《大眼睛用户注册协议》，并同意该协议！");
+                } else {
+                    flag++;
+                }
+
+                if (flag != 6) return false;
+
+                //后台注册
+                layer.load(2);
+                $.ajax({
+                    url: '/llp/addUser',
+                    type: 'post',
+                    data: {
+                        phoneNumber: mobile,
+                        password: password,
+                        verify: msg
+                    },
+                    success: function (respDate) {
+                        alert(respDate.msg)
+                        if (respDate.code == 0) {
+                            location.href = "/llp/toLogin";
+                        }
+                    }
+                })
+            })
+
+            function getRandom(n) {
+                return Math.floor(Math.random() * n + 1);
+            }
+        })
+    </script>
+    <script type="text/javascript">
+        var code; //在全局 定义验证码
+        function createCode() {
+            code = new Array();
+            var codeLength = 4;//验证码的长度
+            var checkCode = document.getElementById("checkCode");
+            checkCode.value = "";
+
+            var selectChar = new Array( 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+
+            for (var i = 0; i < codeLength; i++) {
+                var charIndex = Math.floor(Math.random() * 32);
+                code += selectChar[charIndex];
+            }
+            if (code.length != codeLength) {
+                createCode();
+            }
+            checkCode.value = code;
+        }
+
+        function validate() {
+            var inputCode = document.getElementById("input1").value.toUpperCase();
+
+            if (inputCode.length <= 0) {
+                $.messager.alert('提示', "请输入验证码", 'info');
+                return false;
+            } else if (inputCode.length != 4) {
+                $.messager.alert('提示', "请输入4位验证码", 'info');
+                createCode();
+                return false;
+            } else if (inputCode != code) {
+                $.messager.alert('提示', "验证码输入错误", 'info');
+                createCode();
+                return false;
+            } else {
+                alert("成功！");
+                return true;
+            }
+        }
+    </script>
+</head>
+<body class="regpage">
+<div class="wrapper">
+    <div class="header-reg">
+        <div class="logo-tt clearfix">
+            <div class="logo"><a href="http://www.daeyes.com.cn/"><img
+                    src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/logo.jpg" alt="大眼睛票务"></a></div>
+            <div class="tt">账户注册</div>
+        </div>
+    </div>
+
+    <div class="main-reg">
+        <div class="form">
+            <div class="item mobile clearfix">
+                <div class="box">
+                    <input type="text" name="mobile" maxlength="15" placeholder="建议使用常用手机">
+                    <div class="tt"><span class="logo_country">
+                            <img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/timg.jpg" height="22"
+                                 alt="中国"></span>+86
+                    </div>
+                </div>
+                <div class="tip hide">完成验证后，可以使用手机登录和找回密码</div>
+            </div>
+            <div style="color: #C01733;margin-left: 20px;margin-bottom: 15px;">注意：手机号码注册后不可修改!</div>
+            <div class="item password set">
+                <div class="clearfix">
+                    <div class="box">
+                        <input type="password" name="password" maxlength="20" placeholder="密码由6-20个字符组成">
+                        <div class="tt"><span>设置密码</span><span class="show"><img
+                                src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/eye_1.png" width="20"></span>
+                        </div>
+                    </div>
+                    <div class="tip hide">密码由6-20个字符组成，可使用字母、数字、符号，区分大小写</div>
+                </div>
+                <div id="regStrong" class="reg_strong clearfix">
+                    <span class="enough on">弱</span>
+                    <span class="medium">中</span>
+                    <span class="strong">强</span>
+                </div>
+            </div>
+            <div class="item password confirm clearfix">
+                <div class="box">
+                    <input type="password" name="confirm" maxlength="15" placeholder="请再次输入密码">
+                    <div class="tt"><span>确认密码</span><span class="show"><img
+                            src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/eye_1.png" width="20"></span></div>
+                </div>
+                <div class="tip hide">请再次输入密码</div>
+            </div>
+            <div class="item clearfix">
+                <div class="box reg-checkcode clearfix">
+                    <div class="ipt">
+                        <input type="text" name="checkcode" maxlength="8" placeholder="请输入右侧验证码">
+                    </div>
+                    <div class="send-msg">
+                        <input type="button" id="checkCode" class="code" style="width:132px;height: 40px"
+                               onClick="createCode()"/>
+                        <a href="#" onClick="createCode()"></a></div>
+                </div>
+                <div class="tip hide">请输入图形验证码</div>
+            </div>
+            <div class="item clearfix">
+                <div class="box reg-msg clearfix">
+                    <div class="ipt">
+                        <input type="text" name="msg" maxlength="6" placeholder="请输入短信验证码">
+                    </div>
+                    <div class="send-msg"><a id="sendmsg" href="javascript:getyanzheng()">获取验证码</a></div>
+                </div>
+                <div class="tip hide">请输入短信验证码</div>
+            </div>
+            <div class="submit"><a href="javascript:void(0)">立即注册</a></div>
+            <div class="reg-txt">
+                <label>
+                    <input type="checkbox" name="check" class="check" checked="checked">
+                    <span>我已阅读并同意<a href="http://www.daeyes.com.cn/reg.html#" target="_blank">《大眼睛用户注册协议》</a></span>
+                </label>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

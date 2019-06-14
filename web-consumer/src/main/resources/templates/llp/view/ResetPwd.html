@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>找回密码</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/llp/js/layer.js" type="text/javascript"></script>
+
+
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="/llp/css/layer.css" rel="stylesheet"/>
+
+    <link href="/portal/eyes/favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon"/>
+    <link href="/portal/eyes/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+    <LINK rel=stylesheet type="text/css" href="/portal/eyes/common/iconskin/iconfont.css">
+    <!--全局-->
+    <LINK rel=stylesheet type="text/css" href="/portal/eyes/common/common.css?v=2">
+
+    <script charset="UTF-8" type="text/javascript" src="/js/jquery.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="/js/jquery-form.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="/portal/eyes/common/jquery.pseudo.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="/js/jquery.cookie.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="/js/layer/layer.js"></script>
+    <script charset="UTF-8" type="text/javascript" src="/portal/eyes/common/public.js?v=2"></script>
+
+    <script language="javascript">
+        //js文件全局变量
+        var G_Scheme = "http://www.daeyes.com"
+        var G_sysBasePath = "";  //当前系统相对目录
+        $(document).ready(function () {//更改连接的默认操作
+            $("A.anolink").attr("href", "javascript:void(0);");
+            $(".clearfix").after("<div class='dclear'></div>");
+            $(".clearfix").append("<div class='dclear'></div>");
+//        $("input[type=text],input[type=password]").addClass("normal");
+        });
+    </script>
+
+    <LINK rel=stylesheet type="text/css" href="images/index.css">
+    <script language="javascript">
+        var G_sysBasePath = "";  //当前系统相对目录
+    </script>
+    <script charset="UTF-8" type="text/javascript" src="images/index.js?v=1"></script>
+
+</head>
+<body>
+<!--        <div style="background-color:#d73388;height:40px;line-height:40px;position:relative;margin-bottom:20px;">
+             <div  style="position:absolute;left:20px;top:0px;color:#fff;font-size:20px;font-family:'microsoft yahei',宋体;">
+                找回密码
+            </div>
+        </div>-->
+<ul class="fp_steps">
+    <li class="cur">输入用户名</li>
+    <li>验证身份</li>
+    <li>重置密码</li>
+    <li>完成</li>
+</ul>
+<div class="dclear"></div>
+
+<table class="itable " id="step1">
+    <TR>
+        <TD style="width:60px;padding-top:15px;">账户名：</TD>
+        <TD><input type="text" class="itxt" tabindex="1" id="username" name="username" value="">
+            <div id=infor1 class="sysinfor ">请输入您的登录手机号</div>
+        </TD>
+    </TR>
+    <TR>
+        <TD style="padding-top:15px;">验证码：</TD>
+        <TD><input type="text" class="itxt" style="width:40px;" tabindex="1" id="yanzhengma" name="yanzhengma" value="">
+            <span style="margin-left:10px;"><img src="/imagecodemaker?source=2" id="imgyanzheng" class="imgyanzheng"
+                                                 style='margin:0px;width:80px;height:27px;cursor:pointer;'
+                                                 title="点击更换验证码"/></span>
+            <span style="font-size:12px;margin-left:10px;">看不清？<a href="javascript:void(0)" class="imgyanzheng">换一张</a></span>
+            <div id=infor2 class="sysinfor ">请输入验证码</div>
+        </TD>
+    </TR>
+    <TR>
+        <TD></TD>
+        <TD>
+            <div class="dgray noprint" style="border-bottom:0px #7F7F7F solid;padding-top:10px;">
+                <INPUT id="btn-next" class=btn-next value="下一步" type="button">
+            </div>
+        </TD>
+    </TR>
+
+</table>
+
+
+</body>
+</html>

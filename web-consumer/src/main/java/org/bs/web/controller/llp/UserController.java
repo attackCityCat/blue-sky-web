@@ -2,6 +2,7 @@ package org.bs.web.controller.llp;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -17,6 +18,7 @@ import org.bs.web.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +31,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
+@RequestMapping("llp")
 public class UserController {
 
     @Resource
@@ -36,6 +39,60 @@ public class UserController {
 
     @Autowired
     private UserServiceApi userServiceApi;
+
+
+    /**
+     * 进入首页
+     * @param model
+     * @return
+     */
+    @RequestMapping("toMain")
+    public String toMain(Model model){
+
+        System.out.println("首页");
+        return "llp/view/main";
+    }
+    /**
+     * 登陆页
+     * @param model
+     * @return
+     */
+    @RequestMapping("toLogin")
+    public String toLogin(Model model){
+
+        return "llp/view/login";
+    }
+    /**
+     * 修改密码页
+     * @param model
+     * @return
+     */
+    @RequestMapping("ResetPwd")
+    public String ResetPwd(Model model){
+
+        return "llp/view/ResetPwd";
+    }
+
+    /**
+     * 跳转index
+     * @param model
+     * @return
+     */
+    @RequestMapping("toIndex")
+    public String toIndex(Model model){
+
+        return "llp/view/index";
+    }
+    /**
+     * 注册页面
+     * @param model
+     * @return
+     */
+    @RequestMapping("reg")
+    public String reg(Model model){
+
+        return "llp/view/reg";
+    }
 
     /**
      * 登陆操作根据手机号登陆
@@ -84,6 +141,7 @@ public class UserController {
     @RequestMapping("/getVerify")
     @ResponseBody
     public HashMap<String, Object> getVerify(String phone) throws Exception {
+        System.out.println("11111111111111");
         //先构造一个map
         HashMap<String, Object> map = new HashMap<>();
         //验证码在redis里的key
@@ -132,19 +190,21 @@ public class UserController {
     @ResponseBody
     public HashMap<String, Object> addUser(UserBean userBean) {
 
+        if (userBean.getName() == null){
+            userBean.setName(userBean.getPhoneNumber());
+        }
         HashMap<String, Object> map = new HashMap<>();
 
         Object o = redisTemplate.opsForValue().get(Conts.VERIFY + userBean.getPhoneNumber());
-        System.out.println(o);
-
+        //判断验证码是否正确
         if (!userBean.getVerify().equals(o.toString())) {
             map.put("code", 3);
             map.put("msg", "验证码不正确");
             return map;
         }
-
+        //根据手机查询
         UserBean phone = userServiceApi.findByPhone(userBean.getPhoneNumber());
-
+        //判断账号是否存在
         if (phone != null) {
             map.put("code", 1);
             map.put("msg", "账号已经存在");
@@ -152,15 +212,30 @@ public class UserController {
         }
 
         Boolean boo = userServiceApi.addUser(userBean);
-
         if (!boo) {
             map.put("code", 2);
             map.put("msg", "系统故障");
             return map;
         }
-
+        //注册成功返回
         map.put("code", 0);
-        map.put("msg", "注册成功");
+        map.put("msg", "注册成功,即将跳转登陆页");
         return map;
+    }
+
+    /**
+     * 暂时先不写修改功能，等构建出登陆和个人中心以后在做
+     * @param userBean
+     * @return
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public boolean updateUser(UserBean userBean){
+        //
+        Object o = redisTemplate.opsForValue().get(Conts.VERIFY + userBean.getPhoneNumber());
+        if (!userBean.getVerify().equals(o.toString())){
+
+        }
+        return false;
     }
 }
