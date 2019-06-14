@@ -1,6 +1,5 @@
 package org.bs.web.service.ljw;
 
-import org.bs.web.serviceApi.ljw.NavServiceApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
 /**
