@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
 
-@Configuration
+
 public class EsConfig {
     private Logger logger  = LoggerFactory.getLogger(this.getClass());
 
