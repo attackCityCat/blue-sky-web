@@ -37,12 +37,16 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/llp/*/*", "anon");
         filterChainDefinitionMap.put("/llp/*", "anon");
+
         filterChainDefinitionMap.put("/llp/css/*", "anon"); //匿名访问静态资源
+        filterChainDefinitionMap.put("/bootstrap-4/*", "anon"); //匿名访问静态资源
+        filterChainDefinitionMap.put("/llp/layui/*", "anon"); //匿名访问静态资源
         filterChainDefinitionMap.put("/llp/js/*", "anon"); //匿名访问静态资源
-        filterChainDefinitionMap.put("/*/*", "authc");
+        filterChainDefinitionMap.put("/llp/Personal/*", "anon"); //匿名访问静态资源
+        filterChainDefinitionMap.put("/*/*", "anon");
 
         //拦截到/login/logout 请求，自动进行登出操作
-        filterChainDefinitionMap.put("/llp/logout", "logout");
+        filterChainDefinitionMap.put("/llp/loginOut", "logout");
 
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;

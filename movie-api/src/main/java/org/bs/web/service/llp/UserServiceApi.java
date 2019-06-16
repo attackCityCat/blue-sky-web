@@ -22,4 +22,13 @@ public interface UserServiceApi {
      */
     @RequestMapping(value = "/addUser")
     Boolean addUser(@RequestBody UserBean userBean);
+
+    /**
+     * 根据手机号修改用户昵称
+     * @param name
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/updateUser")
+    void updateUser(@RequestParam(value = "name")String name, @RequestParam(value = "phone") String phone);
 }

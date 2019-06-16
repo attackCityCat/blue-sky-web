@@ -952,27 +952,7 @@ $(function () {
     menuStamp(window.location.pathname);
     setCityHtml();
 
-    //选择城市
-    $(".city-choose .tabs-nav").tabs(".city-choose .panel");
-    $(".city-btn").on("click", function () {
-        var _self = $(this);
-        if (_self.attr("data-flag") == "1") {
-            $(".city-choose").addClass("hide");
-            _self.attr("data-flag", "2");
-            _self.find(".arrow").removeClass("top").addClass("down");
-        } else {
-            $(".city-choose").removeClass("hide");
-            _self.attr("data-flag", "1");
-            _self.find(".arrow").removeClass("down").addClass("top");
-        }
-    });
-    $(".city-choose .panel li a").on("click", function () {
-        var _self = $(this);
-        var cityCode = _self.attr("data-citycode");
-        var cityName = _self.attr("data-cityname");
-        setCity(cityCode, cityName);
-        window.location.reload();
-    })
+
 
     //搜索
     $(".search .submit").on("click", function () {

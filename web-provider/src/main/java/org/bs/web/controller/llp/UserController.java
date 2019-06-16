@@ -12,6 +12,18 @@ public class UserController {
     private UserMapper userMapper;
 
     /**
+     * 根据手机号修改用户昵称
+     * @param name
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/updateUser")
+    @ResponseBody
+    public void updateUser(@RequestParam(value = "name")String name, @RequestParam(value = "phone") String phone){
+        userMapper.updateUser(name,phone);
+    }
+
+    /**
      * 用户登陆操作，根据手机号查询。
      * @param phone
      * @return

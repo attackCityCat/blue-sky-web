@@ -2,8 +2,6 @@ package org.bs.web.controller.llp;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -27,7 +25,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -40,56 +37,104 @@ public class UserController {
     @Autowired
     private UserServiceApi userServiceApi;
 
+    /**
+     * 进入订单页
+     *
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("toOrder")
+    public String toOrder(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+       if (attribute == null) {
+            return "redirect:toLogin";
+        }
+        model.addAttribute("user", attribute);
+
+        return "llp/view/order";
+    }
+
+    /**
+     * 进入个人中心
+     *
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("toPersonal")
+    public String toPersonal(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        if (attribute == null) {
+            return "redirect:toLogin";
+        }
+        model.addAttribute("user", attribute);
+
+        return "llp/view/Personal";
+
+    }
 
     /**
      * 进入首页
+     *
      * @param model
      * @return
      */
     @RequestMapping("toMain")
-    public String toMain(Model model){
+    public String toMain(Model model, HttpSession session) {
 
-        System.out.println("首页");
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        model.addAttribute("user", attribute);
+
         return "llp/view/main";
     }
+
     /**
      * 登陆页
+     *
      * @param model
      * @return
      */
     @RequestMapping("toLogin")
-    public String toLogin(Model model){
+    public String toLogin(Model model) {
 
         return "llp/view/login";
     }
+
     /**
      * 修改密码页
+     *
      * @param model
      * @return
      */
     @RequestMapping("ResetPwd")
-    public String ResetPwd(Model model){
+    public String ResetPwd(Model model) {
 
         return "llp/view/ResetPwd";
     }
 
     /**
-     * 跳转index
+     * 跳转index 测试专用
+     *
      * @param model
      * @return
      */
     @RequestMapping("toIndex")
-    public String toIndex(Model model){
+    public String toIndex(Model model) {
 
         return "llp/view/index";
     }
+
     /**
      * 注册页面
+     *
      * @param model
      * @return
      */
-    @RequestMapping("reg")
-    public String reg(Model model){
+    @RequestMapping("/reg")
+    public String reg(Model model) {
 
         return "llp/view/reg";
     }
@@ -186,11 +231,17 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 新增用户信息
+     *
+     * @param userBean
+     * @return
+     */
     @RequestMapping("/addUser")
     @ResponseBody
     public HashMap<String, Object> addUser(UserBean userBean) {
 
-        if (userBean.getName() == null){
+        if (userBean.getName() == null) {
             userBean.setName(userBean.getPhoneNumber());
         }
         HashMap<String, Object> map = new HashMap<>();
@@ -224,18 +275,51 @@ public class UserController {
     }
 
     /**
-     * 暂时先不写修改功能，等构建出登陆和个人中心以后在做
-     * @param userBean
+     * 根据手机号修改用户昵称
+     *
+     * @param name
+     * @param phone
      * @return
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public boolean updateUser(UserBean userBean){
+    public boolean updateUser(String name, String phone) {
+        System.out.println("修改的方法");
+        try {
+            userServiceApi.updateUser(name, phone);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 暂时先不写修改功能，等构建出登陆和个人中心以后在做
+     *
+     * @param userBean
+     * @return
+     */
+    @RequestMapping("/updatePwd")
+    @ResponseBody
+    public boolean updateUser(UserBean userBean) {
         //
         Object o = redisTemplate.opsForValue().get(Conts.VERIFY + userBean.getPhoneNumber());
-        if (!userBean.getVerify().equals(o.toString())){
+        if (!userBean.getVerify().equals(o.toString())) {
 
         }
         return false;
+    }
+
+    /**
+     * 用户退出登陆操作
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpSession session) {
+        session.removeAttribute(session.getId());
+        return "redirect:toMain";
     }
 }
