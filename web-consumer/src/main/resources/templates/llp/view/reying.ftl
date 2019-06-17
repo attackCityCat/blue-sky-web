@@ -4,9 +4,10 @@
 <html>
 <head>
     <title>大眼睛票务</title>
-    <javascript:tan()--layui轮播-->
+    <#--layui轮播-->
     <link href="/llp/layui/css/layui.css" rel="stylesheet"/>
     <script src="/llp/layui/layui.js" type="text/javascript"></script>
+    <script src="/llp/js/jquery.js" type="text/javascript"></script>
 
     <script charset="UTF-8" type="text/javascript" src="/llp/Personal/layer.js">
     </script>
@@ -70,8 +71,8 @@
     <div class="main-nav">
         <div class="container clearfix">
             <ul class="menu clearfix">
-                <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
-                <li><a href="javascript:tan()" data-index="filmshowing">热映影片</a></li>
+                <li><a href="javascript:toMain()" data-index="index" >首页</a></li>
+                <li><a href="javascript:" data-index="filmshowing" class="act">热映影片</a></li>
                 <li><a href="javascript:tan()" data-index="filmfeature">即将上映</a></li>
                 <li><a href="javascript:tan()" data-index="cinemas">影院</a></li>
             </ul>
@@ -84,6 +85,7 @@
 </div>
 </div>
 <script type="text/javascript">
+    /*跳转脚本*/
     function toPersonal() {
         location.href="/llp/toPersonal";
     }
@@ -101,132 +103,34 @@
     <div class="mbanner flexslider">
     </div>
 </div>-->
+<#--数据展示区域-->
 <div class="main filmshowingpage">
     <div class="crumb">
         <p><span>大眼睛</span><i>&gt;</i><span>热映影片</span></p>
         <div class="search-box-films clearfix">
-            <p class="des">共为您搜出<strong>56</strong>部影片</p>
+            <p class="des">共为您搜出<strong>#{count}</strong>部影片</p>
         </div>
     </div>
     <div class="film-list">
         <ul class="clearfix">
+            <#list list as i >
             <li class="">
                 <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=f895913b-168d-4ba2-b6ab-f83322f19f1a&amp;filmname=%E9%BB%91%E8%A1%A3%E4%BA%BA%EF%BC%9A%E5%85%A8%E7%90%83%E8%BF%BD%E7%BC%89&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="/llp/js/img/20190403170756.jpg" alt="黑衣人：全球追缉"></a>
+                    <a href="#这里写链接传ID跳转详情页面">
+                        <img class="logo" src="${i.img}" alt="黑衣人：全球追缉"></a>
                     <div class="film-layer" style="bottom: -75px;">
                         <div class="info">
-                            <p>类型：动作,科幻,冒险</p> <p>片长：115分钟</p> <p>187家影院上映4465场</p>
+                            <p>类型：${i.tagName}</p> <p>片长：${i.length}分钟</p>
                         </div>
                         <div class="mask"></div>
                     </div>
                 </div>
-                <h3 class="texthide">黑衣人：全球追缉<span class="price"><strong class="" style="color: #1BA4E5;">¥0</strong>起</span></h3>
+                <h3 class="texthide">${i.name}<span class="price"><strong class="" style="color: #1BA4E5;">¥${i.price}</strong>起</span></h3>
             </li>
-            <li class="">
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=51a1de33-db4a-403c-8c35-a69ddce6e84e&amp;filmname=X%E6%88%98%E8%AD%A6%EF%BC%9A%E9%BB%91%E5%87%A4%E5%87%B0&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190520111235.jpg" alt="X战警：黑凤凰"></a>
-                    <div class="film-layer" style="bottom: -75px;">
-                        <div class="info">
-                            <p>类型：动作,冒险,科幻</p><p>片长：114分钟</p><p>199家影院上映2878场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                </div>
-                <h3 class="texthide">X战警：黑凤凰<span class="price"><strong class="" style="color: #1BA4E5;">¥24</strong>起</span></h3>
-            </li>
-            <li class="">
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=f1bef09e-5c1a-4bfa-868d-7bb238f0caca&amp;filmname=%E6%9C%80%E5%A5%BD%E7%9A%84%E6%88%91%E4%BB%AC&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190523093103.jpg" alt="最好的我们">
-                    </a>
-                    <div class="film-layer" style="bottom: -75px;">
-                        <div class="info">
-                            <p>类型：爱情,青春</p><p>片长：110分钟</p><p>199家影院上映2052场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                </div>
-                <h3 class="texthide">最好的我们<span class="price"><strong class="" style="color: #1BA4E5;">¥0</strong>起</span></h3>
-            </li>
-            <li class="">
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=75488d90-f94a-456b-a628-03d27d6a4219&amp;filmname=%E5%93%A5%E6%96%AF%E6%8B%892%EF%BC%9A%E6%80%AA%E5%85%BD%E4%B9%8B%E7%8E%8B&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190425101647.jpg" alt="哥斯拉2：怪兽之王">
-                    </a>
-                    <div class="film-layer" style="bottom: -75px;">
-                        <div class="info">
-                            <p>类型：动作,惊悚,科幻</p><p>片长：132分钟</p><p>192家影院上映1893场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                </div>
-                <h3 class="texthide">哥斯拉2：怪兽之王<span class="price"><strong class="" style="color: #1BA4E5;">¥0</strong>起</span></h3>
-            </li>
-            <li class="">
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=8434055f-a923-4db1-8652-d59a665e057b&amp;filmname=%E8%BF%BD%E9%BE%99%E2%85%A1&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190603092448.jpg" alt="追龙Ⅱ">
-                    </a>
-                    <div class="film-layer" style="bottom: -75px;">
-                        <div class="info">
-                            <p>类型：犯罪,剧情,动作</p><p>片长：103分钟</p><p>194家影院上映1398场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                </div>
-                <h3 class="texthide">追龙Ⅱ<span class="price"><strong class="" style="color: #1BA4E5;">¥32</strong>起</span></h3>
-            </li>
-            <li>
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=f3175baa-4335-4181-baf2-fcdae91ecc09&amp;filmname=%E5%A6%88%E9%98%81%E6%98%AF%E5%BA%A7%E5%9F%8E&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190523104552.jpg" alt="妈阁是座城">
-                    </a>
-                    <div class="film-layer">
-                        <div class="info">
-                            <p>类型：爱情,剧情</p><p>片长：127分钟</p><p>149家影院上映1241场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                    <span class="tag"></span>
-                </div>
-                <h3 class="texthide">妈阁是座城<span class="price"><strong style="color: #1BA4E5;">¥0</strong>起</span></h3>
-            </li>
-            <li>
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=f415347a-8876-4891-820d-5c8f6402a9e2&amp;filmname=%E9%98%BF%E6%8B%89%E4%B8%81&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190523094248.jpg" alt="阿拉丁">
-                    </a>
-                    <div class="film-layer">
-                        <div class="info">
-                            <p>类型：爱情,奇幻,冒险</p><p>片长：128分钟</p><p>160家影院上映1004场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                </div>
-                <h3 class="texthide">阿拉丁<span class="price"><strong style="color: #1BA4E5;">¥25.9</strong>起</span></h3>
-            </li>
-            <li>
-                <div class="flogo">
-                    <a href="http://www.daeyes.com.cn/filmdetail.html?filmid=c21a8218-5c04-4004-aad8-c8c3783f01be&amp;filmname=%E7%BB%9D%E6%9D%80%E6%85%95%E5%B0%BC%E9%BB%91&amp;crumb=%E7%83%AD%E6%98%A0%E5%BD%B1%E7%89%87">
-                        <img class="logo" src="../js/热映影片_大眼睛票务.电影_files/20190523104004.jpg" alt="绝杀慕尼黑">
-                    </a>
-                    <div class="film-layer">
-                        <div class="info">
-                            <p>类型：剧情,运动</p><p>片长：120分钟</p><p>176家影院上映866场</p>
-                        </div>
-                        <div class="mask"></div>
-                    </div>
-                    <span class="tag"></span>
-                </div>
-                <h3 class="texthide">绝杀慕尼黑<span class="price"><strong style="color: #1BA4E5;">¥0</strong>起</span></h3>
-            </li>
+            </#list>
         </ul>
     </div>
-
-
-<!-- tan -->
+    <!-- tan -->
 <script type="text/javascript">
     function tan(){
         layer.msg("功能正在开发中！~~")

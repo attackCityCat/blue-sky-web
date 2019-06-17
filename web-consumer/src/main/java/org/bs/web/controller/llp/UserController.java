@@ -8,6 +8,7 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.bs.web.constant.Conts;
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.UserBean;
 import com.sun.jmx.snmp.Timestamp;
 import org.bs.web.service.llp.UserServiceApi;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -89,10 +91,13 @@ public class UserController {
         UserBean attribute = (UserBean) session.getAttribute(session.getId());
         model.addAttribute("user", attribute);
 
+        List<HitMovies> list =  userServiceApi.findHitMovies();
+        model.addAttribute("list",list);
+
         return "llp/view/main";
     }
     /**
-     * 进入首页
+     * 进入热映页面 并查询数据
      *
      * @param model
      * @return
@@ -103,6 +108,10 @@ public class UserController {
         UserBean attribute = (UserBean) session.getAttribute(session.getId());
         model.addAttribute("user", attribute);
 
+        List<HitMovies> list =  userServiceApi.findHitMovies();
+
+        model.addAttribute("count",list.size());
+        model.addAttribute("list",list);
         return "llp/view/reying";
     }
 
@@ -153,6 +162,7 @@ public class UserController {
 
         return "llp/view/reg";
     }
+
 
     /**
      * 根据用户的id查询对应的订单号

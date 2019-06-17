@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff2b0a7d-3818-43c5-887e-78dde7023879" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/OrderMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/util/LayuiPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_6_RELEASE.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HitMovies.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/js/jquery-1.8.0.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/movie-api/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/service/llp/UserServiceApi.class" beforeDir="false" afterPath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/service/llp/UserServiceApi.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/llp/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/llp/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-provider/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/UserMapper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/movie-api/target/" />
@@ -38,84 +31,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl">
+        <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HitMovies.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2781">
-              <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
-              <folding>
-                <element signature="e#4176#4180#1#HTML" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#0;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#li#1;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#1;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#2;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#li#3;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#3;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#li#4;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#4;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#5;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#6;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#7;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#6580#6584#1#HTML" expanded="true" />
-                <element signature="e#6650#6654#1#HTML" expanded="true" />
-                <element signature="e#6720#6724#1#HTML" expanded="true" />
-                <element signature="e#6790#6794#1#HTML" expanded="true" />
-                <element signature="e#6928#6932#1#HTML" expanded="true" />
-                <element signature="e#6998#7002#1#HTML" expanded="true" />
-                <element signature="e#7067#7071#1#HTML" expanded="true" />
-                <element signature="e#7202#7206#1#HTML" expanded="true" />
-                <element signature="e#7272#7276#1#HTML" expanded="true" />
-                <element signature="e#7407#7411#1#HTML" expanded="true" />
-                <element signature="e#7477#7481#1#HTML" expanded="true" />
-                <element signature="e#7547#7551#1#HTML" expanded="true" />
-                <element signature="e#7682#7686#1#HTML" expanded="true" />
-                <element signature="e#7755#7759#1#HTML" expanded="true" />
-                <element signature="e#7825#7829#1#HTML" expanded="true" />
-                <element signature="e#7960#7964#1#HTML" expanded="true" />
-                <element signature="e#8030#8034#1#HTML" expanded="true" />
-                <element signature="e#8100#8104#1#HTML" expanded="true" />
-                <element signature="e#8170#8174#1#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1673">
-              <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
-              <folding>
-                <element signature="e#6580#6584#1#HTML" expanded="true" />
-                <element signature="e#6650#6654#1#HTML" expanded="true" />
-                <element signature="e#6720#6724#1#HTML" expanded="true" />
-                <element signature="e#6790#6794#1#HTML" expanded="true" />
-                <element signature="e#6928#6932#1#HTML" expanded="true" />
-                <element signature="e#6998#7002#1#HTML" expanded="true" />
-                <element signature="e#7067#7071#1#HTML" expanded="true" />
-                <element signature="e#7202#7206#1#HTML" expanded="true" />
-                <element signature="e#7272#7276#1#HTML" expanded="true" />
-                <element signature="e#7407#7411#1#HTML" expanded="true" />
-                <element signature="e#7477#7481#1#HTML" expanded="true" />
-                <element signature="e#7547#7551#1#HTML" expanded="true" />
-                <element signature="e#7682#7686#1#HTML" expanded="true" />
-                <element signature="e#7755#7759#1#HTML" expanded="true" />
-                <element signature="e#7825#7829#1#HTML" expanded="true" />
-                <element signature="e#7960#7964#1#HTML" expanded="true" />
-                <element signature="e#8030#8034#1#HTML" expanded="true" />
-                <element signature="e#8100#8104#1#HTML" expanded="true" />
-                <element signature="e#8170#8174#1#HTML" expanded="true" />
-              </folding>
+            <state relative-caret-position="243">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -123,11 +42,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/llp/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="487">
-              <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
+            <state relative-caret-position="351">
+              <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2334">
+              <caret line="125" column="40" lean-forward="true" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="130" column="13" lean-forward="true" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -146,15 +83,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>layui.use</find>
-      <find>演出</find>
-      <find>slide</find>
-      <find>carousel</find>
-      <find>redirect</find>
-      <find>性别</find>
-      <find>submit</find>
-      <find>form1</find>
-      <find>btn-login</find>
       <find>btnmodimobile</find>
       <find>showstatus</find>
       <find>http://www.daeyes.com/portal/eyes/intro/help1308.htm</find>
@@ -175,12 +103,22 @@
       <find>.下载</find>
       <find>jsimg</find>
       <find>layer</find>
+      <find>热映</find>
+      <find>loading</find>
+      <find>cityCode</find>
+      <find>find</find>
       <find>#</find>
+      <find>HitMovies</find>
+      <find>\t</find>
+      <find>texthide</find>
+      <find>film-recommend</find>
+      <find>\n</find>
     </findStrings>
     <replaceStrings>
       <replace>/llp/js</replace>
       <replace>js/img</replace>
       <replace>javascript:tan()</replace>
+      <replace />
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -196,8 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/WebProviderApplication.java" />
-        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/MovieService.java" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/util/HttpClientUtil.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/util/HttpClientUtil.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/WebConsumerApplication.java" />
@@ -230,7 +166,6 @@
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/shiro/ShiroConfig.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/login.html" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/index.js" />
-        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.html" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/OrderMessage.java" />
@@ -239,14 +174,17 @@
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/util/LayuiPage.java" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/ParamBean.java" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/KeyBean.java" />
-        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java" />
-        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java" />
-        <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.html" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl" />
+        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/Movie.java" />
+        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HitMovies.java" />
+        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java" />
+        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl" />
+        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/llp/UserController.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl" />
-        <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl" />
       </list>
     </option>
   </component>
@@ -391,7 +329,7 @@
       <workItem from="1560681651986" duration="2348000" />
       <workItem from="1560684174211" duration="91000" />
       <workItem from="1560731954519" duration="15223000" />
-      <workItem from="1560758711550" duration="8010000" />
+      <workItem from="1560758711550" duration="18529000" />
     </task>
     <task id="LOCAL-00001" summary="不报错上传">
       <created>1560424660037</created>
@@ -421,11 +359,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560684225508</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="2019年6月17日 2019年6月17日 19:08:27  llp 首页 个人中心">
+      <created>1560769723945</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1560769723945</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="92534000" />
+    <option name="totallyTimeSpent" value="103053000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -480,44 +425,10 @@
     <MESSAGE value="登陆注册 llp" />
     <MESSAGE value="2019年6月14日 22:51:48 llp 提交登陆注册 首页展示" />
     <MESSAGE value="2019年6月16日 19:23:16 llp 首页 个人中心" />
-    <option name="LAST_COMMIT_MESSAGE" value="2019年6月16日 19:23:16 llp 首页 个人中心" />
+    <MESSAGE value="2019年6月17日 2019年6月17日 19:08:27  llp 首页 个人中心" />
+    <option name="LAST_COMMIT_MESSAGE" value="2019年6月17日 2019年6月17日 19:08:27  llp 首页 个人中心" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/barcode1.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/header.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="30" column="44" selection-start-line="30" selection-start-column="44" selection-end-line="30" selection-end-column="44" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/help.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/hm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/iconfont.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-53" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/Personal/index.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-53" />
@@ -719,20 +630,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/ParamBean.java" />
     <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/KeyBean.java" />
-    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="31" column="47" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="47" column="160" selection-start-line="47" selection-start-column="160" selection-end-line="47" selection-end-column="160" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reg.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -755,100 +652,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/js/img/20190403170756.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="15" column="20" lean-forward="true" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/js/jquery-1.8.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/js/jquery.min.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="157" column="25" lean-forward="true" selection-start-line="157" selection-start-column="25" selection-end-line="157" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/Movie.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/UserBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/service/llp/UserServiceApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="723">
+          <caret line="57" column="45" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/llp/UserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="130" column="13" lean-forward="true" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HitMovies.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="38" column="14" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/llp/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="105" column="29" selection-start-line="105" selection-start-column="29" selection-end-line="105" selection-end-column="29" />
+        <state relative-caret-position="351">
+          <caret line="94" column="40" lean-forward="true" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/Personal.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="35" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/order.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/main.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1673">
-          <caret line="153" column="38" selection-start-line="153" selection-start-column="38" selection-end-line="153" selection-end-column="38" />
-          <folding>
-            <element signature="e#6580#6584#1#HTML" expanded="true" />
-            <element signature="e#6650#6654#1#HTML" expanded="true" />
-            <element signature="e#6720#6724#1#HTML" expanded="true" />
-            <element signature="e#6790#6794#1#HTML" expanded="true" />
-            <element signature="e#6928#6932#1#HTML" expanded="true" />
-            <element signature="e#6998#7002#1#HTML" expanded="true" />
-            <element signature="e#7067#7071#1#HTML" expanded="true" />
-            <element signature="e#7202#7206#1#HTML" expanded="true" />
-            <element signature="e#7272#7276#1#HTML" expanded="true" />
-            <element signature="e#7407#7411#1#HTML" expanded="true" />
-            <element signature="e#7477#7481#1#HTML" expanded="true" />
-            <element signature="e#7547#7551#1#HTML" expanded="true" />
-            <element signature="e#7682#7686#1#HTML" expanded="true" />
-            <element signature="e#7755#7759#1#HTML" expanded="true" />
-            <element signature="e#7825#7829#1#HTML" expanded="true" />
-            <element signature="e#7960#7964#1#HTML" expanded="true" />
-            <element signature="e#8030#8034#1#HTML" expanded="true" />
-            <element signature="e#8100#8104#1#HTML" expanded="true" />
-            <element signature="e#8170#8174#1#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/llp/js/img/20190403170756.jpg">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/llp/view/reying.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2781">
-          <caret line="103" column="34" lean-forward="true" selection-start-line="103" selection-start-column="34" selection-end-line="103" selection-end-column="34" />
-          <folding>
-            <element signature="e#4176#4180#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#0;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#0;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#1;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#1;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#2;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#2;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#3;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#3;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#li#4;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#4;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#5;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#6;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#strong#0;n#span#0;n#h3#0;n#li#7;n#ul#0;n#div#1;n#div#1;n#body#0;n#html#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#6580#6584#1#HTML" expanded="true" />
-            <element signature="e#6650#6654#1#HTML" expanded="true" />
-            <element signature="e#6720#6724#1#HTML" expanded="true" />
-            <element signature="e#6790#6794#1#HTML" expanded="true" />
-            <element signature="e#6928#6932#1#HTML" expanded="true" />
-            <element signature="e#6998#7002#1#HTML" expanded="true" />
-            <element signature="e#7067#7071#1#HTML" expanded="true" />
-            <element signature="e#7202#7206#1#HTML" expanded="true" />
-            <element signature="e#7272#7276#1#HTML" expanded="true" />
-            <element signature="e#7407#7411#1#HTML" expanded="true" />
-            <element signature="e#7477#7481#1#HTML" expanded="true" />
-            <element signature="e#7547#7551#1#HTML" expanded="true" />
-            <element signature="e#7682#7686#1#HTML" expanded="true" />
-            <element signature="e#7755#7759#1#HTML" expanded="true" />
-            <element signature="e#7825#7829#1#HTML" expanded="true" />
-            <element signature="e#7960#7964#1#HTML" expanded="true" />
-            <element signature="e#8030#8034#1#HTML" expanded="true" />
-            <element signature="e#8100#8104#1#HTML" expanded="true" />
-            <element signature="e#8170#8174#1#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="2334">
+          <caret line="125" column="40" lean-forward="true" selection-start-line="125" selection-start-column="40" selection-end-line="125" selection-end-column="40" />
         </state>
       </provider>
     </entry>

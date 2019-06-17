@@ -1,6 +1,7 @@
 package org.bs.web.controller.llp;
 
 import org.bs.web.mapper.UserMapper;
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.OrderMessage;
 import org.bs.web.pojo.UserBean;
 import org.bs.web.util.LayuiPage;
@@ -20,6 +21,19 @@ public class UserController {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+
+    /**
+     * 查询热映电影
+     * @return
+     */
+    @RequestMapping(value = "/findHitMovies")
+    @ResponseBody
+    public List<HitMovies> findHitMovies(){
+
+        List<HitMovies> list = userMapper.findHitMovies();
+
+        return list;
+    }
 
     /**
      * 根据用户的id多条件查询对应的订单号
