@@ -20,7 +20,7 @@ spring:
     suffix: .ftl
 
   main:
-    allow-bean-definition-overriding: true #å…è®¸ç›¸åŒkeyæƒ…å†µä¸‹beanDefinitionå®ä¾‹çš„è¦†ç›–
+    allow-bean-definition-overriding: true #ÔÊĞíÏàÍ¬keyÇé¿öÏÂbeanDefinitionÊµÀıµÄ¸²¸Ç
   thymeleaf:
     cache: false
     enabled: true
@@ -36,3 +36,4 @@ elasticsearch:
   clusterName: my-application
   ip: 127.0.0.1
   firstPort: 9300
+

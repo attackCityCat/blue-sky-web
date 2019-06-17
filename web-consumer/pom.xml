@@ -66,14 +66,19 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!-- thymeleaf 模板依赖 -->
+        <!-- templates 模板依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.bs.web</groupId>
+            <artifactId>movie-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
-        <!-- spring 整合 shiro -->
+        <!--&lt;!&ndash; spring 整合 shiro &ndash;&gt;
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
@@ -86,26 +91,26 @@
             <version>1.4.0</version>
         </dependency>
 
-        <!-- shiro web 依赖-->
+        &lt;!&ndash; shiro web 依赖&ndash;&gt;
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-web</artifactId>
             <version>1.4.0</version>
         </dependency>
 
-        <!-- shiro  ehcache  缓存依赖 -->
+        &lt;!&ndash; shiro  ehcache  缓存依赖 &ndash;&gt;
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-ehcache</artifactId>
             <version>1.4.0</version>
         </dependency>
 
-        <!-- shiro thymeleaf 标签整合 依赖 -->
+        &lt;!&ndash; shiro templates 标签整合 依赖 &ndash;&gt;
         <dependency>
             <groupId>com.github.theborakompanioni</groupId>
-            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <artifactId>templates-extras-shiro</artifactId>
             <version>2.0.0</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
