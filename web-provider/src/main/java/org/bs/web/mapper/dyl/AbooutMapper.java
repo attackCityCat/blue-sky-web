@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Select;
 import org.bs.web.pojo.MovieBean;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface AbooutMapper {
 
@@ -14,4 +16,10 @@ public interface AbooutMapper {
             "                          left join t_performer tp on tmp.performerId = tp.id " +
             " where tm.name = #{value}")
     MovieBean queryMovieByName(String name);
+
+
+    @Select("select * from t_movie")
+    List<MovieBean> queryMovie();
+
+
 }

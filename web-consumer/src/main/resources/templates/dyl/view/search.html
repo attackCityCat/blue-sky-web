@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>即将上映_大眼睛票务.电影</title>
+    <meta name="renderer" content="webkit" />
+    <meta name="keywords" content="大眼睛,大眼睛票务，大眼睛电影，电影，票务" />
+    <meta name="description" content="大眼睛票务是覆盖全国的电影票在线选座平台，同时还提供全国电影排期，影院信息查询、电影行业资讯等服务。看电影，来大眼睛票务选座" />
+    <link href="/dyl/css/base.min.css" rel="stylesheet" />
+    <link href="/dyl/css/main.min.css" rel="stylesheet" />
+    <script src="/dyl/js/jquery.1.7.2.min.js" type="text/javascript"></script>
+    <script src="/dyl/js/json2.min.js" type="text/javascript"></script>
+    <script src="/dyl/js/jquery.tool.tabs.min.js" type="text/javascript"></script>
+    <script src="/dyl/js/helper.min.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            var keyword = isNull(getQueryString("keyword")) ? "" : getQueryString("keyword");
+            $(".crumb .crumb-txt").append("<strong>" + keyword + "</strong>");
+            filmShow();
+
+            //热映影片排行
+            $.ajax({
+                url: '/local.asmx/GetFilmHot',
+                type: 'post',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify({
+                    "pMobile": getCookie("Mobile"),
+                    "pCityCode": findCityCode()
+                }),
+                success: function (respDate) {
+                    var data = respDate.d;
+                    if (data.ResultCode == "0") {
+                        var FilmCount = data.FilmCount > 5 ? 5 : data.FilmCount;
+                        var Films = data.Films;
+                        if (FilmCount > 0) {
+                            var html = "<ul>";
+                            for (var i = 0; i < FilmCount; i++) {
+                                html += '<li>';
+                                html += '<h3>' + Films[i].Film.FilmName + '</h3>';
+                                html += '<p>导演：' + txtShow(Films[i].Film.FilmName) + '</p>';
+                                html += '<p>' + Films[i].Cinema_And_Show + '</p>';
+                                html += '<span class="flogo"><img src="' + (isNull(Films[i].Film.Post_Path) ? "/resource/images/default_1.jpg" : Films[i].Film.Post_Path) + '" alt="' + Films[i].Film.FilmName + '" /></span>';
+                                html += '<p class="buy"><a class="btn" href="#">选座购票</a></p>';
+                                html += '</li>';
+                            }
+                            html += '</ul>';
+                            $(".top-showing .film-list").html(html);
+                        }
+                    } else {
+                        alert(data.ErrMsg);
+                    }
+
+                },
+                error: function () {
+                    //alert(msgErrorGlobal);
+                },
+                complete: function () {
+
+                }
+            })
+
+            //影片列表
+            function filmShow(cityCode, pageIndex, pageSize) {
+                var cityCode = cityCode || "110100";
+                var pageIndex = pageIndex || 1;
+                var pPageSize = pageSize || 12;
+                $(".film-wrap .film-list").html('<div class="loading"></div>');
+                $(".film-wrap .pagination").addClass("hide");
+                $.ajax({
+                    url: '/local.asmx/GetFilmList',
+                    type: 'post',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify({
+                        "pMobile": getCookie("Mobile"),
+                        "pCityCode": findCityCode(),
+                        "pStatusFlag": 1,
+                        "pRetInfoBz": "1100",
+                        "pFilmName": keyword,
+                        "pPageSize": pPageSize,
+                        "pPageIndex": pageIndex
+                    }),
+                    success: function (respDate) {
+                        var data = respDate.d;
+                        if (data.ResultCode == "0") {
+                            var FilmCount = data.FilmCount;
+                            if (FilmCount > 0) {
+                                var Films = data.Films;
+                                var html = '<ul class="clearfix">';
+                                for (var i = 0; i < Films.length; i++) {
+                                    var showType;
+                                    if (!isNull(Films[i].Film.Lang)) {
+                                        if (Films[i].Film.Lang.indexOf("2D") > -1 || Films[i].Film.Lang.indexOf("3D") > -1) {
+                                            showType = Films[i].Film.Lang;
+                                        } else {
+                                            showType = Films[i].Film.Lang + "/" + Films[i].Film.CopyType;
+                                        }
+                                    } else {
+                                        showType = Films[i].Film.CopyType;
+                                    }
+                                    html += '<li>';
+                                    html += '<h3 class="texthide"><a href="/filmdetail.html?filmid=' + Films[i].Film.FilmID + '&filmname=' + encodeURI(Films[i].Film.FilmName) + '" target="_blank">' + Films[i].Film.FilmName + '</a></h3>';
+                                    html += '<p>类型：' + txtShow(showType) + '</p>';
+                                    html += '<p>片长：' + txtShow(Films[i].Film.Duration) + '分钟</p>';
+                                    html += '<p>导演：' + txtShow(Films[i].Film.Director) + '</p>';
+                                    html += '<p>主演：' + txtShow(Films[i].Film.Actor) + '</p>';
+                                    html += '<p class="submit"><a href="/filmdetail.html?filmid=' + Films[i].Film.FilmID + '&filmname=' + encodeURI(Films[i].Film.FilmName) + '" class="btn" target="_blank">选择购票</a></p>';
+                                    html += '<span class="flogo"><img class="flogo" src="' + (isNull(Films[i].Film.Post_Path) ? "/resource/images/default_1.jpg" : Films[i].Film.Post_Path) + '" alt="' + Films[i].Film.FilmName + '" /></span>';
+                                    html += '</li>';
+                                }
+                                html += "</ul>";
+                                $(".film-wrap .film-list").html(html);
+                                $(".film-wrap .film-list li").hover(function () {
+                                    $(this).find(".film-layer").animate({ bottom: '0' }, "fast");
+                                }, function () {
+                                    $(this).find(".film-layer").animate({ bottom: '-55px' }, "fast");
+                                });
+
+                                //分页显示
+                                var totalPage = Math.ceil(FilmCount / pPageSize);
+                                if (totalPage > 1) {
+                                    var htmlPagination = '<ul class="clearfix">';
+                                    if (pageIndex == 1) {
+                                        htmlPagination += '<li><a class="prev disable" data-pageindex="' + pageIndex + '" data-tag="prev">上一页</a></li>';
+                                    } else {
+                                        htmlPagination += '<li><a href="#" class="prev" data-pageindex="' + pageIndex + '" data-tag="prev">上一页</a></li>';
+                                    }
+                                    for (var i = 0; i < totalPage; i++) {
+                                        if (pageIndex == i + 1) {
+                                            htmlPagination += '<li><a class="current" data-pageindex="' + (i + 1) + '">' + (i + 1) + '</a></li>';
+                                        } else {
+                                            htmlPagination += '<li><a href="#"  data-pageindex="' + (i + 1) + '">' + (i + 1) + '</a></li>';
+                                        }
+                                    }
+                                    if (pageIndex == totalPage) {
+                                        htmlPagination += '<li><a class="next disable" data-pageindex="' + pageIndex + '" data-tag="next">下一页</a></li>';
+                                    } else {
+                                        htmlPagination += '<li><a href="#" class="next" data-pageindex="' + pageIndex + '" data-tag="next">下一页</a></li>';
+                                    }
+                                    htmlPagination += '</ul>';
+                                    $(".pagination").html(htmlPagination).removeClass("hide");
+                                    $(".pagination li a").on("click", function () {
+                                        var _self = $(this);
+                                        var pageIndex = parseInt(_self.attr("data-pageindex"));
+                                        var tag = _self.attr("data-tag");
+                                        var isDisable = _self.hasClass("disable");
+                                        if (tag == "prev") {
+                                            if (!isDisable) {
+                                                filmShow("", pageIndex - 1);
+                                            }
+                                        } else if (tag == "next") {
+                                            if (!isDisable) {
+                                                filmShow("", pageIndex + 1);
+                                            }
+                                        } else {
+                                            if (!_self.hasClass("current")) {
+                                                filmShow("", pageIndex);
+                                            }
+                                        }
+                                    });
+                                }
+                            } else {
+                                $(".film-list").html('<p class="error">暂时没有数据，请稍后再试！</p>');
+                            }
+
+                        } else {
+                            alert(data.ErrMsg);
+                        }
+
+                    },
+                    error: function () {
+                        //alert(msgErrorGlobal);
+                    },
+                    complete: function () {
+
+                    }
+                })
+            }
+        })
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="adv-top"></div>
+    <div class="tip-web">尊敬的用户：大眼睛网站<strong>【电影售票系统】</strong> 目前正处于开展测试阶段，如有不足之处，敬请谅解，感谢您关注本网站！</div>
+    <div class="header-nav">
+        <div class="container clearfix"></div>
+    </div>
+    <div class="search-box clearfix">
+        <div class="logo"><a href="/"><img src="resource/images/logo.jpg" alt="大眼睛票务网" /></a></div>
+        <div class="search">
+            <div class="search-input">
+                <input type="text" name="keywords" maxlength="20" placeholder="请输入电影进行搜索" />
+                <span class="submit">搜索</span>
+            </div>
+            <div class="search-hot hide">
+                <a href="javascript:void(0);">星际特工</a>
+                <a href="javascript:void(0);">赛车总动员3</a>
+                <a href="javascript:void(0);">极盗车神</a>
+            </div>
+        </div>
+        <div class="channel"><a href="http://www.daeyes.com/portal/eyes/perform/index.htm"></a><a href="/"></a></div>
+    </div>
+    <div class="main-nav">
+        <div class="container clearfix">
+            <ul class="menu clearfix">
+                <li class="city-btn"></li>
+                <li><a href="/index.html" data-index="index">首页</a></li>
+                <li><a href="/filmshowing.html" data-index="filmshowing">热映影片</a></li>
+                <li><a href="/filmfeature.html" data-index="filmfeature">即将上映</a></li>
+            </ul>
+            <ul class="other clearfix">
+                <li><a href="/proTicket.html">新影联票卡产品</a></li>
+                <li><a href="/proCinema.html">新影联院线</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main searchpage">
+    <div class="crumb">
+        <p class="crumb-txt"><span>大眼睛</span><i>></i><span>搜索影片</span><i>></i></p>
+    </div>
+    <div class="film-topshowing clearfix">
+        <div class="film-wrap">
+            <div class="film-list">
+                <div class="loading"></div>
+            </div>
+            <div class="pagination hide"></div>
+        </div>
+        <div class="top-showing">
+            <h2>热映影片排行</h2>
+            <div class="film-list">
+                <div class="loading"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="nav-quick">
+        <ul class="clearfix">
+            <li>
+                <h3>新手指南</h3>
+                <p><i>></i><a href="#">在线订购</a></p>
+                <p><i>></i><a href="#">电话订购</a></p>
+                <p><i>></i><a href="#">上门订购</a></p>
+                <p><i>></i><a href="#">大客户团体订购</a></p>
+            </li>
+            <li>
+                <h3>配送方式</h3>
+                <p><i>></i><a href="#">送货上门</a></p>
+                <p><i>></i><a href="#">电子票</a></p>
+                <p><i>></i><a href="#">上门自取</a></p>
+            </li>
+            <li>
+                <h3>支付方式</h3>
+                <p><i>></i><a href="#">电话支付</a></p>
+                <p><i>></i><a href="#">柜台支付</a></p>
+            </li>
+            <li>
+                <h3>账户安全</h3>
+                <p><i>></i><a href="#">找回密码</a></p>
+                <p><i>></i><a href="#">账户注册</a></p>
+                <p><i>></i><a href="#">账户绑定</a></p>
+            </li>
+            <li>
+                <h3>售后服务</h3>
+                <p><i>></i><a href="#">退换及缺货说明</a></p>
+                <p><i>></i><a href="#">发票帮助</a></p>
+                <p><i>></i><a href="#">验票说明</a></p>
+            </li>
+            <li>
+                <h3>特色服务</h3>
+                <p><i>></i><a href="#">大眼睛卡</a></p>
+                <p><i>></i><a href="#">积分商城</a></p>
+                <p><i>></i><a href="#">票务系统</a></p>
+                <p><i>></i><a href="#">场馆库</a></p>
+            </li>
+            <li class="code">
+                <div class="container">
+                    <p>
+                        <img src="resource/images/code.jpg" alt="公众号二维码" /></p>
+                    <p>扫描关注大眼睛</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="copyright">
+        <div class="nav-copyright clearfix">
+            <ul class="clearfix">
+                <li><a href="#">公司介绍</a></li>
+                <li><a href="#">合作机会</a></li>
+                <li><a href="#">法律公告</a></li>
+                <li><a href="#">友情链接</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+        </div>
+        <p>北京新影联文化传播有限责任公司 版权所有 Copyright 2003-2017 All Rights Reserved 京ICP备12006157号 营业性演出许可证 编号：京演（机构）［2017］3083号</p>
+        <p>京公网安备 11010102002123号</p>
+    </div>
+</div>
+</body>
+</html>

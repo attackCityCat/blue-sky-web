@@ -1,5 +1,6 @@
 package org.bs.web.pojo;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -38,6 +39,22 @@ public class MovieBean implements Serializable {
 
     @Field(type = FieldType.Double)
     private Double price;
+
+    @Transient
+    private Integer minLength;
+
+    @Transient
+    private Integer maxLength;
+
+    @Transient
+    private Integer minPrice;
+
+    @Transient
+    private Integer maxPrice;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Integer getId() {
         return id;
@@ -117,5 +134,37 @@ public class MovieBean implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getMinLength() {
+        return minLength;
+    }
+
+    public void setMinLength(Integer minLength) {
+        this.minLength = minLength;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public Integer getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(Integer minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public Integer getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Integer maxPrice) {
+        this.maxPrice = maxPrice;
     }
 }

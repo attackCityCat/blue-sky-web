@@ -29,5 +29,11 @@ feign:
     enabled: true
   httpclient:
     connection-timeout: 30000
+elasticsearch:
+  clusterName: my-application
+  firstPort: 9300
+  ip: 127.0.0.1
+  secondPort: 9301
+  thirdPort: 9302
 
 

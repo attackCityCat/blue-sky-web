@@ -101,7 +101,7 @@
             var imgRatio = ["SmallPost_Path", "BigPost_Path", "SmallPost_Path", "MidPost_Path", "MidPost_Path", "SmallPost_Path", "SmallPost_Path", "SmallPost_Path", "SmallPost_Path", "MidPost_Path"];
             var imgRatioFuture = ["SmallPost_Path", "BigPost_Path", "SmallPost_Path", "MidPost_Path", "SmallPost_Path", "MidPost_Path"];
             $.ajax({
-                url: '/local.asmx/GetFilmRecommend',
+                url: '/dyl/queryMovie',
                 type: 'post',
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify({
@@ -162,66 +162,6 @@
                 }
             })
 
-            //影院推荐
-            var cityArea = getCityArea(findCityCode());
-            if (cityArea.length > 0) {
-                var htmlCityArea = '<ul class="clearfix">';
-                for (var i = 0; i < cityArea.length; i++) {
-                    htmlCityArea += '<li><a href="/cinemaSearch.html?citycode=' + cityArea[i].code + '&cityname=' + cityArea[i].name + '" data-citycode="' + cityArea[i].code + '" target="_blank">' + cityArea[i].name + '</a></li>';
-                }
-                htmlCityArea += '</ul>';
-                $(".cinema-recommend .area").html(htmlCityArea);
-            }
-
-            $.ajax({
-                url: '/local.asmx/GetCinemaList',
-                type: 'post',
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify({
-                    "pMobile": "",
-                    "pCityCode": findCityCode(),
-                    "pRecommend": 1,
-                    "pCinemaName": "",
-                    "pPageSize": 10,
-                    "pPageIndex":1
-                }),
-                success: function (respDate) {
-                    var data = respDate.d;
-                    if (data.ResultCode == "0") {
-                        var CinemaCount = data.CinemaCount > 10 ? 10 : data.CinemaCount;
-                        var Cinemas = data.Cinemas;
-                        var html = "";
-                        if (CinemaCount > 0) {
-                            html += '<ul class="clearfix">';
-                            for (var i = 0; i < CinemaCount; i++) {
-                                var className = (i + 1) % 2 == 0 ? "ml6" : "";
-                                html += '<li class=' + className + '><div class="container">';
-                                html += '<h3 class="texthide"><a href="/cinemashow.html?cinemaid=' + Cinemas[i].CinemaID + '&name=' + Cinemas[i].CinemaName + '">' + Cinemas[i].CinemaName + '</a></h3>';
-                                html += '<p>' + Cinemas[i].Addr + '</p>';
-                                if (!isNull(Cinemas[i].WorkTime)) {
-                                    html += '<p>电话：' + Cinemas[i].Phone + '&nbsp;&nbsp;营业时间：' + Cinemas[i].WorkTime + '</p>';
-                                } else {
-                                    html += '<p>电话：' + Cinemas[i].Phone + '</p>';
-                                }
-                                html += '<span class="clogo"><a href="/cinemashow.html?cinemaid=' + Cinemas[i].CinemaID + '&name=' + Cinemas[i].CinemaName + '"><img src="' + Cinemas[i].LogoPath + '" alt="' + Cinemas[i].CinemaName + '" /></a></span>';
-                                html += "</div>";
-                            }
-                            html += "</ul>";
-                            $(".cinema-recommend .cinemas").html(html);
-                        } else {
-                            $(".cinema-recommend").addClass("hide");
-                        }
-                    } else {
-                        alert(data.ErrMsg);
-                    }
-                },
-                error: function () {
-                    //alert(msgErrorGlobal);
-                },
-                complete: function () {
-
-                }
-            })
 
             //顶部广告收起时间
             function advHideSpeed(height) {
@@ -275,7 +215,7 @@
         <div class="container clearfix">
             <ul class="menu clearfix">
                 <li class="city-btn"></li>
-                <li><a href="/page/toIndex" data-index="index">首页</a></li>
+                <li><a href="/dylpage/toIndex" data-index="index">首页</a></li>
                 <li><a href="/filmshowing.html" data-index="filmshowing">热映影片</a></li>
                 <li><a href="/filmfeature.html" data-index="filmfeature">即将上映</a></li>
             </ul>
