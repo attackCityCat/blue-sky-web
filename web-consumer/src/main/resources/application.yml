@@ -9,7 +9,7 @@ spring:
     name: web-consumer
   redis:
     host: localhost
-    port: 6379
+    port: 6380
 
   profiles: default
   freemarker:
@@ -25,9 +25,9 @@ spring:
   main:
     allow-bean-definition-overriding: true #允许相同key情况下beanDefinition实例的覆盖
   thymeleaf:
+    cache: false
     enabled: true
     mode: LEGACYHTML5
-    cache: false
 
 
 feign:
@@ -35,6 +35,12 @@ feign:
     enabled: true
   httpclient:
     connection-timeout: 30000
+elasticsearch:
+  thirdPort: 9302
+  secondPort: 9301
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300
 hystrix:
   command:
     default:
@@ -43,10 +49,4 @@ hystrix:
           thread:
             timeoutInMilliseconds: 30000 #缺省为1000
 
-#elasticsearch:
-#  thirdPort: 9302
-#  secondPort: 9301
-#  clusterName: my-application
-#  ip: 127.0.0.1
-#  firstPort: 9300
 
