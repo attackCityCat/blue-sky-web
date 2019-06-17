@@ -29,9 +29,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-<<<<<<< HEAD
-
-=======
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
@@ -44,7 +41,7 @@
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
->>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

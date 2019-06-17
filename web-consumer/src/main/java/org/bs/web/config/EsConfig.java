@@ -12,15 +12,9 @@ import org.springframework.context.annotation.Configuration;
 
 import java.net.InetAddress;
 
-<<<<<<< HEAD
-
-public class EsConfig {
-    private Logger logger  = LoggerFactory.getLogger(this.getClass());
-=======
 @Configuration
 public class EsConfig {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
->>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
 
     @Value("${elasticsearch.ip}")
     private String firstIp;
@@ -40,21 +34,7 @@ public class EsConfig {
     @Bean
     public TransportClient getTransportClient() {
         logger.info("ElasticSearch初始化开始。。");
-<<<<<<< HEAD
-        logger.info("要连接的节点1的ip是{}，端口是{}，集群名为{}" , firstIp , firstPort , clusterName);
-        logger.info("要连接的节点2的ip是{}，端口是{}，集群名为{}" , secondIp , secondPort , clusterName);
-        logger.info("要连接的节点3的ip是{}，端口是{}，集群名为{}" , thirdIp , thirdPort , clusterName);
-        TransportClient transportClient = null;
-        try {
-            Settings settings = Settings.builder()
-                    .put("cluster.name",clusterName)
-                    .put("client.transport.sniff",true)
-                    .build();
-            transportClient = new PreBuiltTransportClient(settings);
-            TransportAddress firstAddress = new TransportAddress(InetAddress.getByName(firstIp),Integer.parseInt(firstPort));
-            TransportAddress secondAddress = new TransportAddress(InetAddress.getByName(secondIp),Integer.parseInt(secondPort));
-            TransportAddress thirdAddress = new TransportAddress(InetAddress.getByName(thirdIp),Integer.parseInt(thirdPort));
-=======
+
         logger.info("要连接的节点1的ip是{}，端口是{}，集群名为{}", firstIp, firstPort, clusterName);
         logger.info("要连接的节点2的ip是{}，端口是{}，集群名为{}", secondIp, secondPort, clusterName);
         logger.info("要连接的节点3的ip是{}，端口是{}，集群名为{}", thirdIp, thirdPort, clusterName);
@@ -68,27 +48,20 @@ public class EsConfig {
             TransportAddress firstAddress = new TransportAddress(InetAddress.getByName(firstIp), Integer.parseInt(firstPort));
             TransportAddress secondAddress = new TransportAddress(InetAddress.getByName(secondIp), Integer.parseInt(secondPort));
             TransportAddress thirdAddress = new TransportAddress(InetAddress.getByName(thirdIp), Integer.parseInt(thirdPort));
->>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
+
             transportClient.addTransportAddress(firstAddress);
             transportClient.addTransportAddress(secondAddress);
             transportClient.addTransportAddress(thirdAddress);
 
             logger.info("ElasticSearch初始化完成。。");
-<<<<<<< HEAD
+
         }catch (Exception e){
             e.printStackTrace();
             logger.error("ElasticSearch初始化失败：" +  e.getMessage(),e);
-=======
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("ElasticSearch初始化失败：" + e.getMessage(), e);
->>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
+
         }
+
         return transportClient;
     }
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
