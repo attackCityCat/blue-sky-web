@@ -36,6 +36,7 @@ feign:
   httpclient:
     connection-timeout: 30000
 elasticsearch:
+<<<<<<< HEAD
   thirdPort: 9302
   secondPort: 9301
   clusterName: my-application
@@ -48,5 +49,12 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000 #缺省为1000
+=======
+  clusterName: my-application
+  firstPort: 9300
+  ip: 127.0.0.1
+  secondPort: 9301
+  thirdPort: 9302
+>>>>>>> d5865038fd2147d23ebbc881b12d52ed148bfe4b
 
 
