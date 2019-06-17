@@ -68,7 +68,10 @@
     function toOrder() {
         location.href="/llp/toOrder";
     }
-
+    function toOrder() {
+        location.href="/llp/toOrder";
+        //javascript:toOrder()
+    }
     function loginOut() {
         location.href = "/llp/loginOut";
     }
@@ -88,7 +91,7 @@
                     <div class="son hide"><p><a href="#">个人资料</a></p>
                         <p><a href="#">我的新影联卡</a></p></div>
                 </li>
-                <li><a href="#">我的订单</a></li>
+                <li><a href="javascript:toOrder()">我的订单</a></li>
                 <li>关注大眼睛</li>
                 <li class="tel-film">电影热线：189-0310-0844</li>
                 <li class="tel-perform">演出热线：189-0310-0844</li>
@@ -113,7 +116,7 @@
     <div class="main-nav">
         <div class="container clearfix">
             <ul class="menu clearfix">
-                <li><a href="#" data-index="index" class="act">首页</a></li>
+                <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
                 <li><a href="#" data-index="filmshowing">热映影片</a></li>
                 <li><a href="#" data-index="filmfeature">即将上映</a></li>
                 <li><a href="#" data-index="cinemas">影院</a></li>

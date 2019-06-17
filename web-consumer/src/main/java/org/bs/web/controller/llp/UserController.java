@@ -12,6 +12,7 @@ import org.bs.web.pojo.UserBean;
 import com.sun.jmx.snmp.Timestamp;
 import org.bs.web.service.llp.UserServiceApi;
 import org.bs.web.util.HttpClientUtil;
+import org.bs.web.util.LayuiPage;
 import org.bs.web.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -48,7 +49,7 @@ public class UserController {
     public String toOrder(Model model, HttpSession session) {
 
         UserBean attribute = (UserBean) session.getAttribute(session.getId());
-       if (attribute == null) {
+        if (attribute == null) {
             return "redirect:toLogin";
         }
         model.addAttribute("user", attribute);
@@ -89,6 +90,20 @@ public class UserController {
         model.addAttribute("user", attribute);
 
         return "llp/view/main";
+    }
+    /**
+     * 进入首页
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toReYing")
+    public String toReYing(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        model.addAttribute("user", attribute);
+
+        return "llp/view/reying";
     }
 
     /**
@@ -137,6 +152,27 @@ public class UserController {
     public String reg(Model model) {
 
         return "llp/view/reg";
+    }
+
+    /**
+     * 根据用户的id查询对应的订单号
+     *
+     * @param page
+     * @param limit
+     * @param session
+     * @return
+     */
+    @RequestMapping("findOrderByUserId")
+    @ResponseBody
+    public LayuiPage findOrderByUserId(Integer page, Integer limit, HttpSession session,String hello) {
+
+        System.out.println(hello);
+
+        UserBean user = (UserBean) session.getAttribute(session.getId());
+
+            LayuiPage list = userServiceApi.findOrderByUserId(page, limit, user.getId());
+            return list;
+
     }
 
     /**

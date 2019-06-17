@@ -20,3 +20,6 @@ spring:
     url: jdbc:mysql:///movie?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
     driver-class-name: com.mysql.jdbc.Driver
 
+  data:
+    mongodb:
+      uri: mongodb://192.168.1.134:27017/test  #小飞的盲狗的逼

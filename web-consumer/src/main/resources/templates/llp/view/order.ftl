@@ -17,6 +17,9 @@
     <script type="text/javascript" src="/bootstrap-4/jquery.min.js"></script>
     <script type="text/javascript" src="/bootstrap-4/js/bootstrap.js"></script>
 
+    <#--layui的js和css-->
+    <script type="text/javascript" src="/llp/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="/llp/layui/css/layui.css">
     <#--个人中心所有js和css-->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--全局-->
@@ -47,6 +50,7 @@
 </head>
 
 <body>
+
 <script type="text/javascript">
 
     function loginOut() {
@@ -93,7 +97,7 @@
     <div class="main-nav">
         <div class="container clearfix">
             <ul class="menu clearfix">
-                <li><a href="#" data-index="index" class="act">首页</a></li>
+                <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
                 <li><a href="#" data-index="filmshowing">热映影片</a></li>
                 <li><a href="#" data-index="filmfeature">即将上映</a></li>
                 <li><a href="#" data-index="cinemas">影院</a></li>
@@ -143,19 +147,19 @@
         </DIV>
         <DIV class="menuright">
             <div class="U_title clearfix">
-                <h3>我的订单-电影</h3>
-                <div class="my_tips">
-                </div>
-                <div class="tsearch">
-                    <div style="">
-                        <input type="text" id="guankey" style='color:#AFAFAF;' onfocus="if ($(this).val() == '订单编号')
-                    $(this).val('')" onblur="if ($(this).val() == '')
-                                $(this).val('订单编号')" value="订单编号"><a href="javascript:;" id="gbtnsearch">搜索</a>
+
+                    <div class="demoTable">
+                        订单搜索：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+                        </div>
+                        <button class="layui-btn" data-type="reload">搜索</button>
                     </div>
-                </div>
             </div>
             <div id="DataList" class="clearfix">
-                <table id="orderTableId"></table>
+                <#--layui 的数据表格-->
+<#--                <table class="layui-hide" id="orderTableId"></table>-->
+                <table class="layui-hide" id="orderTableId" lay-filter="user"></table>
             </div>
 
             <div id="Pagination" class="pagination" style='padding:20px 50px 50px 50px;'></div>
@@ -171,8 +175,48 @@
     })
     //订单展示表格信息
     function show() {
+        layui.use('table', function(){
+            var table = layui.table;
+            //方法级渲染
+            table.render({
+                elem: '#orderTableId'
+                ,url: '/llp/findOrderByUserId'
+                ,cols: [[
+                    {checkbox: true, fixed: true}
+                    ,{field:'movieName', title: '电影名', width:100, sort: true, fixed: true}
+                    ,{field:'length', title: '时长', width:70}
+                    ,{field:'yuyan', title: '语言', width:80}
+                    ,{field:'hallName', title: '放映厅', width:100, sort: true}
+                    ,{field:'seatRow', title: '座位行号', width:86}
+                    ,{field:'seatClumn', title: '座位列号',width:86}
+                    ,{field:'orderNum', title: '订单号', sort: true, width:212}
+                    ,{field:'transaction', title: '交易时间', sort: true, width:170}
+                ]]
+                ,id: 'testReload'
+                ,page: true
+                ,height: 310
+            });
 
+            var $ = layui.$, active = {
+                reload: function(){
+                    var demoReload = $('#demoReload');
+                    //执行重载
+                    table.reload('testReload', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        }
+                        ,where: {
+                                hello: demoReload.val()
+                        }
+                    }, 'data');
+                }
+            };
 
+            $('.demoTable .layui-btn').on('click', function(){
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+        });
     }
     function tan() {
         layer.msg("功能正在开发中！~~")

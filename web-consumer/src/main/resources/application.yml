@@ -38,10 +38,5 @@ hystrix:
           thread:
             timeoutInMilliseconds: 30000 #缺省为1000
 
-#elasticsearch:
-#  thirdPort: 9302
-#  secondPort: 9301
-#  clusterName: my-application
-#  ip: 127.0.0.1
-#  firstPort: 9300
+
 
