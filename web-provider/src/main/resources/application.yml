@@ -10,13 +10,15 @@ eureka:
     #server端没有收到client的心跳，则将摘除该instance
     lease-expiration-duration-in-seconds: 2 #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，
     #在这个时间内若没收到下一次心跳，则将移除该instance
+mybatis:
+  mapper-locations: classpath:mybatis/*/*Mapper.xml
 
 spring:
   application:
     name: web-provider #应用名称  保证唯一   一般采用项目名
   datasource:
     username: root
-    password:
-    url: jdbc:mysql://localhost/test?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
+    password: 123456
+    url: jdbc:mysql://localhost/cinema?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
     driver-class-name: com.mysql.jdbc.Driver
 
