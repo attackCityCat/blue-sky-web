@@ -12,7 +12,6 @@
         <option value="$PROJECT_DIR$/web-consumer/pom.xml" />
         <option value="$PROJECT_DIR$/web-eureka/pom.xml" />
         <option value="$PROJECT_DIR$/web-provider/pom.xml" />
-        <option value="$PROJECT_DIR$/web-consumer/pom.xml" />
       </list>
     </option>
   </component>

@@ -30,34 +30,34 @@
 		handler:function(){
 			saveMovie();
 		}
-	}]" style="width:700px;height:450px">
+	}]" style="width:800px;height:450px">
+    <center>
     <form id="movieForm">
 
-        电影名称:<input class="easyui-textbox" name="name"><br>
+        电影名称:<input class="easyui-textbox" name="name" required="required"><br>
         封面:<input type="hidden" name="img" id="imgId" />
         <input type="file" id="imgFileBTN" />
         <div id="showImgDiv" style="width: 100px;height: 100px;border-style:solid;border-width:1px; border-color:black;">
             <img src="" id="showImg" style="width: 100px;height: 100px;">
         </div>
         <div id="showBars" ></div>
-        状态:<input type="radio" name="status" value="0">已上映
-        <input type="radio" name="status" value="1">未上映
-        <input type="radio" name="status" value="2">已下架<br>
-        票价:<input class="easyui-textbox" name="price">
-        影片时长:<input class="easyui-textbox" name="length"><br>
-        首映时间:<input class="easyui-datebox" name="firstTime">
-        导演:<input class="easyui-textbox" name="director">
-        电影简介:<input class="easyui-textbox" name="detail"><br>
-        开始日期:<input class="easyui-datetimebox" name="startDate">
-        结束日期:<input class="easyui-datetimebox" name="endDate"><br>
-        类型:<select class="easyui-combobox" id="type" name="typeName" style="width:80px">
+        票价:<input class="easyui-textbox" name="price" required="required">
+        影片时长:<input class="easyui-textbox" name="length" required="required"><br>
+        电影简介:<textarea id="textId" required="required" name="detail" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;">
+  </textarea>
+        开始日期:<input class="easyui-datetimebox" name="startDate" required="required">
+        结束日期:<input class="easyui-datetimebox" name="endDate" required="required"><br>
+        首映时间:<input class="easyui-timespinner"  style="width:80px;"
+               name="firstTime" required="required" data-options="min:'09:00',showSeconds:true" />
+        导演:<input class="easyui-textbox" name="director" required="required"><br>
+        类型:<select class="easyui-combobox" id="type" name="typeName" style="width:80px" required="required">
             </select>
-        语言:<select class="easyui-combobox" id="language" name="languageName" style="width:80px">
+        语言:<select class="easyui-combobox" id="language" name="languageName" style="width:80px" required="required">
             </select><br>
-        标签:<select class="easyui-combobox" id="tag" name="tag" style="width: 180px"></select>
-        演员:<select class="easyui-combobox" id="performer" name="performer" style="width: 180px"></select>
+        标签:<select class="easyui-combobox" id="tag" name="tag" style="width: 180px" required="required"></select>
+        演员:<select class="easyui-combobox" id="performer" name="performer" style="width: 180px" required="required"></select>
     </form>
-
+    </center>
 </div>
 <table id="tableId"></table>
 </body>
@@ -102,6 +102,7 @@
 
     //新增电影
     function saveMovie(){
+        editor1.sync();
         $.ajax({
             url:'/movie/saveMovieLjw',
             type:'post',
@@ -157,11 +158,36 @@
                     {field:"startDate",title:"开始日期"},
                     {field:"endDate",title:"结束日期"},
                     {field:"typeName",title:"类型"},
-                    {field:"languageName",title:"语言"}
+                    {field:"languageName",title:"语言"},
+                    {field:"tag",title:"标签"},
+                    {field:"performer",title:"演员"}
             ]
             ]
         })
     }
+
+    var editor1 = null;
+    KindEditor.ready(function(K) {
+        /* textarea[name="textValue"]  name的属性名 必须和 上面文本域的name 属性名保持一致 */
+        editor1 = K.create('textarea[name="detail"]', {
+            cssPath : 'kindeditor/plugins/code/prettify.css',
+            uploadJson : 'kindeditor/jsp/upload_json.jsp',
+            fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
+            allowFileManager : true,
+            afterCreate : function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    document.forms['example'].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    document.forms['example'].submit();
+                });
+            }
+        });
+        prettyPrint();
+    });
 
     //文件域的id
     $("#imgFileBTN").uploadify({

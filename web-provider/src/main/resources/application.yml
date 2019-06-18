@@ -14,6 +14,23 @@ mybatis:
   mapper-locations: classpath:mybatis/*/*Mapper.xml
 
 spring:
+  #redis连接池信息
+  redis:
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 20000
+    database: 0
+    #配置哨兵集群
+    sentinel:
+      master: mymaster
+      nodes: 192.168.68.141:26379,192.168.68.141:26380,192.168.68.141:26381
+    cluster:
+      #配置redis集群
+      nodes: 192.168.68.141:6379,192.168.68.141:6380,192.168.68.141:6381
   application:
     name: web-provider
   datasource:

@@ -30,7 +30,7 @@ public interface MovieMapper {
 
     List<MovieBean> queryMovieLjw(HashMap<String, Object> map);
 
-    void saveMovieLjw(MovieBean movieBean);
+    Boolean saveMovieLjw(MovieBean movieBean);
 
     void saveDetailLjw(MovieBean movieBean);
 
@@ -64,4 +64,20 @@ public interface MovieMapper {
     TagBean queryTagByName(String tag);
 
     void saveMovieTag(ArrayList<MovieTagBean> list);
+
+    @Select("select * from t_performer where name = #{value}")
+    PerformerBean queryPerformerByName(String performer);
+
+    void savePerformerLjw(PerformerBean performerBean1);
+
+    void saveMoviePerformer(ArrayList<MoviePerformerBean> arrayList);
+
+    @Select("select  " +
+            "  GROUP_CONCAT(tt.name) tag  " +
+            "  from t_movie tm  " +
+            "  left join t_movie_tag tmt on tmt.movieId = tm.id  " +
+            "  left join t_tag tt on tt.id = tmt.tagId  " +
+            "  where tm.id = #{value}  " +
+            "  group by tm.id")
+    String queryTagLjw(Integer movieId);
 }

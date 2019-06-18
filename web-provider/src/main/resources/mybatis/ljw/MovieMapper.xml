@@ -5,6 +5,20 @@
 <mapper namespace="org.bs.web.mapper.ljw.MovieMapper">
 
 
+	<insert id="saveMoviePerformer">
+		insert into t_movie_performer(movieId,performerId) values
+		<foreach collection="list" item="i" index="index" separator=",">
+			(#{i.movieId},#{i.performerId})
+		</foreach>
+	</insert>
+
+	<insert id="savePerformerLjw">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_performer(name) values (#{name})
+	</insert>
+
 	<insert id="saveMovieTag">
 		insert into t_movie_tag(movieId,tagId) values
 		<foreach collection="list" item="i" index="index" separator=",">
@@ -47,11 +61,13 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="int">
 			select last_insert_id()
 		</selectKey>
-		insert into t_movie(name,img,status) values(#{name},#{img},#{status})
+		insert into t_movie(name,img,status) values(#{name},#{img},1)
 	</insert>
 
     <select id="queryMovieLjw" resultType="org.bs.web.pojo.movie.MovieBean">
-        select tm.*,
+        select
+			tm.*,
+			GROUP_CONCAT(tper.name) performer,
 			 tmd.price,
 			 tmd.length,
 			 tmd.firstTime,
@@ -67,6 +83,9 @@
 			 left join t_paiqi tp on tp.movieId = tm.id
 			 left join t_movie_type tmty on tmty.id = tmd.type
 			 left join t_movie_language tml on tml.id = tmd.language
+			 left join t_movie_performer tmper on tmper.movieId = tm.id
+			 left join t_performer tper on tper.id = tmper.performerId
+			 group by tm.id
 			 limit #{start,jdbcType=NUMERIC},#{end,jdbcType=NUMERIC}
     </select>
 </mapper>
