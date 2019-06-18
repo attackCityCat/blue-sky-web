@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.bs.web.pojo.HallBean;
+import org.bs.web.pojo.HallTypeBean;
 import org.bs.web.pojo.SeatBean;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public interface HallMapper {
     List<HallBean> queryHall();
 
     @Select("select * from t_seat where hallId = #{value}")
-    SeatBean querySeat(Integer hallId);
+    List<SeatBean> querySeat(Integer hallId);
 
     @Update("update t_seat set seatColumn =#{seatColumn},seatRow = #{seatRow},isActive = #{isActive},isLovers = #{isLovers} where hallId = #{hallId}")
     void editSeat(SeatBean seatBean);
@@ -44,4 +45,7 @@ public interface HallMapper {
 
     @Select("select th.id,th.name,th.typeId,tht.name as typeName,tht.seats from t_hall th left join t_hall_type tht on th.typeId = tht.id where th.id = #{value}")
     List<HallBean> queryHallById(Integer id);
+
+    @Select("select * from t_hall_type")
+    List<HallTypeBean> queryHallType();
 }

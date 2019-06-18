@@ -2,6 +2,7 @@ package org.bs.web.controller.dyl;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.bs.web.pojo.HallBean;
+import org.bs.web.pojo.HallTypeBean;
 import org.bs.web.pojo.SeatBean;
 import org.bs.web.service.dyl.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,12 @@ public class HallController {
         return hallService.queryHallById(id);
     }
 
+    //查询放映厅类型
+    @RequestMapping("queryHallType")
+    public List<HallTypeBean> queryHallType(){
+        return hallService.queryHallType();
+    }
+
     //新增放映厅
     @RequestMapping("addHall")
     public Boolean addHall(HallBean hallBean){
@@ -48,7 +55,7 @@ public class HallController {
 
     //查看放映厅座位
     @RequestMapping("querySeat")
-    public SeatBean querySeat(Integer hallId){
+    public List<SeatBean> querySeat(Integer hallId){
             return hallService.querySeat(hallId);
     }
 

@@ -1,6 +1,7 @@
 package org.bs.web.service.dyl;
 
 import org.bs.web.pojo.HallBean;
+import org.bs.web.pojo.HallTypeBean;
 import org.bs.web.pojo.SeatBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ public interface HallService {
     List<HallBean> queryHall();
 
     @RequestMapping(value = "/querySeat")
-    SeatBean querySeat(@RequestParam(value = "hallId") Integer hallId);
+    List<SeatBean> querySeat(@RequestParam(value = "hallId") Integer hallId);
 
     @RequestMapping(value = "/editSeat")
     Boolean editSeat(@RequestBody SeatBean seatBean);
@@ -45,4 +46,7 @@ public interface HallService {
 
     @RequestMapping(value = "/queryHallById")
     List<HallBean> queryHallById(@RequestParam(value = "id") Integer id);
+
+    @RequestMapping(value = "/queryHallType")
+    List<HallTypeBean> queryHallType();
 }
