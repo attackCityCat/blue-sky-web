@@ -64,4 +64,12 @@ public interface UserServiceApi {
      */
     @RequestMapping(value = "/findHitMoviesMain")
     List<HitMovies> findHitMoviesMain();
+
+    /**
+     * 根据ID查询电影
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findMoviesDetail")
+    HitMovies findMoviesDetail(@RequestParam(value = "id") int id);
 }

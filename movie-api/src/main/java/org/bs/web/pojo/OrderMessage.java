@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Document(value = "OrderMessage")
 public class OrderMessage implements Serializable{
@@ -16,7 +17,7 @@ public class OrderMessage implements Serializable{
 
     private  Integer  language;   //语言版本
 
-    private  Date     startDate;  //放映时间
+    private  String   startDate;  //放映时间
 
     private  Double   moviePrice; //电影票价
 
@@ -24,9 +25,7 @@ public class OrderMessage implements Serializable{
 
     private  String   hallName;  //放映厅名称
 
-    private  String   seatRow;  //座位行号
-
-    private  String   seatClumn;  //座位列号
+    private List<SeatBean> seatBeans;
 
     private  String   transaction;  //交易时间
 
@@ -41,6 +40,56 @@ public class OrderMessage implements Serializable{
     private  String   length;  //电影时长
 
     private  String   yuyan;  //语言版本
+
+    private  Integer  account;  //票数
+
+    private  Integer  jibie;  //会员级别
+
+    private  Double   zk;  //折扣
+
+    private  Double  totalPrice; //总价
+
+    private  Double  fracturePrice;  //折价
+
+    public Double getFracturePrice() {
+        return fracturePrice;
+    }
+
+    public void setFracturePrice(Double fracturePrice) {
+        this.fracturePrice = fracturePrice;
+    }
+
+    public Integer getJibie() {
+        return jibie;
+    }
+
+    public void setJibie(Integer jibie) {
+        this.jibie = jibie;
+    }
+
+    public Double getZk() {
+        return zk;
+    }
+
+    public void setZk(Double zk) {
+        this.zk = zk;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Integer getAccount() {
+        return account;
+    }
+
+    public void setAccount(Integer account) {
+        this.account = account;
+    }
 
     public String getId() {
         return id;
@@ -74,11 +123,11 @@ public class OrderMessage implements Serializable{
         this.language = language;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
@@ -106,20 +155,12 @@ public class OrderMessage implements Serializable{
         this.hallName = hallName;
     }
 
-    public String getSeatRow() {
-        return seatRow;
+    public List<SeatBean> getSeatBeans() {
+        return seatBeans;
     }
 
-    public void setSeatRow(String seatRow) {
-        this.seatRow = seatRow;
-    }
-
-    public String getSeatClumn() {
-        return seatClumn;
-    }
-
-    public void setSeatClumn(String seatClumn) {
-        this.seatClumn = seatClumn;
+    public void setSeatBeans(List<SeatBean> seatBeans) {
+        this.seatBeans = seatBeans;
     }
 
     public String getTransaction() {
@@ -178,7 +219,7 @@ public class OrderMessage implements Serializable{
         this.yuyan = yuyan;
     }
 
-    public OrderMessage(String id, String movieName, String movieImg, Integer language, Date startDate, Double moviePrice, String phone, String hallName, String seatRow, String seatClumn, String transaction, String orderNum, Date endDate, String cinemaName, Integer userId, String length, String yuyan) {
+    public OrderMessage(String id, String movieName, String movieImg, Integer language, String startDate, Double moviePrice, String phone, String hallName, List<SeatBean> seatBeans, String transaction, String orderNum, Date endDate, String cinemaName, Integer userId, String length, String yuyan, Integer account, Integer jibie, Double zk, Double totalPrice, Double fracturePrice) {
         this.id = id;
         this.movieName = movieName;
         this.movieImg = movieImg;
@@ -187,8 +228,7 @@ public class OrderMessage implements Serializable{
         this.moviePrice = moviePrice;
         this.phone = phone;
         this.hallName = hallName;
-        this.seatRow = seatRow;
-        this.seatClumn = seatClumn;
+        this.seatBeans = seatBeans;
         this.transaction = transaction;
         this.orderNum = orderNum;
         this.endDate = endDate;
@@ -196,6 +236,11 @@ public class OrderMessage implements Serializable{
         this.userId = userId;
         this.length = length;
         this.yuyan = yuyan;
+        this.account = account;
+        this.jibie = jibie;
+        this.zk = zk;
+        this.totalPrice = totalPrice;
+        this.fracturePrice = fracturePrice;
     }
 
     public OrderMessage() {
@@ -204,16 +249,15 @@ public class OrderMessage implements Serializable{
     @Override
     public String toString() {
         return "OrderMessage{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", movieName='" + movieName + '\'' +
                 ", movieImg='" + movieImg + '\'' +
                 ", language=" + language +
-                ", startDate=" + startDate +
+                ", startDate='" + startDate + '\'' +
                 ", moviePrice=" + moviePrice +
                 ", phone='" + phone + '\'' +
                 ", hallName='" + hallName + '\'' +
-                ", seatRow='" + seatRow + '\'' +
-                ", seatClumn='" + seatClumn + '\'' +
+                ", seatBeans=" + seatBeans +
                 ", transaction='" + transaction + '\'' +
                 ", orderNum='" + orderNum + '\'' +
                 ", endDate=" + endDate +
@@ -221,6 +265,11 @@ public class OrderMessage implements Serializable{
                 ", userId=" + userId +
                 ", length='" + length + '\'' +
                 ", yuyan='" + yuyan + '\'' +
+                ", account=" + account +
+                ", jibie=" + jibie +
+                ", zk=" + zk +
+                ", totalPrice=" + totalPrice +
+                ", fracturePrice=" + fracturePrice +
                 '}';
     }
 }

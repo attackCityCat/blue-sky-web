@@ -3,15 +3,39 @@ package org.bs.web.pojo;
 public class HitMovies {
     private Integer id;
 
-    private String name;
+    private String name;    //电影名
 
-    private String img;
+    private String img;     //图
 
-    private String tagName;
+    private String tagName;     //标签
 
-    private Integer price;
+    private String typeName;  //类型 2D 3D等
 
-    private Integer length;
+    private Integer price;      //价格
+
+    private Integer length;     //时长
+
+    private String director;     ///导演
+
+    private String perName;     //演员
+
+    private String detail;      //简介
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getPerName() {
+        return perName;
+    }
+
+    public void setPerName(String perName) {
+        this.perName = perName;
+    }
 
     public Integer getId() {
         return id;
@@ -61,15 +85,35 @@ public class HitMovies {
         this.length = length;
     }
 
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     @Override
     public String toString() {
-        return "Movie{" +
+        return "HitMovies{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", img='" + img + '\'' +
                 ", tagName='" + tagName + '\'' +
+                ", typeName='" + typeName + '\'' +
                 ", price=" + price +
                 ", length=" + length +
+                ", director='" + director + '\'' +
+                ", perName='" + perName + '\'' +
+                ", detail='" + detail + '\'' +
                 '}';
     }
 }
