@@ -3,8 +3,8 @@ package org.bs.web.mapper.dyl;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.bs.web.pojo.HallBean;
-import org.bs.web.pojo.SeatBean;
+import org.bs.web.pojo.movie.HallBean;
+import org.bs.web.pojo.movie.SeatBean;
 import org.springframework.stereotype.Component;
 
 @Component

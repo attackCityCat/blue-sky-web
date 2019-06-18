@@ -3,6 +3,7 @@ package org.bs.web.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.bs.web.pojo.UserBean;
 
 @Mapper
@@ -18,4 +19,7 @@ public interface UserMapper {
 
     @Insert(" INSERT INTO t_user(phoneNumber,password,name) VALUES(#{phoneNumber},#{password},#{name}) ")
     void addUser(UserBean userBean);
+
+    @Update(" UPDATE t_user  SET NAME = #{name} WHERE phoneNumber = #{phone} ")
+    void updateUser(String name, String phone);
 }

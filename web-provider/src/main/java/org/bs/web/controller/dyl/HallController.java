@@ -1,8 +1,8 @@
 package org.bs.web.controller.dyl;
 
 import org.bs.web.mapper.dyl.HallMapper;
-import org.bs.web.pojo.HallBean;
-import org.bs.web.pojo.SeatBean;
+import org.bs.web.pojo.movie.HallBean;
+import org.bs.web.pojo.movie.SeatBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

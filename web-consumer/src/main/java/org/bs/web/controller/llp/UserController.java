@@ -2,7 +2,6 @@ package org.bs.web.controller.llp;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.apache.commons.collections.bag.SynchronizedSortedBag;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -13,10 +12,12 @@ import org.bs.web.pojo.UserBean;
 import com.sun.jmx.snmp.Timestamp;
 import org.bs.web.service.llp.UserServiceApi;
 import org.bs.web.util.HttpClientUtil;
+import org.bs.web.util.LayuiPage;
 import org.bs.web.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,10 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Controller
+@RequestMapping("llp")
 public class UserController {
 
     @Resource
@@ -36,6 +37,143 @@ public class UserController {
 
     @Autowired
     private UserServiceApi userServiceApi;
+
+    /**
+     * 进入订单页
+     *
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("toOrder")
+    public String toOrder(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        if (attribute == null) {
+            return "redirect:toLogin";
+        }
+        model.addAttribute("user", attribute);
+
+        return "llp/view/order";
+    }
+
+    /**
+     * 进入个人中心
+     *
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping("toPersonal")
+    public String toPersonal(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        if (attribute == null) {
+            return "redirect:toLogin";
+        }
+        model.addAttribute("user", attribute);
+
+        return "llp/view/Personal";
+
+    }
+
+    /**
+     * 进入首页
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toMain")
+    public String toMain(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        model.addAttribute("user", attribute);
+
+        return "llp/view/main";
+    }
+    /**
+     * 进入首页
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toReYing")
+    public String toReYing(Model model, HttpSession session) {
+
+        UserBean attribute = (UserBean) session.getAttribute(session.getId());
+        model.addAttribute("user", attribute);
+
+        return "llp/view/reying";
+    }
+
+    /**
+     * 登陆页
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toLogin")
+    public String toLogin(Model model) {
+
+        return "llp/view/login";
+    }
+
+    /**
+     * 修改密码页
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("ResetPwd")
+    public String ResetPwd(Model model) {
+
+        return "llp/view/ResetPwd";
+    }
+
+    /**
+     * 跳转index 测试专用
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toIndex")
+    public String toIndex(Model model) {
+
+        return "llp/view/index";
+    }
+
+    /**
+     * 注册页面
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("/reg")
+    public String reg(Model model) {
+
+        return "llp/view/reg";
+    }
+
+    /**
+     * 根据用户的id查询对应的订单号
+     *
+     * @param page
+     * @param limit
+     * @param session
+     * @return
+     */
+    @RequestMapping("findOrderByUserId")
+    @ResponseBody
+    public LayuiPage findOrderByUserId(Integer page, Integer limit, HttpSession session,String hello) {
+
+        System.out.println(hello);
+
+        UserBean user = (UserBean) session.getAttribute(session.getId());
+
+            LayuiPage list = userServiceApi.findOrderByUserId(page, limit, user.getId());
+            return list;
+
+    }
 
     /**
      * 登陆操作根据手机号登陆
@@ -84,6 +222,7 @@ public class UserController {
     @RequestMapping("/getVerify")
     @ResponseBody
     public HashMap<String, Object> getVerify(String phone) throws Exception {
+        System.out.println("11111111111111");
         //先构造一个map
         HashMap<String, Object> map = new HashMap<>();
         //验证码在redis里的key
@@ -128,23 +267,31 @@ public class UserController {
         return map;
     }
 
+    /**
+     * 新增用户信息
+     *
+     * @param userBean
+     * @return
+     */
     @RequestMapping("/addUser")
     @ResponseBody
     public HashMap<String, Object> addUser(UserBean userBean) {
 
+        if (userBean.getName() == null) {
+            userBean.setName(userBean.getPhoneNumber());
+        }
         HashMap<String, Object> map = new HashMap<>();
 
         Object o = redisTemplate.opsForValue().get(Conts.VERIFY + userBean.getPhoneNumber());
-        System.out.println(o);
-
+        //判断验证码是否正确
         if (!userBean.getVerify().equals(o.toString())) {
             map.put("code", 3);
             map.put("msg", "验证码不正确");
             return map;
         }
-
+        //根据手机查询
         UserBean phone = userServiceApi.findByPhone(userBean.getPhoneNumber());
-
+        //判断账号是否存在
         if (phone != null) {
             map.put("code", 1);
             map.put("msg", "账号已经存在");
@@ -152,15 +299,63 @@ public class UserController {
         }
 
         Boolean boo = userServiceApi.addUser(userBean);
-
         if (!boo) {
             map.put("code", 2);
             map.put("msg", "系统故障");
             return map;
         }
-
+        //注册成功返回
         map.put("code", 0);
-        map.put("msg", "注册成功");
+        map.put("msg", "注册成功,即将跳转登陆页");
         return map;
+    }
+
+    /**
+     * 根据手机号修改用户昵称
+     *
+     * @param name
+     * @param phone
+     * @return
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public boolean updateUser(String name, String phone) {
+        System.out.println("修改的方法");
+        try {
+            userServiceApi.updateUser(name, phone);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * 暂时先不写修改功能，等构建出登陆和个人中心以后在做
+     *
+     * @param userBean
+     * @return
+     */
+    @RequestMapping("/updatePwd")
+    @ResponseBody
+    public boolean updateUser(UserBean userBean) {
+        //
+        Object o = redisTemplate.opsForValue().get(Conts.VERIFY + userBean.getPhoneNumber());
+        if (!userBean.getVerify().equals(o.toString())) {
+
+        }
+        return false;
+    }
+
+    /**
+     * 用户退出登陆操作
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("loginOut")
+    public String loginOut(HttpSession session) {
+        session.removeAttribute(session.getId());
+        return "redirect:toMain";
     }
 }

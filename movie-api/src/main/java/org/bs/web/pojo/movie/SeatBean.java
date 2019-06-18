@@ -10,8 +10,8 @@ public class SeatBean implements Serializable {
     private static final long serialVersionUID = 7206772350302578184L;
     private Integer id;         //主键
     private Integer hallId;     //放映厅ID
-    private String row;         //行号
-    private String column;      //列号
+    private String seatRow;         //行号
+    private String seatCol;      //列号
     private Integer isActive;   //是否可用
     private Integer isLovers;   //是否为情侣座
 
@@ -31,20 +31,20 @@ public class SeatBean implements Serializable {
         this.hallId = hallId;
     }
 
-    public String getRow() {
-        return row;
+    public String getSeatRow() {
+        return seatRow;
     }
 
-    public void setRow(String row) {
-        this.row = row;
+    public void setSeatRow(String seatRow) {
+        this.seatRow = seatRow;
     }
 
-    public String getColumn() {
-        return column;
+    public String getSeatCol() {
+        return seatCol;
     }
 
-    public void setColumn(String column) {
-        this.column = column;
+    public void setSeatCol(String seatCol) {
+        this.seatCol = seatCol;
     }
 
     public Integer getIsActive() {

@@ -18,6 +18,6 @@ public class Conts {
     //判断验证码是否存在
     public static final String VERIFY = "Verify";
     // 验证码有效时间
-    public static final long TIME = 300000000000L;
+    public static final long TIME = 99999L;
 
 }
