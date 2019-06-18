@@ -117,36 +117,45 @@
                 </div>
             </div>
             <div class="film-recommend film-showing">
-                <#--当点击更多时修改为查询所有的热映产品 并分页-->
-                <h2>正在热映<a href="javascript:tan()" class="more">更多</a></h2>
+                <#--点击跳转到热映页面-->
+                <h2>正在热映<a href="/llp/toReYing" class="more">更多</a></h2>
                 <div class="films">
-                    <#--<div class="loading">
-                        &lt;#&ndash;此处为展示数据区域&ndash;&gt;
-                    </div>-->
-                    <#assign index = 0 >
-                    <#list list as i>
-                        <#assign index = index+1>
-                        <ul class="clearfix">
+                    <ul class="clearfix">
+                        <#assign index = 0 >
+                        <#list list as i>
+                            <#assign index = index+1>
                             <li class="wd${index}">
                                 <img src="${i.img}" alt="">
-                                <a href="#" class="film-layer">
+                                <a href="#" class="film-layer" style="">
                                     <div class="txt">
                                         <h3>${i.name}</h3>
                                     </div>
                                     <div class="mask"></div>
                                 </a>
                             </li>
-                        </ul>
-                    </#list>
+                        </#list>
+                    </ul>
                 </div>
             </div>
             <div class="film-recommend film-feature">
-                <#--当点击更多的时候修改为查询所有的 预售的电影 并分页-->
-                <h2>即将上映<a href="/javascript:tan()" class="more">更多</a></h2>
+                <#--点击跳转到热映页面-->
+                <h2>即将上映<a href="/llp/toReYing" class="more">更多</a></h2>
                 <div class="films">
-                    <div class="loading">
-                        <#--此处为展示数据区域-->
-                    </div>
+                    <ul class="clearfix">
+                        <#assign index = 0 >
+                        <#list list as i>
+                            <#assign index = index+1>
+                            <li class="wd${index}">
+                                <img src="${i.img}" alt="">
+                                <a href="#" class="film-layer" style="">
+                                    <div class="txt">
+                                        <h3>${i.name}</h3>
+                                    </div>
+                                    <div class="mask"></div>
+                                </a>
+                            </li>
+                        </#list>
+                    </ul>
                 </div>
             </div>
             <div class="active-recommend">

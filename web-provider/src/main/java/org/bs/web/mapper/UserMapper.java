@@ -40,4 +40,18 @@ public interface UserMapper {
             " tm.STATUS = 0  " +
             " GROUP BY tm.id  LIMIT 15")
     List<HitMovies> findHitMovies();
+    @Select(" SELECT " +
+            " tm.*, " +
+            " tmd.price, " +
+            " tmd.length, " +
+            " GROUP_CONCAT( tag.NAME ) AS tagName " +
+            "FROM " +
+            " t_movie tm " +
+            " LEFT JOIN t_movie_tag tmt ON tm.id = tmt.movieId " +
+            " LEFT JOIN t_movie_detail tmd ON tm.id = tmd.movieId " +
+            " LEFT JOIN t_tag tag ON tag.id = tmt.tagId  " +
+            " WHERE " +
+            " tm.STATUS = 0  " +
+            " GROUP BY tm.id  LIMIT 10")
+    List<HitMovies> findHitMoviesMain();
 }

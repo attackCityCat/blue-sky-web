@@ -4,16 +4,8 @@
 <html>
 <head>
     <title>大眼睛票务</title>
-    <#--layui轮播-->
-    <link href="/llp/layui/css/layui.css" rel="stylesheet"/>
-    <script src="/llp/layui/layui.js" type="text/javascript"></script>
-    <script src="/llp/js/jquery.js" type="text/javascript"></script>
-
-    <script charset="UTF-8" type="text/javascript" src="/llp/Personal/layer.js">
-    </script>
-    <link rel="stylesheet" href="/llp/Personal/layer.css">
-
-    <link href="/llp/css/base.min.css" rel="stylesheet"/>
+<#--原引入-->
+<#--    <link href="/llp/css/base.min.css" rel="stylesheet"/>
     <link href="/llp/css/jquery.flexslider.css" rel="stylesheet"/>
     <link href="/llp/css/main.min.css" rel="stylesheet"/>
     <script src="/llp/js/jquery.1.7.2.min.js" type="text/javascript"></script>
@@ -21,6 +13,22 @@
     <script src="/llp/js/jquery.tool.tabs.min.js" type="text/javascript"></script>
     <script src="/llp/js/helper.js" type="text/javascript"></script>
     <script src="/llp/js/jquery.flexslider.min.js" type="text/javascript"></script>
+    <script src="/llp/js/layui.js" type="text/javascript"></script>-->
+<#--参考引入-->
+<#--    <link href="../js/热映影片_大眼睛票务.电影_files/base.min.css" rel="stylesheet">
+    <link href="../js/热映影片_大眼睛票务.电影_files/main.min.css" rel="stylesheet">
+    <script src="../js/热映影片_大眼睛票务.电影_files/jquery.1.7.2.min.js.下载" type="text/javascript"></script>
+    <script src="../js/热映影片_大眼睛票务.电影_files/json2.min.js.下载" type="text/javascript"></script>
+    <script src="../js/热映影片_大眼睛票务.电影_files/jquery.tool.tabs.min.js.下载" type="text/javascript"></script>
+    <script src="../js/热映影片_大眼睛票务.电影_files/helper.js.下载" type="text/javascript"></script>-->
+
+    <link href="/reying/base.min.css" rel="stylesheet">
+    <link href="/reying/main.min.css" rel="stylesheet">
+    <script src="/reying/jquery.1.7.2.min.js" type="text/javascript"></script>
+    <script src="/reying/json2.min.js" type="text/javascript"></script>
+    <script src="/reying/jquery.tool.tabs.min.js" type="text/javascript"></script>
+    <script src="/reying/helper.js" type="text/javascript"></script>
+
 
 </head>
 
@@ -98,42 +106,52 @@
     }
 
 </script>
-<javascript:tan()--中间内容-->
-<#--<div class="main homepage">
-    <div class="mbanner flexslider">
-    </div>
-</div>-->
-<#--数据展示区域-->
 <div class="main filmshowingpage">
     <div class="crumb">
-        <p><span>大眼睛</span><i>&gt;</i><span>热映影片</span></p>
+        <p>
+            <span>大眼睛</span><i>&gt;</i><span>热映影片</span>
+        </p>
+
         <div class="search-box-films clearfix">
             <p class="des">共为您搜出<strong>#{count}</strong>部影片</p>
         </div>
     </div>
+
+
     <div class="film-list">
         <ul class="clearfix">
             <#list list as i >
             <li class="">
                 <div class="flogo">
-                    <a href="#这里写链接传ID跳转详情页面">
-                        <img class="logo" src="${i.img}" alt="黑衣人：全球追缉"></a>
+                    <a  href="#">
+                        <img class="logo" src="${i.img}" alt="黑衣人：全球追缉">
+                    </a>
                     <div class="film-layer" style="bottom: -75px;">
                         <div class="info">
-                            <p>类型：${i.tagName}</p> <p>片长：${i.length}分钟</p>
+                            <p>类型：${i.tagName}</p>
+                            <p>片长：${i.length}分钟</p>
                         </div>
                         <div class="mask"></div>
                     </div>
                 </div>
-                <h3 class="texthide">${i.name}<span class="price"><strong class="" style="color: #1BA4E5;">¥${i.price}</strong>起</span></h3>
+                <h3 class="texthide">${i.name}
+                    <span class="price">
+							<strong class="">¥${i.price}</strong>
+						</span>
+                </h3>
             </li>
             </#list>
         </ul>
     </div>
+</div>
+
+
+
+
     <!-- tan -->
 <script type="text/javascript">
     function tan(){
-        layer.msg("功能正在开发中！~~")
+       alert("功能正在开发中！~~")
     }
 </script>
 

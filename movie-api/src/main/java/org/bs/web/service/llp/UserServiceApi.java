@@ -57,4 +57,11 @@ public interface UserServiceApi {
      */
     @RequestMapping(value = "/findHitMovies")
     List<HitMovies> findHitMovies();
+
+    /**
+     * 查询热映电影（首页展示使用十条）
+     * @return
+     */
+    @RequestMapping(value = "/findHitMoviesMain")
+    List<HitMovies> findHitMoviesMain();
 }

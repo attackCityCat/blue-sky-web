@@ -91,7 +91,8 @@ public class UserController {
         UserBean attribute = (UserBean) session.getAttribute(session.getId());
         model.addAttribute("user", attribute);
 
-        List<HitMovies> list =  userServiceApi.findHitMovies();
+        //首页只需要展示条数据即可
+        List<HitMovies> list =  userServiceApi.findHitMoviesMain();
         model.addAttribute("list",list);
 
         return "llp/view/main";

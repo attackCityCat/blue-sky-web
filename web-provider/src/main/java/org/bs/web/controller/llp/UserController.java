@@ -34,6 +34,18 @@ public class UserController {
 
         return list;
     }
+    /**
+     * 查询热映电影 首页展示（使用10条数据)
+     * @return
+     */
+    @RequestMapping(value = "/findHitMoviesMain")
+    @ResponseBody
+    public List<HitMovies> findHitMoviesMain(){
+
+        List<HitMovies> list = userMapper.findHitMoviesMain();
+
+        return list;
+    }
 
     /**
      * 根据用户的id多条件查询对应的订单号
