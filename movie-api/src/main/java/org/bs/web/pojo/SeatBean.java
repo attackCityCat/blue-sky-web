@@ -6,9 +6,9 @@ public class SeatBean {
 
     private Integer hallId;
 
-    private String row;
+    private String seatRow;
 
-    private String column;
+    private String seatColumn;
 
     private Integer isActive;
 
@@ -30,20 +30,20 @@ public class SeatBean {
         this.hallId = hallId;
     }
 
-    public String getRow() {
-        return row;
+    public String getSeatRow() {
+        return seatRow;
     }
 
-    public void setRow(String row) {
-        this.row = row;
+    public void setSeatRow(String seatRow) {
+        this.seatRow = seatRow;
     }
 
-    public String getColumn() {
-        return column;
+    public String getSeatColumn() {
+        return seatColumn;
     }
 
-    public void setColumn(String column) {
-        this.column = column;
+    public void setSeatColumn(String seatColumn) {
+        this.seatColumn = seatColumn;
     }
 
     public Integer getIsActive() {
@@ -67,8 +67,8 @@ public class SeatBean {
         return "SeatBean{" +
                 "id=" + id +
                 ", hallId=" + hallId +
-                ", row='" + row + '\'' +
-                ", column='" + column + '\'' +
+                ", seatRow='" + seatRow + '\'' +
+                ", seatColumn='" + seatColumn + '\'' +
                 ", isActive=" + isActive +
                 ", isLovers=" + isLovers +
                 '}';

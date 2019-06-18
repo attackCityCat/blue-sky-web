@@ -2,30 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3f84353-f5b2-4018-a282-7cdd0fb5bbb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallTypeBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/config/EsConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/dao/MovieRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/search.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/dyl/pojo/MovieAboutBean.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/service/MovieService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/AboutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/AboutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/pojo/MovieBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/pojo/MovieBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/AboutService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/AboutService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/AboutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/AboutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/AbooutMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/AbooutMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java" beforeDir="false" afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -59,49 +41,91 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-provider/src/main/resources/application.yml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="725">
-              <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
+            <state relative-caret-position="547">
+              <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#654#655#0" expanded="true" />
+                <element signature="e#700#701#0" expanded="true" />
+                <element signature="e#819#820#0" expanded="true" />
+                <element signature="e#865#866#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-150">
+              <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+              <folding>
+                <element signature="e#216#217#0" expanded="true" />
+                <element signature="e#241#242#0" expanded="true" />
+                <element signature="e#278#279#0" expanded="true" />
+                <element signature="e#306#307#0" expanded="true" />
+                <element signature="e#337#338#0" expanded="true" />
+                <element signature="e#364#365#0" expanded="true" />
+                <element signature="e#404#405#0" expanded="true" />
+                <element signature="e#436#437#0" expanded="true" />
+                <element signature="e#470#471#0" expanded="true" />
+                <element signature="e#499#500#0" expanded="true" />
+                <element signature="e#544#545#0" expanded="true" />
+                <element signature="e#580#581#0" expanded="true" />
+                <element signature="e#615#616#0" expanded="true" />
+                <element signature="e#646#647#0" expanded="true" />
+                <element signature="e#694#695#0" expanded="true" />
+                <element signature="e#734#735#0" expanded="true" />
+                <element signature="e#767#768#0" expanded="true" />
+                <element signature="e#795#796#0" expanded="true" />
+                <element signature="e#838#839#0" expanded="true" />
+                <element signature="e#872#873#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+              <folding>
+                <element signature="e#280#281#0" expanded="true" />
+                <element signature="e#317#318#0" expanded="true" />
+                <element signature="e#345#346#0" expanded="true" />
+                <element signature="e#379#380#0" expanded="true" />
+                <element signature="e#408#409#0" expanded="true" />
+                <element signature="e#453#454#0" expanded="true" />
+                <element signature="e#489#490#0" expanded="true" />
+                <element signature="e#523#524#0" expanded="true" />
+                <element signature="e#553#554#0" expanded="true" />
+                <element signature="e#599#600#0" expanded="true" />
+                <element signature="e#637#638#0" expanded="true" />
+                <element signature="e#674#675#0" expanded="true" />
+                <element signature="e#707#708#0" expanded="true" />
+                <element signature="e#759#760#0" expanded="true" />
+                <element signature="e#803#804#0" expanded="true" />
+                <element signature="e#839#840#0" expanded="true" />
+                <element signature="e#870#871#0" expanded="true" />
+                <element signature="e#919#920#0" expanded="true" />
+                <element signature="e#959#960#0" expanded="true" />
+                <element signature="e#995#996#0" expanded="true" />
+                <element signature="e#1026#1027#0" expanded="true" />
+                <element signature="e#1075#1076#0" expanded="true" />
+                <element signature="e#1115#1116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar!/ch/qos/logback/classic/util/LoggerNameUtil.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/ch/qos/logback/logback-classic/1.2.3/logback-classic-1.2.3.jar!/org/slf4j/impl/StaticLoggerBinder.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1250">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="229">
+              <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -109,36 +133,46 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="57" column="15" lean-forward="true" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
+            <state relative-caret-position="381">
+              <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1589#1590#0" expanded="true" />
-                <element signature="e#1640#1641#0" expanded="true" />
+                <element signature="e#915#916#0" expanded="true" />
+                <element signature="e#960#961#0" expanded="true" />
+                <element signature="e#1109#1110#0" expanded="true" />
+                <element signature="e#1160#1161#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.7.RELEASE/spring-web-5.1.7.RELEASE.jar!/org/springframework/web/bind/annotation/RequestParam.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="450">
+              <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/AbooutMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/AboutController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="48" column="10" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="10" />
+            <state relative-caret-position="475">
+              <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1347#1348#0" expanded="true" />
+                <element signature="e#1405#1406#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,8 +190,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+            <state relative-caret-position="464">
+              <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -247,17 +281,17 @@
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/pojo/MovieBean.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/dao/HallService.java" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallTypeBean.java" />
-        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java" />
         <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HollMapper.java" />
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallBean.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/web-eureka/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/web-provider/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java" />
-        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java" />
-        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java" />
-        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/AboutController.java" />
+        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java" />
+        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java" />
+        <option value="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java" />
       </list>
     </option>
   </component>
@@ -294,8 +328,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="232" />
-    <option name="y" value="121" />
+    <option name="x" value="193" />
+    <option name="y" value="156" />
     <option name="width" value="1334" />
     <option name="height" value="763" />
   </component>
@@ -304,7 +338,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -316,7 +349,47 @@
             <path>
               <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
               <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="movie-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="pojo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
@@ -476,6 +549,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -494,20 +568,20 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\java\org\bs\web" />
-      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl\images" />
-      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\resource\images" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.bs.web.pojo" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl\js\skin\default" />
       <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\templates\dyl" />
       <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl\images" />
       <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl" />
       <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl\" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.bs.web.pojo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\java\org\bs\web" />
+      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\dyl\images" />
+      <recent name="F:\blue-sky-web\blue-sky-web\web-consumer\src\main\resources\static\resource\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -588,7 +662,8 @@
       <workItem from="1560760213475" duration="510000" />
       <workItem from="1560760807601" duration="41000" />
       <workItem from="1560762428209" duration="373000" />
-      <workItem from="1560762820208" duration="2084000" />
+      <workItem from="1560762820208" duration="14197000" />
+      <workItem from="1560819420622" duration="9442000" />
     </task>
     <task id="LOCAL-00001" summary="段毓霖第一次提交代码6——13">
       <created>1560429879370</created>
@@ -604,11 +679,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560437236675</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="段毓霖第三次提交代码6——17">
+      <created>1560764984405</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1560764984405</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78712000" />
+    <option name="totallyTimeSpent" value="100267000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -623,7 +705,7 @@
     <frame x="-8" y="-8" width="1843" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1794728" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1794728" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -646,7 +728,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32952183" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.32952183" />
-      <window_info anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.23180874" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.23180874" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -667,16 +749,28 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="段毓霖第一次提交代码6——13" />
     <MESSAGE value="段毓霖第二次提交代码6——13" />
-    <option name="LAST_COMMIT_MESSAGE" value="段毓霖第二次提交代码6——13" />
+    <MESSAGE value="段毓霖第三次提交代码6——17" />
+    <option name="LAST_COMMIT_MESSAGE" value="段毓霖第三次提交代码6——17" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java</url>
+          <line>100</line>
+          <properties />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java</url>
+          <line>107</line>
+          <properties />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/jquery.tool.tabs.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="2505" selection-start-column="2505" selection-end-column="2505" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/jquery.flexslider.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -980,46 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/AbooutMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="66" column="28" lean-forward="true" selection-start-line="66" selection-start-column="28" selection-end-line="66" selection-end-column="28" />
-          <folding>
-            <element signature="e#263#264#0" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#325#326#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-            <element signature="e#387#388#0" expanded="true" />
-            <element signature="e#416#417#0" expanded="true" />
-            <element signature="e#461#462#0" expanded="true" />
-            <element signature="e#497#498#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#621#622#0" expanded="true" />
-            <element signature="e#654#655#0" expanded="true" />
-            <element signature="e#683#684#0" expanded="true" />
-            <element signature="e#727#728#0" expanded="true" />
-            <element signature="e#763#764#0" expanded="true" />
-            <element signature="e#799#800#0" expanded="true" />
-            <element signature="e#830#831#0" expanded="true" />
-            <element signature="e#879#880#0" expanded="true" />
-            <element signature="e#919#920#0" expanded="true" />
-            <element signature="e#955#956#0" expanded="true" />
-            <element signature="e#986#987#0" expanded="true" />
-            <element signature="e#1035#1036#0" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/io/github/openfeign/feign-hystrix/10.1.0/feign-hystrix-10.1.0.jar!/feign/hystrix/HystrixInvocationHandler.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -1077,35 +1131,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#216#217#0" expanded="true" />
-            <element signature="e#241#242#0" expanded="true" />
-            <element signature="e#278#279#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#364#365#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#436#437#0" expanded="true" />
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#499#500#0" expanded="true" />
-            <element signature="e#544#545#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#615#616#0" expanded="true" />
-            <element signature="e#646#647#0" expanded="true" />
-            <element signature="e#694#695#0" expanded="true" />
-            <element signature="e#734#735#0" expanded="true" />
-            <element signature="e#767#768#0" expanded="true" />
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#838#839#0" expanded="true" />
-            <element signature="e#872#873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.26/slf4j-api-1.7.26.jar!/org/slf4j/LoggerFactory.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6650">
@@ -1134,17 +1159,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/hs_err_pid6896.log">
+    <entry file="file://$PROJECT_DIR$/hs_err_pid6896.log" />
+    <entry file="file://$PROJECT_DIR$/hs_err_pid7900.log" />
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hs_err_pid7900.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        <state relative-caret-position="175">
+          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1162,63 +1182,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-provider/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="175">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="57" column="15" lean-forward="true" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1589#1590#0" expanded="true" />
-            <element signature="e#1640#1641#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="725">
-          <caret line="31" column="35" lean-forward="true" selection-start-line="31" selection-start-column="35" selection-end-line="31" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1227,11 +1194,140 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/AboutController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="48" column="10" selection-start-line="48" selection-start-column="6" selection-end-line="48" selection-end-column="10" />
+        <state relative-caret-position="475">
+          <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1347#1348#0" expanded="true" />
+            <element signature="e#1405#1406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/AbooutMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.1.7.RELEASE/spring-web-5.1.7.RELEASE.jar!/org/springframework/web/bind/annotation/RequestParam.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="26" column="20" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/SeatBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding>
+            <element signature="e#280#281#0" expanded="true" />
+            <element signature="e#317#318#0" expanded="true" />
+            <element signature="e#345#346#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#408#409#0" expanded="true" />
+            <element signature="e#453#454#0" expanded="true" />
+            <element signature="e#489#490#0" expanded="true" />
+            <element signature="e#523#524#0" expanded="true" />
+            <element signature="e#553#554#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#637#638#0" expanded="true" />
+            <element signature="e#674#675#0" expanded="true" />
+            <element signature="e#707#708#0" expanded="true" />
+            <element signature="e#759#760#0" expanded="true" />
+            <element signature="e#803#804#0" expanded="true" />
+            <element signature="e#839#840#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#919#920#0" expanded="true" />
+            <element signature="e#959#960#0" expanded="true" />
+            <element signature="e#995#996#0" expanded="true" />
+            <element signature="e#1026#1027#0" expanded="true" />
+            <element signature="e#1075#1076#0" expanded="true" />
+            <element signature="e#1115#1116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/HallBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-150">
+          <caret line="12" column="26" lean-forward="true" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+          <folding>
+            <element signature="e#216#217#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#278#279#0" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+            <element signature="e#337#338#0" expanded="true" />
+            <element signature="e#364#365#0" expanded="true" />
+            <element signature="e#404#405#0" expanded="true" />
+            <element signature="e#436#437#0" expanded="true" />
+            <element signature="e#470#471#0" expanded="true" />
+            <element signature="e#499#500#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#580#581#0" expanded="true" />
+            <element signature="e#615#616#0" expanded="true" />
+            <element signature="e#646#647#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
+            <element signature="e#734#735#0" expanded="true" />
+            <element signature="e#767#768#0" expanded="true" />
+            <element signature="e#795#796#0" expanded="true" />
+            <element signature="e#838#839#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/HallMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/HallController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="30" column="41" lean-forward="true" selection-start-line="30" selection-start-column="41" selection-end-line="30" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#960#961#0" expanded="true" />
+            <element signature="e#1109#1110#0" expanded="true" />
+            <element signature="e#1160#1161#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="547">
+          <caret line="39" column="46" selection-start-line="39" selection-start-column="46" selection-end-line="39" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#654#655#0" expanded="true" />
+            <element signature="e#700#701#0" expanded="true" />
+            <element signature="e#819#820#0" expanded="true" />
+            <element signature="e#865#866#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/HallService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="28" column="53" selection-start-line="28" selection-start-column="53" selection-end-line="28" selection-end-column="53" />
         </state>
       </provider>
     </entry>
