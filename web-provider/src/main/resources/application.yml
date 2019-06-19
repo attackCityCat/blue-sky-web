@@ -11,7 +11,7 @@ eureka:
     lease-expiration-duration-in-seconds: 2 #表示eureka server至上一次收到client的心跳之后，等待下一次心跳的超时时间，
     #在这个时间内若没收到下一次心跳，则将移除该instance
 mybatis:
-  mapper-locations: classpath:mybatis/*/*Mapper.xml
+  mapper-locations: classpath:mybatis/mapper/*/*Mapper.xml
 
 spring:
   #redis连接池信息
@@ -38,5 +38,11 @@ spring:
     password: 123456
     url: jdbc:mysql://localhost/cinema?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2b8
     driver-class-name: com.mysql.jdbc.Driver
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 127.0.0.1:9300
+      cluster-name: my-application
 
 

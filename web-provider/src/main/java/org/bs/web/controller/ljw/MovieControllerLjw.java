@@ -1,16 +1,21 @@
 package org.bs.web.controller.ljw;
 
-import org.bs.web.mapper.ljw.MovieMapper;
+import org.bs.web.dao.ljw.MovieRepository;
+import org.bs.web.mapper.ljw.MovieMapperLjw;
 import org.bs.web.pojo.movie.*;
 import org.bs.web.util.PageModel;
 import org.bs.web.util.ResultUtil;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,13 +28,16 @@ import java.util.List;
  */
 @Controller
 @Transactional
-public class MovieController {
+public class MovieControllerLjw {
 
     @Autowired
-    private MovieMapper movieMapper;
+    private MovieMapperLjw movieMapper;
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     //动态加载标签
     @RequestMapping(value = "/getTagLjw")
@@ -63,6 +71,11 @@ public class MovieController {
     @RequestMapping(value = "/saveMovieLjw")
     @ResponseBody
     public void saveMovieLjw(@RequestBody MovieBean movieBean){
+        //拼接首映时间
+        String firstDate = movieBean.getStartDate().concat(" "+movieBean.getFirstTime());
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String format = sim.format(firstDate);
+        movieBean.setFirstTime(firstDate);
         //增电影
         Boolean a = movieMapper.saveMovieLjw(movieBean);
 
@@ -73,7 +86,7 @@ public class MovieController {
         }
 
         //新增索引
-
+        movieRepository.save(movieBean);
 
         //根据name去数据库查类型
         MovieTypeBean movieType = movieMapper.queryTypeByNameLjw(movieBean.getTypeName());

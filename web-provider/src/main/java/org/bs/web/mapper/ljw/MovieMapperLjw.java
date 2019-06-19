@@ -11,13 +11,13 @@ import java.util.List;
 
 /**
  * @author Lenovo
- * @title: MovieMapper
+ * @title: MovieMapperLjw
  * @projectName blue-sky-web
  * @description: TODO
  * @date 2019/6/1411:01
  */
 @Mapper
-public interface MovieMapper {
+public interface MovieMapperLjw {
 
     @Select("select count(1) " +
             " from t_movie tm " +

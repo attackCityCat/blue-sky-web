@@ -2,8 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.bs.web.mapper.ljw.MovieMapper">
-
+<mapper namespace="org.bs.web.mapper.ljw.MovieMapperLjw">
 
 	<insert id="saveMoviePerformer">
 		insert into t_movie_performer(movieId,performerId) values

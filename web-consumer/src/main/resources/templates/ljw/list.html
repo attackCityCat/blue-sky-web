@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<script type="text/javascript" src="/ljw/js/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="/ljw/js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="/ljw/js/easyui_util.js"></script>
 
 <script type="text/javascript" src="/ljw/js/kindeditor-4.1.10/kindeditor-all.js"></script>
@@ -16,6 +16,18 @@
 
 <link rel="stylesheet" href="/ljw/js/uploadify/uploadify.css" type="text/css"></link>
 <script type="text/javascript" src="/ljw/js/uploadify/jquery.uploadify.js"></script>
+<!-- 引入bootstrap的css、js -->
+<link rel="stylesheet" href="/ljw/js/bootstrap3/css/bootstrap.css">
+<script type="text/javascript" src="/ljw/js/bootstrap3/js/bootstrap.js"></script>
+<!-- 引入文件上传的css、js -->
+<link rel="stylesheet" href="/ljw/js/bootstrap-fileinput/css/fileinput.css">
+<script type="text/javascript" src="/ljw/js/bootstrap-fileinput/js/fileinput.js"></script>
+<script type="text/javascript" src="/ljw/js/bootstrap-fileinput/js/locales/zh.js"></script>
+<style type="text/css">
+    .myrow{
+        margin-bottom:10px
+    }
+</style>
 <head>
     <title>Title</title>
 </head>
@@ -35,18 +47,16 @@
     <form id="movieForm">
 
         电影名称:<input class="easyui-textbox" name="name" required="required"><br>
-        封面:<input type="hidden" name="img" id="imgId" />
-        <input type="file" id="imgFileBTN" />
-        <div id="showImgDiv" style="width: 100px;height: 100px;border-style:solid;border-width:1px; border-color:black;">
-            <img src="" id="showImg" style="width: 100px;height: 100px;">
-        </div>
-        <div id="showBars" ></div>
+        封面:<input type="text" id="testimg" name="img" />
+        <!-- projectfile -->
+        <input type="file" multiple class="projectfile" accept="image/*" name="img" id="goodsImg">
+        </label>
         票价:<input class="easyui-textbox" name="price" required="required">
         影片时长:<input class="easyui-textbox" name="length" required="required"><br>
         电影简介:<textarea id="textId" required="required" name="detail" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;">
   </textarea>
-        开始日期:<input class="easyui-datetimebox" name="startDate" required="required">
-        结束日期:<input class="easyui-datetimebox" name="endDate" required="required"><br>
+        开始日期:<input class="easyui-datebox" name="startDate" required="required">
+        结束日期:<input class="easyui-datebox" name="endDate" required="required"><br>
         首映时间:<input class="easyui-timespinner"  style="width:80px;"
                name="firstTime" required="required" data-options="min:'09:00',showSeconds:true" />
         导演:<input class="easyui-textbox" name="director" required="required"><br>
@@ -67,6 +77,39 @@
     $(function(){
         show();
     })
+
+    //文件域的id
+        $('#goodsImg').fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: '/movie/uploadNewsImg', //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //是否显示上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+            //minImageWidth: 50, //图片的最小宽度
+            //minImageHeight: 50,//图片的最小高度
+            //maxImageWidth: 1000,//图片的最大宽度
+            //maxImageHeight: 1000,//图片的最大高度
+            //maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            //minFileCount: 0,
+            maxFileCount: 2, //表示允许同时上传的最大文件个数
+            enctype: 'multipart/form-data',
+            validateInitialCount:true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        }).on('fileuploaded', function(event, data, previewId, index) {
+
+            var imgval = $('#testimg').val();
+
+            if(imgval == null || imgval == "" || imgval == undefined){
+                imgval = data.response.path;
+            }/*else{
+			imgval += ","+"http://<%= request.getServerName()%>:<%=request.getServerPort()%><%=request.getContextPath()%>/"+data.response;
+		}*/
+            $('#testimg').val(imgval);
+        });
 
     //动态加载标签
     $("#tag").combobox({
@@ -145,13 +188,15 @@
                     {field:"id",title:"编号"},
                     {field:"name",title:"电影名称"},
                     {field:"img",title:"封面",formatter:function(value,rows,index){
-                        return "<img src='/upload/"+value+"' style='width:50px;height:50px'>";
+                        return "<img src='"+value+"' style='width:50px;height:50px'>";
                         }},
                     {field:"status",title:"状态",formatter:function(value,rows,index){
                         return value==0?"已上映":value==1?"未上映":"已下架";
                         }},
                     {field:"price",title:"票价"},
-                    {field:"length",title:"影片时长"},
+                    {field:"length",title:"影片时长",formatter:function(value,rows,index){
+                        return value+"分钟";
+                        }},
                     {field:"firstTime",title:"首映时间"},
                     {field:"director",title:"导演"},
                     {field:"detail",title:"电影简介"},
@@ -189,39 +234,8 @@
         prettyPrint();
     });
 
-    //文件域的id
-    $("#imgFileBTN").uploadify({
-        //前台请求后台的url 不可忽略的参数
-        'uploader' :"/movie/uploadNewsImg",
-        //插件自带 不可忽略的参数
-        'swf' : '/ljw/js/uploadify/uploadify.swf',
-        //撤销按钮的图片路径
-        'cancelImg' : '/ljw/js/uploadify/uploadify-cancel.png',
-        //如果为true 为自动上传 在文件后 为false 那么它就要我们自己手动点上传按钮
-        'auto' : true,
-        //可以同时选择多个文件 默认为true 不可忽略
-        'multi' : false,
-        //给上传按钮设置文字
-        'buttonText' : '上传图片',
-        //上传后队列是否消失
-        'removeCompleted' : true,
-        'removeTimeout' : 1,
-        //上传文件的个数
-        'uploadLimit' : 2,
-        'fileTypeExts' : '*.jpg;*.jpge;*.gif;*.png',
-        'fileSizeLimit' : '2MB',
-        //给div的进度条加背景 不可忽略
-        'queueID' : 'showBars',
-        // controller层方法中接收文件的参数名, 参数名为自定义
-        'fileObjName' : 'img',
-        //      上传成功后的回调函数
-        'onUploadSuccess' : function(file, data, response) {
 
-            data = data.replace("\"","").replace("\"","");
-            $("#showImg").attr("src","/upload/"+data);
-            $("#imgId").val(data);
-        }
 
-    });
+
 </script>
 </html>

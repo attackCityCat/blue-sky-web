@@ -1,13 +1,15 @@
 package org.bs.web.controller.ljw.movie;
 
+import org.bs.web.dao.ljw.MovieRepository;
 import org.bs.web.pojo.MovieBean;
 import org.bs.web.pojo.movie.LanguageBean;
 import org.bs.web.pojo.movie.MovieTypeBean;
 import org.bs.web.pojo.movie.PerformerBean;
 import org.bs.web.pojo.movie.TagBean;
-import org.bs.web.service.ljw.MovieService;
+import org.bs.web.service.ljw.MovieServiceLjw;
 import org.bs.web.util.FileUtil;
 import org.bs.web.util.ResultUtil;
+import org.bs.web.utils.ljw.OssClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +28,25 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/movie")
-public class MovieController {
+public class MovieControllerLjw {
 
     @Autowired
-    private MovieService movieService;
+    private MovieServiceLjw movieService;
+
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @RequestMapping("deleteMovieByIdLjw")
+    public Boolean deleteMovieByIdLjw(Integer id){
+        try {
+            //先对数据库进行删除，然后判断是否删除成功，如果删除成功，在对索引进行删除，为了保证数据的一致性
+            movieRepository.deleteById(id);
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 
     //动态加载标签
     @RequestMapping(value = "/getTagLjw")
@@ -76,9 +93,16 @@ public class MovieController {
     //图片上传
     @RequestMapping("uploadNewsImg")
     @ResponseBody
-    public String uploadNewsImg(MultipartFile img, HttpServletRequest request) throws IOException {
-        String path = FileUtil.uploadFile(img, request);
-        return path;
+    public String uploadNewsImg(MultipartFile img) throws IOException {
+        if (img == null || img.getSize() <= 0) {
+            throw new IOException("file不能为空");
+        }
+        OssClientUtil ossClient=new OssClientUtil();
+        String name = ossClient.uploadImg2Oss(img);
+        String imgUrl = ossClient.getImgUrl(name);
+        String[] split = imgUrl.split("\\?");
+        System.out.println(split[0]);
+        return "{\"path\":\"" + split[0] + "\"}";
     }
 
 }

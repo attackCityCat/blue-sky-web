@@ -16,13 +16,13 @@ import java.util.List;
 
 /**
  * @author Lenovo
- * @title: MovieService
+ * @title: MovieServiceLjw
  * @projectName blue-sky-web
  * @description: TODO
  * @date 2019/6/1322:45
  */
 @FeignClient(value = "web-provider")
-public interface MovieService{
+public interface MovieServiceLjw {
 
     //查询
     @RequestMapping(value = "/queryMovieLjw")

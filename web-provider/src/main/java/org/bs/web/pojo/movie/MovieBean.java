@@ -1,64 +1,65 @@
 package org.bs.web.pojo.movie;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
+
 import java.io.Serializable;
 import java.util.Date;
 
-
+@Document(indexName = "bluemovie",type = "movie",shards = 5,replicas = 1)
 public class MovieBean implements Serializable {
 
     private static final long serialVersionUID = 6149653222356773426L;
 
+    @Id
     private Integer id;
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word",copyTo = "copy")
     private String name;
+    @Field(type = FieldType.Text)
     private String img;
+    @Field(type = FieldType.Integer)
     private Integer status;
 
+    @Field(type = FieldType.Text)
     private String director;
 
+    @Field(type = FieldType.Integer)
     private Integer length;
 
+    @Field(type = FieldType.Text)
     private String firstTime;
 
+    @Field(type = FieldType.Integer)
+    private Integer type;
+
+    @Field(type = FieldType.Integer)
+    private Integer language;
+
+    @Field(type = FieldType.Text,analyzer = "ik_max_word",searchAnalyzer = "ik_max_word",copyTo = "copy")
     private String detail;
 
+    @Field(type = FieldType.Double)
     private Double price;
 
-    private Integer type;
+    @Field(type = FieldType.Text)
     private String typeName;
 
-    private Integer language;
+    @Field(type = FieldType.Text)
     private String languageName;
 
+    @Field(type = FieldType.Text)
     private String startDate;
 
+    @Field(type = FieldType.Text)
     private String endDate;
 
+    @Field(type = FieldType.Text)
     private String tag;
 
+    @Field(type = FieldType.Text)
     private String performer;
-
-    @Override
-    public String toString() {
-        return "MovieBean{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", img='" + img + '\'' +
-                ", status=" + status +
-                ", director='" + director + '\'' +
-                ", length=" + length +
-                ", firstTime='" + firstTime + '\'' +
-                ", detail='" + detail + '\'' +
-                ", price=" + price +
-                ", type=" + type +
-                ", typeName='" + typeName + '\'' +
-                ", language=" + language +
-                ", languageName='" + languageName + '\'' +
-                ", startDate='" + startDate + '\'' +
-                ", endDate='" + endDate + '\'' +
-                ", tag='" + tag + '\'' +
-                ", performer='" + performer + '\'' +
-                '}';
-    }
 
     public String getTag() {
         return tag;
@@ -76,6 +77,14 @@ public class MovieBean implements Serializable {
         this.performer = performer;
     }
 
+    public String getDirector() {
+        return director;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     public Integer getType() {
         return type;
     }
@@ -84,12 +93,12 @@ public class MovieBean implements Serializable {
         this.type = type;
     }
 
-    public void setFirstTime(String firstTime) {
-        this.firstTime = firstTime;
+    public String getFirstTime() {
+        return firstTime;
     }
 
-    public String getTypeName() {
-        return typeName;
+    public void setFirstTime(String firstTime) {
+        this.firstTime = firstTime;
     }
 
     public String getStartDate() {
@@ -106,6 +115,10 @@ public class MovieBean implements Serializable {
 
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+    public String getTypeName() {
+        return typeName;
     }
 
     public void setTypeName(String typeName) {
@@ -152,13 +165,6 @@ public class MovieBean implements Serializable {
         this.status = status;
     }
 
-    public String getDirector() {
-        return director;
-    }
-
-    public void setDirector(String director) {
-        this.director = director;
-    }
 
     public Integer getLength() {
         return length;
@@ -168,9 +174,6 @@ public class MovieBean implements Serializable {
         this.length = length;
     }
 
-    public String getFirstTime() {
-        return firstTime;
-    }
 
     public Integer getLanguage() {
         return language;
@@ -194,5 +197,28 @@ public class MovieBean implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "MovieBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", img='" + img + '\'' +
+                ", status=" + status +
+                ", director='" + director + '\'' +
+                ", length=" + length +
+                ", firstTime='" + firstTime + '\'' +
+                ", type=" + type +
+                ", language=" + language +
+                ", detail='" + detail + '\'' +
+                ", price=" + price +
+                ", typeName='" + typeName + '\'' +
+                ", languageName='" + languageName + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", tag='" + tag + '\'' +
+                ", performer='" + performer + '\'' +
+                '}';
     }
 }

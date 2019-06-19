@@ -13,7 +13,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @MapperScan("org.bs.web.mapper")
 public class WebProviderApplication {
 
+
     public static void main(String[] args) {
+
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(WebProviderApplication.class, args);
     }
 

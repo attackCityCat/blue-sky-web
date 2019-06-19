@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import java.io.Serializable;
 import java.util.Date;
 
-@Document(indexName = "movie",type = "movie",shards = 5,replicas = 1)
+@Document(indexName = "bluemovie",type = "movie",shards = 5,replicas = 1)
 public class MovieBean implements Serializable {
 
     private static final long serialVersionUID = 6149653222356773426L;
@@ -28,7 +28,7 @@ public class MovieBean implements Serializable {
     @Field(type = FieldType.Integer)
     private Integer length;
 
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Text)
     private String firstTime;
 
     @Field(type = FieldType.Integer)
@@ -49,10 +49,10 @@ public class MovieBean implements Serializable {
     @Field(type = FieldType.Text)
     private String languageName;
 
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Text)
     private String startDate;
 
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Text)
     private String endDate;
 
     @Field(type = FieldType.Text)
