@@ -49,4 +49,11 @@ public interface MovieServiceLjw {
     //动态加载标签
     @RequestMapping(value = "/getTagLjw")
     List<TagBean> getTagLjw();
+
+    //设置为轮播图
+    @RequestMapping(value = "/isSlideShowLjw")
+    void isSlideShowLjw(@RequestParam(value = "id") Integer id);
+
+    @RequestMapping(value = "/noSlideShowLjw")
+    void noSlideShowLjw(@RequestParam(value = "id") Integer id);
 }

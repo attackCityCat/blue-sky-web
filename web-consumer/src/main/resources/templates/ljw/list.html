@@ -31,7 +31,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
+<body style="visibility:hidden;">
 <div id="toolbar" >
     <a class="easyui-linkbutton" id="addMovie" data-options="iconCls:'icon-add',plain:true">新增</a>
 </div>
@@ -44,7 +44,7 @@
 		}
 	}]" style="width:800px;height:450px">
     <center>
-    <form id="movieForm">
+    <form id="movieForm",enctype="multipart/form-data">
 
         电影名称:<input class="easyui-textbox" name="name" required="required"><br>
         封面:<input type="text" id="testimg" name="img" />
@@ -112,35 +112,47 @@
         });
 
     //动态加载标签
-    $("#tag").combobox({
-        url:'/movie/getTagLjw',
-        textField:'name',
-        valueField:'name',
-        multiple:true
-    })
+    function getTag(){
+        $("#tag").combobox({
+            url:'/movie/getTagLjw',
+            textField:'name',
+            valueField:'name',
+            multiple:true
+        })
+    }
+
 
     //动态加载演员
-    $("#performer").combobox({
-        url:'/movie/getPerformerLjw',
-        textField:'name',
-        valueField:'name',
-        multiple:true
-    })
+    function getPerformer(){
+        $("#performer").combobox({
+            url:'/movie/getPerformerLjw',
+            textField:'name',
+            valueField:'name',
+            multiple:true
+        })
+    }
+
 
     //动态加载language
-    $("#language").combobox({
-        url:'/movie/getLanguageLjw',
-        textField:'name',
-        valueField:'name'
-    })
+    function getLanguage(){
+        $("#language").combobox({
+            url:'/movie/getLanguageLjw',
+            textField:'name',
+            valueField:'name'
+        })
+    }
+
 
 
     //动态加载type
-    $("#type").combobox({
-        url:'/movie/getTypeLjw',
-        textField:'name',
-        valueField:'name',
-    })
+    function getType(){
+        $("#type").combobox({
+            url:'/movie/getTypeLjw',
+            textField:'name',
+            valueField:'name',
+        })
+    }
+
 
 
     //新增电影
@@ -154,13 +166,23 @@
                 $("#movieForm").form('reset');
                 show();
                 $("#movieDialog").dialog('close');
-                $("#showImg").attr('src','');
+                editor1.html('');
+                $('#goodsImg').fileinput('clear').fileinput('enable');
+                getTag();
+                getPerformer();
+                getLanguage();
+                getType();
             }
         })
     }
 
     //打开新增窗口
     $("#addMovie").click(function(){
+        getTag();
+        getPerformer();
+        getLanguage();
+        getType();
+        editor1.html('');
         $("#movieForm").form('reset');
         var tagData = $("#tag").combobox("getData");
         $("#tag").combobox("clear");
@@ -169,13 +191,42 @@
         $("#performer").combobox("clear");
         $("#performer").combobox("loadData",performerData);
         $("#movieDialog").dialog({
-            title:'用户新增',
+            title:'',
             closed:false
         })
     })
 
+    //取消设置轮播图
+    function noSlideShow(id) {
+        $.ajax({
+            url:'/movie/noSlideShowLjw',
+            method:'post',
+            data:{
+                id:id
+            },
+            success:function () {
+                show();
+            }
+        })
+    }
+
+    //设置为轮播图
+    function isSlideShow(id) {
+        $.ajax({
+            url:'/movie/isSlideShowLjw',
+            method:'post',
+            data:{
+                id:id
+            },
+            success:function () {
+                show();
+            }
+        })
+    }
+
     //查询
     function show() {
+        $('body').css({visibility:'visible'});
         $("#tableId").datagrid({
             url:'/movie/queryMovieLjw',
             toolbar:'#toolbar',
@@ -205,7 +256,15 @@
                     {field:"typeName",title:"类型"},
                     {field:"languageName",title:"语言"},
                     {field:"tag",title:"标签"},
-                    {field:"performer",title:"演员"}
+                    {field:"performer",title:"演员"},
+                    {field:"slideShow",title:"是否为轮播图",formatter:function (value,rows,index) {
+                            return value==0?"否":"是";
+                        }},
+                    {field:"123",title:"操作",formatter:function(value,rows,index){
+                        var html = "";
+                        rows.slideShow==1?html += "<a href='javascript:noSlideShow("+rows.id+")'>取消轮播</a>":html += "<a href='javascript:isSlideShow("+rows.id+")'>设置为轮播图</a>";
+                        return html;
+                        }},
             ]
             ]
         })

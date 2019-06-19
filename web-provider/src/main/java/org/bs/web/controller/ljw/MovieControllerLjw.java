@@ -26,7 +26,7 @@ import java.util.List;
  * @description: TODO
  * @date 2019/6/1411:00
  */
-@Controller
+@RestController
 @Transactional
 public class MovieControllerLjw {
 
@@ -39,37 +39,44 @@ public class MovieControllerLjw {
     @Autowired
     private MovieRepository movieRepository;
 
+    //设置为轮播图
+    @RequestMapping(value = "/isSlideShowLjw")
+    public void isSlideShowLjw(@RequestParam(value = "id") Integer id){
+        movieMapper.isSlideShowLjw(id);
+    }
+
+    //取消设置为轮播图
+    @RequestMapping(value = "/noSlideShowLjw")
+    public void noSlideShowLjw(@RequestParam(value = "id") Integer id){
+        movieMapper.noSlideShowLjw(id);
+    }
+
     //动态加载标签
     @RequestMapping(value = "/getTagLjw")
-    @ResponseBody
     public List<TagBean> getTagLjw(){
         return movieMapper.getTagLjw();
     }
 
     //动态加载演员
     @RequestMapping(value = "/getPerformerLjw")
-    @ResponseBody
     public List<PerformerBean> getPerformerLjw(){
         return movieMapper.getPerformerLjw();
     }
 
     //动态加载type
     @RequestMapping(value = "/getTypeLjw")
-    @ResponseBody
     public List<MovieTypeBean> getTypeLjw(){
         return movieMapper.getTypeLjw();
     }
 
     //动态加载language
     @RequestMapping(value = "/getLanguageLjw")
-    @ResponseBody
     public List<LanguageBean> getLanguageLjw(){
         return movieMapper.getLanguageLjw();
     }
 
     //新增
     @RequestMapping(value = "/saveMovieLjw")
-    @ResponseBody
     public void saveMovieLjw(@RequestBody MovieBean movieBean){
         //拼接首映时间
         String firstDate = movieBean.getStartDate().concat(" "+movieBean.getFirstTime());
@@ -184,7 +191,6 @@ public class MovieControllerLjw {
 
     //查询
     @RequestMapping(value = "/queryMovieLjw")
-    @ResponseBody
     public ResultUtil queryMovieLjw(@RequestParam(value = "page") Integer page,
                                     @RequestParam(value = "rows") Integer rows,
                                     @RequestBody MovieBean movieBean){

@@ -21,6 +21,8 @@ public class MovieBean implements Serializable {
     private String img;
     @Field(type = FieldType.Integer)
     private Integer status;
+    @Field(type = FieldType.Integer)
+    private Integer slideShow;
 
     @Field(type = FieldType.Text)
     private String director;
@@ -63,6 +65,14 @@ public class MovieBean implements Serializable {
 
     public String getTag() {
         return tag;
+    }
+
+    public Integer getSlideShow() {
+        return slideShow;
+    }
+
+    public void setSlideShow(Integer slideShow) {
+        this.slideShow = slideShow;
     }
 
     public void setTag(String tag) {

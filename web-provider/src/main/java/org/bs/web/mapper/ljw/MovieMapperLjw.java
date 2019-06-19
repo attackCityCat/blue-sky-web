@@ -3,6 +3,7 @@ package org.bs.web.mapper.ljw;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.bs.web.pojo.movie.*;
 
 import java.util.ArrayList;
@@ -80,4 +81,10 @@ public interface MovieMapperLjw {
             "  where tm.id = #{value}  " +
             "  group by tm.id")
     String queryTagLjw(Integer movieId);
+
+    @Update("update t_movie set slideShow = 1 where id = #{value}")
+    void isSlideShowLjw(Integer id);
+
+    @Update("update t_movie set slideShow = 0 where id = #{value}")
+    void noSlideShowLjw(Integer id);
 }
