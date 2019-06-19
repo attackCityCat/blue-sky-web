@@ -64,10 +64,14 @@
 
 <body>
 <script type="text/javascript">
-
-    function toOrder() {
-        location.href="/llp/toOrder";
+    function toReying() {
+        location.href="/llp/toReYing"
+        //javascript:toReying()
     }
+    function toMain() {
+        location.href="/llp/toMain";
+    }
+
     function toOrder() {
         location.href="/llp/toOrder";
         //javascript:toOrder()
@@ -117,13 +121,13 @@
         <div class="container clearfix">
             <ul class="menu clearfix">
                 <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
-                <li><a href="#" data-index="filmshowing">热映影片</a></li>
+                <li><a href="javascript:toReying()" data-index="filmshowing">热映影片</a></li>
                 <li><a href="#" data-index="filmfeature">即将上映</a></li>
-                <li><a href="#" data-index="cinemas">影院</a></li>
+                <li><a href="javascript:tan()" data-index="cinemas">影院</a></li>
             </ul>
             <ul class="other clearfix">
-                <li><a href="#">新影联票卡产品</a></li>
-                <li><a href="#">新影联院线</a></li>
+                <li><a href="javascript:tan()">新影联票卡产品</a></li>
+                <li><a href="javascript:tan()">新影联院线</a></li>
             </ul>
         </div>
     </div>
@@ -139,13 +143,6 @@
 
     <div class="wt1194 middle" style="margin-bottom: 20px;">
 
-
-
-
-
-
-
-
         <div class="left leftmenu">
             <div style="padding: 0px 24px;">
                 <h1>管理中心</h1></div>
@@ -158,14 +155,12 @@
                         <dd><a class=" " href="javascript:tan()">演出订单</a></dd>
                         <dd><a class=" " href="javascript:tan()">秒杀订单</a></dd>
                         <dd><a class=" " href="javascript:tan()">缺货登记</a></dd>
-                        <!--<DD><A class=' '  href="/portal/eyes/personal/yushou/index.htm">预订登记</A></DD>-->
-                        <!--<DD><A class=' '   href="/portal/eyes/personal/address/index.htm">收货地址</A></DD>-->
                     </dl>
                 </li>
                 <li>
                     <dl>
                         <dt>会员中心</dt>
-                        <dd><a class="current " href="#">个人资料</a></dd>
+                        <dd><a class="current " href="javascript:tan()">个人资料</a></dd>
                         <dd><a class=" " href="javascript:tan()">账户安全</a></dd>
                         <dd><a class="" href="javascript:tan()">我的关注</a></dd>
                         <dd><a class=" " href="javascript:tan()">我的新影联票卡</a></dd>
@@ -238,16 +233,10 @@
             }
         })
     });
-    function toOrder() {
 
-        location.href="/llp/toOrder";
-
-    }
-    function toMain() {
-        location.href="/llp/toMain";
-    }
     function tan(){
         layer.msg("功能正在开发中！~~")
+        //avascript:toReying()
     }
 </script>
 

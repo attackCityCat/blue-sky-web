@@ -1,6 +1,5 @@
 package org.bs.web.pojo.movie;
 
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 

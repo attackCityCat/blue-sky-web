@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>大眼睛票务</title>
-    <javascript:tan()--layui轮播-->
+    <#--layui轮播-->
     <link href="/llp/layui/css/layui.css" rel="stylesheet"/>
     <script src="/llp/layui/layui.js" type="text/javascript"></script>
 
@@ -71,7 +71,7 @@
         <div class="container clearfix">
             <ul class="menu clearfix">
                 <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
-                <li><a href="javascript:tan()" data-index="filmshowing">热映影片</a></li>
+                <li><a href="javascript:toReying()" data-index="filmshowing">热映影片</a></li>
                 <li><a href="javascript:tan()" data-index="filmfeature">即将上映</a></li>
                 <li><a href="javascript:tan()" data-index="cinemas">影院</a></li>
             </ul>
@@ -85,18 +85,29 @@
 </div>
 <script type="text/javascript">
     function toPersonal() {
-        location.href="/llp/toPersonal";
+        location.href = "/llp/toPersonal";
     }
+
     function toOrder() {
-        location.href="/llp/toOrder";
+        location.href = "/llp/toOrder";
         //javascript:toOrder()
     }
+
+    function toReying() {
+        location.href = "/llp/toReYing"
+        //javascript:toReying()
+    }
+
     function toMain() {
-        location.href="/llp/toMain";
+        location.href = "/llp/toMain";
+    }
+
+    function toDetail(id) {
+        location.href = "/llp/toDetail?id=" + id;
     }
 
 </script>
-<javascript:tan()--中间内容-->
+<#--中间内容-->
 <div class="main homepage">
     <div class="mbanner flexslider">
         <div class="layui-carousel" id="test1">
@@ -108,28 +119,52 @@
             </div>
         </div>
         <div class="film-recommend film-showing">
-            <javascript:tan()--当点击更多时修改为查询所有的热映产品 并分页-->
-            <h2>正在热映<a href="javascript:tan()" class="more">更多</a></h2>
+            <#--点击跳转到热映页面-->
+            <h2>正在热映<a href="/llp/toReYing" class="more">更多</a></h2>
             <div class="films">
-                <div class="loading">
-                    <javascript:tan()--此处为展示数据区域-->
-                </div>
+                <ul class="clearfix">
+                    <#assign index = 0 >
+                    <#list list as i>
+                        <#assign index = index+1>
+                        <li class="wd${index}">
+                            <img src="${i.img}" alt="" onclick="toDetail(${i.id})">
+                            <a href="#" class="film-layer" style="">
+                                <div class="txt">
+                                    <h3>${i.name}</h3>
+                                </div>
+                                <div class="mask"></div>
+                            </a>
+                        </li>
+                    </#list>
+                </ul>
             </div>
         </div>
         <div class="film-recommend film-feature">
-            <javascript:tan()--当点击更多的时候修改为查询所有的 预售的电影 并分页-->
-            <h2>即将上映<a href="/javascript:tan()" class="more">更多</a></h2>
+            <#--点击跳转到热映页面-->
+            <h2>即将上映<a href="/llp/toReYing" class="more">更多</a></h2>
             <div class="films">
-                <div class="loading">
-                    <javascript:tan()--此处为展示数据区域-->
-                </div>
+                <ul class="clearfix">
+                    <#assign index = 0 >
+                    <#list list as i>
+                        <#assign index = index+1>
+                        <li class="wd${index}">
+                            <img src="${i.img}" alt="" onclick="toDetail(${i.id})">
+                            <a href="#" class="film-layer" style="">
+                                <div class="txt">
+                                    <h3>${i.name}</h3>
+                                </div>
+                                <div class="mask"></div>
+                            </a>
+                        </li>
+                    </#list>
+                </ul>
             </div>
         </div>
         <div class="active-recommend">
             <h2>精彩活动</h2>
             <div class="active clearfix">
                 <div class="poster">
-                    <img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/timg.jpg" alt="国旗" /></div>
+                    <img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/timg.jpg" alt="国旗"/></div>
                 <div class="description">
                     <h3>更多详情咨询一组项目组全体成员</h3>
                     <p>活动规则：</p>
@@ -155,13 +190,14 @@
             //,anim: 'updown' //切换动画方式
         });
     });
-    function tan(){
+
+    function tan() {
         layer.msg("功能正在开发中！~~")
     }
 </script>
 
 
-<javascript:tan()--底部-->
+<#--底部-->
 <div class="footer">
     <div class="nav-quick">
         <ul class="clearfix">
@@ -222,7 +258,8 @@
                 <li><a href="javascript:tan()">联系我们</a></li>
             </ul>
         </div>
-        <p>北京新影联文化传播有限责任公司 版权所有 Copyright 2003-2017 All Rights Reserved 京ICP备12006157号 营业性演出许可证 编号：京演（机构）［2017］3083号</p>
+        <p>北京新影联文化传播有限责任公司 版权所有 Copyright 2003-2017 All Rights Reserved 京ICP备12006157号 营业性演出许可证
+            编号：京演（机构）［2017］3083号</p>
         <p>京公网安备 11010102002123号</p>
     </div>
 </div>

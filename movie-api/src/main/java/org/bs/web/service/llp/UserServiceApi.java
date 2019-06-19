@@ -1,12 +1,15 @@
 package org.bs.web.service.llp;
 
 
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.UserBean;
 import org.bs.web.util.LayuiPage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import sun.awt.SunHints;
+
+import java.util.List;
 
 public interface UserServiceApi {
     /**
@@ -47,4 +50,25 @@ public interface UserServiceApi {
     LayuiPage findOrderByUserId(@RequestParam(value = "page") Integer page, @RequestParam(value = "limit") Integer limit, @RequestParam(value = "id") Integer id);
 
 
+    /**
+     * 查询热映电影
+     * @return
+     */
+    @RequestMapping(value = "/findHitMovies")
+    List<HitMovies> findHitMovies();
+
+    /**
+     * 查询热映电影（首页展示使用十条）
+     * @return
+     */
+    @RequestMapping(value = "/findHitMoviesMain")
+    List<HitMovies> findHitMoviesMain();
+
+    /**
+     * 根据ID查询电影
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findMoviesDetail")
+    HitMovies findMoviesDetail(@RequestParam(value = "id") int id);
 }
