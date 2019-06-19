@@ -1,6 +1,6 @@
 package org.bs.web.controller.llp;
 
-import org.bs.web.mapper.UserMapper;
+import org.bs.web.mapper.llp.UserMapper;
 import org.bs.web.pojo.OrderMessage;
 import org.bs.web.pojo.UserBean;
 import org.bs.web.util.LayuiPage;

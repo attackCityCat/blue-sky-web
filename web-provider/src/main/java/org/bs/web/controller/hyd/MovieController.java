@@ -143,6 +143,35 @@ public class MovieController {
             return 4;
         }
 
+        //获取收费标准时间段信息
+        List<PaiqiNormalTimeBean> paiqiNormalTimeBeans = movieMapper.findPaiqiNormalTimeBean();
+
+        for (PaiqiNormalTimeBean paiqiNormalTimeBean : paiqiNormalTimeBeans){
+            // 获取原有的价格
+            double price = paiqiBean.getPrice();
+            // 获取播映时间类型段的事件
+            Date beginTime = sim.parse(paiqiNormalTimeBean.getBeginTime());
+            Date endTime = sim.parse(paiqiNormalTimeBean.getEndTime());
+
+            // 取出对应的时分秒
+            Date hms2 = sim.parse(s[1]);
+            System.out.println(hms2);
+            boolean b = comparaDate(hms2,beginTime) < 0 || comparaDate(hms2,endTime) >0;
+            // 判断当前时间点处在某一个时间段  如果不在任何时间段 直接continue
+            if (comparaDate(hms2,beginTime) < 0 || comparaDate(hms2,endTime) >0){
+                continue;
+            }
+            // 利用原有价格 * 价格对应的时间段系数 普通时间段 1  黄金时间段 1.5  夜场时间段  0.7
+            price = price * paiqiNormalTimeBean.getCoe();
+            // 计算出的价格存到返回体
+            paiqiBean.setPrice(price);
+        }
+
+        // 获取对应放映厅ID的放映厅类型系数 普通厅为 1  豪华厅为 1.5
+        Float coe = movieMapper.findHallTypeCoeByHallId(hallId);
+        // 计算对应放映厅类型的价格 并存在返回体中
+        paiqiBean.setPrice(paiqiBean.getPrice()*coe);
+
         //若新增数据库成功  将相关数据缓存   返回0   新增成功
         //生成 指定排期信息键   生成规则： CommonConf.PAI_QI_KEY + paiQiId   paiQiId 为  selectKey返回
         redisTemplate.opsForHash().put(CommonConf.PAI_QI_KEY,CommonConf.PAI_QI_KEY + paiqiBean.getId(),paiqiBean);
@@ -173,7 +202,7 @@ public class MovieController {
             paiQiSeatBean.setSeatId(seatBean.getId());
 
             //生成 key   生成规则   常量字符串+排期ID
-            redisTemplate.opsForHash().put(CommonConf.PAI_QI_SEATS_KEY,CommonConf.PAI_QI_SEATS_KEY+paiqiBean.getId(),paiQiSeatBean);
+            redisTemplate.opsForHash().put(CommonConf.PAI_QI_SEATS_KEY+paiqiBean.getId(),CommonConf.PAI_QI_SEATS_KEY+seatBean.getId(),paiQiSeatBean);
         }
 
         return 0;
@@ -187,7 +216,7 @@ public class MovieController {
     public List<PaiqiBean> findMoviePaiqi(String movieDate,Integer movieId) throws ParseException {
         //获取时间转化对象  时分秒
         SimpleDateFormat sim = new SimpleDateFormat("HH:mm:ss");
-        //获取营业标准时间段信息
+        //获取收费标准时间段信息
         List<PaiqiNormalTimeBean> paiqiNormalTimeBeans = movieMapper.findPaiqiNormalTimeBean();
         //根据电影放映时间和电影ID  查询出排期信息
         List<PaiqiBean> moviePaiqis = movieMapper.findMoviePaiqi(movieDate,movieId);

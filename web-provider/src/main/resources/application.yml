@@ -29,5 +29,5 @@ spring:
     port: 6380
 mybatis:
   type-aliases-package: org.bs.cms.pojo
-  mapper-locations: classpath:mybatis/mapper/hyd/*.xml
+  mapper-locations: classpath:mybatis/mapper/*/*.xml
   config-locations: classpath:mybatis/confg.xml

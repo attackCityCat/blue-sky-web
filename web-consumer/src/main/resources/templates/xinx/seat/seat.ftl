@@ -364,10 +364,7 @@
                 }
             });
 
-            //更换图片验证码
-            $(".checkcode .imgshow").on("click", function () {
-                $(this).find("img").attr("src", "ValidateImage.aspx?line=0&&r=" + getRandom(999));
-            });
+
         })
 
         function getseat(Sites, GraphRow, GraphCol, GraphRowTotal, GraphColTotal, isVista) {
@@ -649,9 +646,7 @@
                     <p class="item"><span class="tt">场次：</span><span class="showtime"></span><span class="chooseci hide">更换</span></p>
                     <div class="item seats">
                         <span class="tt">座位：</span>
-                        <ul class="seat-list clearfix">
-                            <li class="noseat">你还未选择座位</li>
-                        </ul>
+                        <ul class="seat-list clearfix" id="seatBox"></ul>
                         <p class="tip">单击左侧座位图选择座位，再次单击取消。</p>
                         
                     </div>
@@ -663,9 +658,9 @@
                 </div>
                 <div class="form">
                     <p class="item tip">输入取票的手机号码</p>
-                    <p class="item"><span>手机号：</span><span class="mobile"><input type="text" name="mobile" placeholder="请输入手机号码" /></span></p>
-                    <p class="item checkcode clearfix"><span class="tt">验证码：</span><span><input name="checkcode" type="text" /></span><span class="imgshow"><a href="javascript:void(0);"><img src="ValidateImage.aspx?line=0" width="100%" alt="验证码" /></a></span></p>
-                    <p class="item submit"><a class="btn disable" href="javascript:void(0);" id="confirmOrder">完成选择</a></p>
+                    <p class="item"><span>手机号：</span><span class="mobile"><input type="text" id="phone" placeholder="请输入手机号码" /></span></p>
+                    <p class="item checkcode clearfix"><span class="tt">验证码：</span><span><input id="checkcode" type="text" /></span><span class="imgshow"><a href="javascript:void(0);"><img src="/verificationCode" width="100%" alt="验证码" /></a></span></p>
+                    <p class="item submit"><a class="btn" href="javascript:submitOrder(1);" id="confirmOrder">完成选择</a></p>
                 </div>
                 <div class="choose-changci clearfix hide">
                     <!--<h3>北京耀莱国际影城</h3>
@@ -778,8 +773,11 @@
         </div>
     </div>
 
-<input type="" id="PaiqiId" value=${id}>
+<input type="" id="paiqiId" value=${id}>
+<input type="" id="seatId">
+
 </body>
+
 <script type="text/javascript">
     var n = 0;
 	//按照难度等级加载
@@ -788,7 +786,7 @@
         $.ajax({
             url:'/xinx/init',
             data:{
-                id:$("#PaiqiId").val()
+                id:$("#paiqiId").val()
             },
             success:function (result) {
                 if (result.hallType == 1)
@@ -799,15 +797,24 @@
                 //定义单元格
                 var block = '';
 
-                var searBeans = result.seatBeans;
+                var paiQiSeatBeans = result.paiQiSeatBeans;
+
                 //行
                 for (var i = 1; i <= n; i++) {
                     //列
                     for (var j = 1; j <= n; j++) {
                         var b = false;
-                        for (var r = 0;r < searBeans.length;r++){
-                            if (i == searBeans[r].seatRow && j == searBeans[r].seatCol){
-                                block += '<div class="block able" seatId="'+searBeans[r].id+'"  id="a'+i+'_'+j+'"  style="width:'+600/n+'px ;height:'+600/n+'px;float:left;border:1px solid #cccccc;line-height:'+600/n+'px;" onclick="leftClick()"></div>';
+                        for (var r = 0;r < paiQiSeatBeans.length;r++){
+                            var status = paiQiSeatBeans[r].status;
+
+                            if (status == 0)
+                                status = "able";
+                            if (status == 2)
+                                status = "unable";
+
+                            if (i == paiQiSeatBeans[r].seatBean.seatRow && j == paiQiSeatBeans[r].seatBean.seatCol){
+
+                                block += '<div class="block '+status+'" seatId="'+paiQiSeatBeans[r].seatBean.id+'"  id="a'+i+'_'+j+'"  style="width:'+600/n+'px ;height:'+600/n+'px;float:left;line-height:'+600/n+'px;" onclick="leftClick()"></div>';
                                 b = true;
                                 break;
                             }
@@ -817,7 +824,7 @@
                             continue;
                         }
                         //动态拼接单元格   id = ai_j  宽高 = 600/n  浮动    边框   行高   600/n   class = block
-                        block += '<div class="block bad"  id="a'+i+'_'+j+'"  style="width:'+600/n+'px ;height:'+600/n+'px;float:left;border:1px solid #cccccc;line-height:'+600/n+'px;" onclick="leftClick()"></div>';
+                        block += '<div class="block white"  id="a'+i+'_'+j+'"  style="width:'+600/n+'px ;height:'+600/n+'px;float:left;line-height:'+600/n+'px;" onclick="leftClick()"></div>';
 
                     }
 
@@ -837,10 +844,132 @@
         })
 	}
 
+    leftClick = function(obj){
+        if (obj.classList.contains('white')) {
+            alert("此处不可选");
+            return;
+        }
+
+        if (obj.classList.contains('unable')) {
+            alert("已售");
+            return;
+        }
+
+        if (obj.classList.contains('bad')) {
+            alert("此处已坏");
+            return;
+        }
+
+        if (obj.classList.contains('able')) {
+
+
+
+            var id = obj.id;
+            $("#"+id).toggleClass('able').toggleClass('seled');
+
+            var seatId = $("#"+id).attr('seatId');
+            var seatIds = $("#seatId").val();
+
+            seatIds += seatIds == '' ? seatId : ','+seatId;
+            $("#seatId").val(seatIds);
+            var r_c = id.substr(1);
+            var arr = r_c.split("_");
+
+            var seats = $("#seatId").val().split(",");
+
+            if (seats.length >= 4){
+                alert("一次最多选四个");
+                return;
+            }
+
+            var row = arr[0];
+            var col = arr[1];
+            var li = $("#seatBox").html() + '<li id="a'+id+'">'+row+'排'+col+'座</li>'
+            $("#seatBox").html(li);
+            return;
+        }
+
+
+        if (obj.classList.contains('seled')) {
+            var id = obj.id;
+            $("#"+id).toggleClass('seled').toggleClass('able');
+
+            var seatIds = $("#seatId").val();
+            var arr = seatIds.split(",");
+            var ids = '';
+            for (var i=0;i<arr.length;i++){
+                if(arr[i] == $("#"+id).attr('seatId')){
+                    continue;
+                }
+                ids += ids == '' ? arr[i] : ','+arr[i]
+            }
+            $("#seatId").val(ids);
+
+
+            var r_c = id.substr(1);
+            var arr = r_c.split("_");
+
+            var row = arr[0];
+            var col = arr[1];
+            var li = $("#seatBox").html().replace('<li id="a'+id+'">'+row+'排'+col+'座</li>','');
+            $("#seatBox").html(li);
+
+
+            return;
+        }
+
+
+
+    }
+
+    changeStatus = function(paiQiId,seatId,flag){
+
+        $.ajax({
+            url:'/xinx/changeStatus',
+            data:{
+                paiQiId:paiQiId,
+                seats:seatId,
+                flag:flag
+            },
+            success:function () {
+                
+            }
+        })
+
+    }
+    submitOrder = function(userId){
+	    var paiQiId = $("#paiqiId").val();
+	    var seatIds = $("#seatId").val();
+	    var phone = $("#phone").val();
+        changeStatus(paiQiId,seatIds,2);
+
+        $.ajax({
+            url:'http://192.168.1.134:8082/queryOrderRJF',
+            data:{
+                phone:phone,
+                paiqiId:paiQiId,
+                userId:userId,
+                seatIds:seatIds
+            },
+            success:function (data) {
+                if (data)
+                    location.href="http://192.168.1.134:8082/page/toOrder";
+            }
+        })
+
+    }
+
 
 	$(function(){
 		init(10);
 	})
+
+    //更换图片验证码
+    $(".checkcode .imgshow").on("click", function () {
+        $(this).find("img").attr("src", "/verificationCode?t=" + new Date());
+    });
+
+
 	
 </script>
 </html>

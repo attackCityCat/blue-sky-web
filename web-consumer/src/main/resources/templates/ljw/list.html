@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<script type="text/javascript" src="/ljw/js/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="/ljw/js/easyui_util.js"></script>
+
+<script type="text/javascript" src="/ljw/js/kindeditor-4.1.10/kindeditor-all.js"></script>
+<link rel="styleSheet" href="/ljw/js/kindeditor-4.1.10/themes/default/default.css" type="text/css">
+
+<script type="text/javascript" src="/ljw/js/easyui1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/ljw/js/easyui1.5/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" href="/ljw/js/easyui1.5/themes/default/easyui.css" type="text/css"></link>
+<link rel="stylesheet" href="/ljw/js/easyui1.5/themes/icon.css" type="text/css"></link>
+
+<script type="text/javascript" src="/ljw/js/util-js.js"></script>
+
+<link rel="stylesheet" href="/ljw/js/uploadify/uploadify.css" type="text/css"></link>
+<script type="text/javascript" src="/ljw/js/uploadify/jquery.uploadify.js"></script>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<div id="toolbar" >
+    <a class="easyui-linkbutton" id="addMovie" data-options="iconCls:'icon-add',plain:true">新增</a>
+</div>
+<div class="easyui-dialog" id="movieDialog" data-options="modal:true,closed:true,buttons:[{
+		text:'保存',
+		plain:true,
+		iconCls:'icon-save',
+		handler:function(){
+			saveMovie();
+		}
+	}]" style="width:800px;height:450px">
+    <center>
+    <form id="movieForm">
+
+        电影名称:<input class="easyui-textbox" name="name" required="required"><br>
+        封面:<input type="hidden" name="img" id="imgId" />
+        <input type="file" id="imgFileBTN" />
+        <div id="showImgDiv" style="width: 100px;height: 100px;border-style:solid;border-width:1px; border-color:black;">
+            <img src="" id="showImg" style="width: 100px;height: 100px;">
+        </div>
+        <div id="showBars" ></div>
+        票价:<input class="easyui-textbox" name="price" required="required">
+        影片时长:<input class="easyui-textbox" name="length" required="required"><br>
+        电影简介:<textarea id="textId" required="required" name="detail" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;">
+  </textarea>
+        开始日期:<input class="easyui-datetimebox" name="startDate" required="required">
+        结束日期:<input class="easyui-datetimebox" name="endDate" required="required"><br>
+        首映时间:<input class="easyui-timespinner"  style="width:80px;"
+               name="firstTime" required="required" data-options="min:'09:00',showSeconds:true" />
+        导演:<input class="easyui-textbox" name="director" required="required"><br>
+        类型:<select class="easyui-combobox" id="type" name="typeName" style="width:80px" required="required">
+            </select>
+        语言:<select class="easyui-combobox" id="language" name="languageName" style="width:80px" required="required">
+            </select><br>
+        标签:<select class="easyui-combobox" id="tag" name="tag" style="width: 180px" required="required"></select>
+        演员:<select class="easyui-combobox" id="performer" name="performer" style="width: 180px" required="required"></select>
+    </form>
+    </center>
+</div>
+<table id="tableId"></table>
+</body>
+<script type="text/javascript">
+
+    //初始化加载
+    $(function(){
+        show();
+    })
+
+    //动态加载标签
+    $("#tag").combobox({
+        url:'/movie/getTagLjw',
+        textField:'name',
+        valueField:'name',
+        multiple:true
+    })
+
+    //动态加载演员
+    $("#performer").combobox({
+        url:'/movie/getPerformerLjw',
+        textField:'name',
+        valueField:'name',
+        multiple:true
+    })
+
+    //动态加载language
+    $("#language").combobox({
+        url:'/movie/getLanguageLjw',
+        textField:'name',
+        valueField:'name'
+    })
+
+
+    //动态加载type
+    $("#type").combobox({
+        url:'/movie/getTypeLjw',
+        textField:'name',
+        valueField:'name',
+    })
+
+
+    //新增电影
+    function saveMovie(){
+        editor1.sync();
+        $.ajax({
+            url:'/movie/saveMovieLjw',
+            type:'post',
+            data:$("#movieForm").serialize(),
+            success:function () {
+                $("#movieForm").form('reset');
+                show();
+                $("#movieDialog").dialog('close');
+                $("#showImg").attr('src','');
+            }
+        })
+    }
+
+    //打开新增窗口
+    $("#addMovie").click(function(){
+        $("#movieForm").form('reset');
+        var tagData = $("#tag").combobox("getData");
+        $("#tag").combobox("clear");
+        $("#tag").combobox("loadData",tagData);
+        var performerData = $("#performer").combobox("getData");
+        $("#performer").combobox("clear");
+        $("#performer").combobox("loadData",performerData);
+        $("#movieDialog").dialog({
+            title:'用户新增',
+            closed:false
+        })
+    })
+
+    //查询
+    function show() {
+        $("#tableId").datagrid({
+            url:'/movie/queryMovieLjw',
+            toolbar:'#toolbar',
+            method:'post',
+            pagination:true,
+            pageList:[1,2,3,4,5,6,7,8],
+            pageSize:4,
+            columns:[
+                [
+                    {field:"id",title:"编号"},
+                    {field:"name",title:"电影名称"},
+                    {field:"img",title:"封面",formatter:function(value,rows,index){
+                        return "<img src='/upload/"+value+"' style='width:50px;height:50px'>";
+                        }},
+                    {field:"status",title:"状态",formatter:function(value,rows,index){
+                        return value==0?"已上映":value==1?"未上映":"已下架";
+                        }},
+                    {field:"price",title:"票价"},
+                    {field:"length",title:"影片时长"},
+                    {field:"firstTime",title:"首映时间"},
+                    {field:"director",title:"导演"},
+                    {field:"detail",title:"电影简介"},
+                    {field:"startDate",title:"开始日期"},
+                    {field:"endDate",title:"结束日期"},
+                    {field:"typeName",title:"类型"},
+                    {field:"languageName",title:"语言"},
+                    {field:"tag",title:"标签"},
+                    {field:"performer",title:"演员"}
+            ]
+            ]
+        })
+    }
+
+    var editor1 = null;
+    KindEditor.ready(function(K) {
+        /* textarea[name="textValue"]  name的属性名 必须和 上面文本域的name 属性名保持一致 */
+        editor1 = K.create('textarea[name="detail"]', {
+            cssPath : 'kindeditor/plugins/code/prettify.css',
+            uploadJson : 'kindeditor/jsp/upload_json.jsp',
+            fileManagerJson : 'kindeditor/jsp/file_manager_json.jsp',
+            allowFileManager : true,
+            afterCreate : function() {
+                var self = this;
+                K.ctrl(document, 13, function() {
+                    self.sync();
+                    document.forms['example'].submit();
+                });
+                K.ctrl(self.edit.doc, 13, function() {
+                    self.sync();
+                    document.forms['example'].submit();
+                });
+            }
+        });
+
+    });
+
+    //文件域的id
+    $("#imgFileBTN").uploadify({
+        //前台请求后台的url 不可忽略的参数
+        'uploader' :"/movie/uploadNewsImg",
+        //插件自带 不可忽略的参数
+        'swf' : '/ljw/js/uploadify/uploadify.swf',
+        //撤销按钮的图片路径
+        'cancelImg' : '/ljw/js/uploadify/uploadify-cancel.png',
+        //如果为true 为自动上传 在文件后 为false 那么它就要我们自己手动点上传按钮
+        'auto' : true,
+        //可以同时选择多个文件 默认为true 不可忽略
+        'multi' : false,
+        //给上传按钮设置文字
+        'buttonText' : '上传图片',
+        //上传后队列是否消失
+        'removeCompleted' : true,
+        'removeTimeout' : 1,
+        //上传文件的个数
+        'uploadLimit' : 2,
+        'fileTypeExts' : '*.jpg;*.jpge;*.gif;*.png',
+        'fileSizeLimit' : '2MB',
+        //给div的进度条加背景 不可忽略
+        'queueID' : 'showBars',
+        // controller层方法中接收文件的参数名, 参数名为自定义
+        'fileObjName' : 'img',
+        //      上传成功后的回调函数
+        'onUploadSuccess' : function(file, data, response) {
+
+            data = data.replace("\"","").replace("\"","");
+            $("#showImg").attr("src","/upload/"+data);
+            $("#imgId").val(data);
+        }
+
+    });
+</script>
+</html>

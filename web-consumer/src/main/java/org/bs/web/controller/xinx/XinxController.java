@@ -1,6 +1,7 @@
 package org.bs.web.controller.xinx;
 
 import org.bs.web.common.CommonConf;
+import org.bs.web.pojo.movie.PaiQiSeatBean;
 import org.bs.web.pojo.movie.PaiqiBean;
 import org.bs.web.pojo.movie.SeatBean;
 import org.bs.web.service.xinx.XinxService;
@@ -12,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -53,29 +52,33 @@ public class XinxController {
             paiqiBean = xinxService.findPaiqiInfoById(id);
         }
 
+        List<SeatBean> seatBeans = new ArrayList<>();
+        List<PaiQiSeatBean> paiQiSeatBeans = (List)redisTemplate.opsForHash().entries(CommonConf.PAI_QI_SEATS_KEY+paiqiBean.getId()).values().stream().collect(Collectors.toList());
+        for (PaiQiSeatBean paiQiSeatBean : paiQiSeatBeans){
 
-        String primaryKey = CommonConf.HALL_SEATS_KEY + paiqiBean.getHallId();
-        Boolean hasPrimaryKey = redisTemplate.hasKey(primaryKey);
-
-        List<SeatBean> seatBeans = null;
-        if (hasPrimaryKey) {
-            //List<ProductBean> list = (List) map.values().stream().collect(Collectors.toList());
-            seatBeans = (List)redisTemplate.opsForHash().entries(primaryKey).values().stream().collect(Collectors.toList());
-        }else {
-            seatBeans = xinxService.findSeatListByHallId(paiqiBean.getHallId());
-            for (SeatBean seatBean : seatBeans){
-                //生成 副键 生成规则 ： 常量字符串+座位ID
-                String repliKey = CommonConf.SEATS_INFO_KEY + seatBean.getId();
-                redisTemplate.opsForHash().put(primaryKey,repliKey,seatBean);
-            }
+            SeatBean seatBean = (SeatBean) redisTemplate.opsForHash().get(CommonConf.HALL_SEATS_KEY + paiqiBean.getHallId(), CommonConf.SEATS_INFO_KEY + paiQiSeatBean.getSeatId());
+            paiQiSeatBean.setSeatBean(seatBean);
         }
 
-        result.put("seatBeans",seatBeans);
+        result.put("paiQiSeatBeans",paiQiSeatBeans);
+
 
         Integer hallType = xinxService.findHallType(paiqiBean.getHallId());
 
         result.put("hallType",hallType);
 
         return result;
+    }
+
+    @RequestMapping("changeStatus")
+    @ResponseBody
+    public Boolean changeStatus(Integer paiQiId,String seats,int flag){
+        List<Integer> seatIds = Arrays.stream(seats.split(",")).map(Integer::valueOf).collect(Collectors.toList());
+        Boolean b = false;
+        for (Integer seatId : seatIds){
+            b = xinxService.changeStatus(paiQiId,seatId,flag);
+        }
+
+        return b;
     }
 }

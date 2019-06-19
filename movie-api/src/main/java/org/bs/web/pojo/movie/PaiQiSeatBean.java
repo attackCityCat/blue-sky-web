@@ -9,6 +9,8 @@ public class PaiQiSeatBean implements Serializable {
     private Integer seatId;     //信息所属座位信息ID
     private Integer status = 0;     // 指定排期 指定座位 状态  0 可选 1 已选 2 已售  默认为 0
 
+    private SeatBean seatBean;
+
     public Integer getPaiQiId() {
         return paiQiId;
     }
@@ -31,5 +33,13 @@ public class PaiQiSeatBean implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public SeatBean getSeatBean() {
+        return seatBean;
+    }
+
+    public void setSeatBean(SeatBean seatBean) {
+        this.seatBean = seatBean;
     }
 }

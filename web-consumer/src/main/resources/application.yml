@@ -25,9 +25,9 @@ spring:
   main:
     allow-bean-definition-overriding: true #允许相同key情况下beanDefinition实例的覆盖
   thymeleaf:
+    cache: false
     enabled: true
     mode: LEGACYHTML5
-    cache: false
 
 
 feign:
@@ -35,6 +35,7 @@ feign:
     enabled: true
   httpclient:
     connection-timeout: 30000
+
 elasticsearch:
   thirdPort: 9302
   secondPort: 9301

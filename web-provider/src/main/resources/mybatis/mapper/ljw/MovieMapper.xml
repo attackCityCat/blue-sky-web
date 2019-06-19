@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.bs.web.mapper.ljw.MovieMapperLjw">
+
+
+	<insert id="saveMoviePerformer">
+		insert into t_movie_performer(movieId,performerId) values
+		<foreach collection="list" item="i" index="index" separator=",">
+			(#{i.movieId},#{i.performerId})
+		</foreach>
+	</insert>
+
+	<insert id="savePerformerLjw">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_performer(name) values (#{name})
+	</insert>
+
+	<insert id="saveMovieTag">
+		insert into t_movie_tag(movieId,tagId) values
+		<foreach collection="list" item="i" index="index" separator=",">
+			(#{i.movieId},#{i.tagId})
+		</foreach>
+	</insert>
+
+	<insert id="saveTagLjw">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_tag(name) values (#{name})
+	</insert>
+
+	<insert id="saveMovieTime" parameterType="org.bs.web.pojo.movie.MovieTimeBean">
+		insert into t_movie_time(startDate,endDate,movieId)
+				values (#{startDate},#{endDate},#{movieId})
+	</insert>
+
+	<insert id="saveLanguageLjw" parameterType="org.bs.web.pojo.movie.LanguageBean">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_movie_language(name) values (#{name})
+	</insert>
+
+	<insert id="saveMovieTypeLjw" parameterType="org.bs.web.pojo.movie.MovieTypeBean">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_movie_type(name) values(#{name})
+	</insert>
+
+	<insert id="saveDetailLjw">
+		insert into t_movie_detail(movieId,director,length,firstTime,detail,price,type,language)
+			values(#{id},#{director},#{length},#{firstTime},#{detail},#{price},#{type},#{language})
+	</insert>
+
+	<insert id="saveMovieLjw">
+		<selectKey keyProperty="id" order="AFTER" resultType="int">
+			select last_insert_id()
+		</selectKey>
+		insert into t_movie(name,img,status) values(#{name},#{img},1)
+	</insert>
+
+    <select id="queryMovieLjw" resultType="org.bs.web.pojo.movie.MovieBean">
+        select
+			tm.*,
+			GROUP_CONCAT(tper.name) performer,
+			 tmd.price,
+			 tmd.length,
+			 tmd.firstTime,
+			 tmd.director,
+			 tmd.detail,
+			 tmt.startDate,
+			 tmt.endDate,
+			 tmty.name as typeName,
+			 tml.name as languageName
+			 from t_movie tm
+			 left join t_movie_detail tmd on tmd.movieId = tm.id
+			 left join t_movie_time tmt on tmt.movieId = tm.id
+			 left join t_paiqi tp on tp.movieId = tm.id
+			 left join t_movie_type tmty on tmty.id = tmd.type
+			 left join t_movie_language tml on tml.id = tmd.language
+			 left join t_movie_performer tmper on tmper.movieId = tm.id
+			 left join t_performer tper on tper.id = tmper.performerId
+			 group by tm.id
+			 limit #{start,jdbcType=NUMERIC},#{end,jdbcType=NUMERIC}
+    </select>
+</mapper>
