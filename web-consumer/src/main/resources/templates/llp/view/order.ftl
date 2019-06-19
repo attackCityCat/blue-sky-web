@@ -188,7 +188,7 @@
                     ,{field:'yuyan', title: '语言', width:80}
                     ,{field:'hallName', title: '放映厅', width:100, sort: true}
                     ,{field:'seatRow', title: '座位行号', width:86}
-                    ,{field:'seatClumn', title: '座位列号',width:86}
+                    ,{field:'seatCol', title: '座位列号',width:86}
                     ,{field:'orderNum', title: '订单号', sort: true, width:212}
                     ,{field:'transaction', title: '交易时间', sort: true, width:170}
                 ]]

@@ -54,4 +54,8 @@ public interface MovieMapper {
     @Select("SELECT coe from t_hall th left join t_hall_type tht on th.typeId = tht.id " +
             "where th.id = #{value}")
     Float findHallTypeCoeByHallId(Integer hallId);
+
+    @Select("SELECT tmd.price from t_movie tm left join t_movie_detail tmd on tmd.movieId = tm.id "+
+            "where tm.id = #{value}")
+    double findMoviePriceById(Integer beanMovieId);
 }

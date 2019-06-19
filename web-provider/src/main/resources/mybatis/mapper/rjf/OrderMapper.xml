@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.bs.web.mapper.rjf.OrderMapper">
+      <select id="queryOrderDetail" resultType="org.bs.web.pojo.order.OrderMessage">
+        select pai.startTime as startTime , m.name as movieName , m.img as movieImg , h.name as hallName ,
+         md.language as language ,md.length as length , md.price as moviePrice, mt.startDate as startDate, ml.name as yuyan
+			,tc.level as jibie, tc.zk as zk FROM  t_paiqi pai
+            LEFT  JOIN  t_movie  m  on  m.id = pai.movieId
+
+            LEFT  JOIN  t_hall   h  on  pai.hallId = h.id
+            LEFT  JOIN  t_movie_detail md on md.movieId = m.id
+			LEFT  JOIN  t_movie_time  mt  on mt.movieId = m.id
+			LEFT  JOIN  t_movie_language ml  on ml.id =  md.language
+			LEFT  JOIN  t_user_info ui on ui.userId = 1
+			LEFT  JOIN  t_consumer tc on  tc.level = ui.consumerId
+            where  pai.id = #{value}
+      </select>
+
+      <!--<select id="userId" resultType="org.bs.web.pojo.order.ConsumerBean">
+            select tc.level as level, tc.zk as zk from  t_consumer tc
+                LEFT  JOIN  t_user_info ui on ui.consumerId = tc.level
+                where ui.userId = #{userId}
+      </select>-->
+</mapper>

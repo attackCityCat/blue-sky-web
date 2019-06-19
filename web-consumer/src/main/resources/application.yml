@@ -7,9 +7,11 @@ eureka:
 spring:
   application:
     name: web-consumer
+
   redis:
     host: localhost
     port: 6380
+
 
   profiles: default
   freemarker:
@@ -35,7 +37,6 @@ feign:
     enabled: true
   httpclient:
     connection-timeout: 30000
-
 elasticsearch:
   thirdPort: 9302
   secondPort: 9301
@@ -49,6 +50,3 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000 #缺省为1000
-
-
-

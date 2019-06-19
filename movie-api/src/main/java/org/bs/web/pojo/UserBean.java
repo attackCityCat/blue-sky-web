@@ -1,7 +1,11 @@
 package org.bs.web.pojo;
 
-public class UserBean {
+import java.io.Serializable;
 
+public class UserBean implements Serializable {
+
+
+    private static final long serialVersionUID = 7030204503878466831L;
     //用户表
     private Integer id;
 

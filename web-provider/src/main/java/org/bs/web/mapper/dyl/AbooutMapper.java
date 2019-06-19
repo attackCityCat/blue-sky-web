@@ -1,7 +1,7 @@
 package org.bs.web.mapper.dyl;
 
 import org.apache.ibatis.annotations.Select;
-import org.bs.web.pojo.MovieBean;
+import org.bs.web.pojo.movie.MovieBean;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

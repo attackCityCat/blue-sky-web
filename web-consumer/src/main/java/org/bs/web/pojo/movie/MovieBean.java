@@ -1,4 +1,5 @@
-package org.bs.web.pojo;
+package org.bs.web.pojo.movie;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;

@@ -21,13 +21,23 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   data:
     mongodb:
-      database: mongodb
       host: localhost
       port: 27017
+      database: mongodb
   redis:
     host: localhost
     port: 6380
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 mybatis:
-  type-aliases-package: org.bs.cms.pojo
+  type-aliases-package: org.bs.web.pojo
   mapper-locations: classpath:mybatis/mapper/*/*.xml
   config-locations: classpath:mybatis/confg.xml
+
+
+
+

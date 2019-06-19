@@ -6,10 +6,13 @@ import org.bs.web.mapper.xinx.XinxMapper;
 import org.bs.web.pojo.movie.PaiQiSeatBean;
 import org.bs.web.pojo.movie.PaiqiBean;
 import org.bs.web.pojo.movie.SeatBean;
+import org.bs.web.pojo.order.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,6 +27,9 @@ public class XinxController {
 
     @Autowired
     private XinxMapper xinxMapper;
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
@@ -60,4 +66,11 @@ public class XinxController {
             return false;
         }
     };
+
+
+    @RequestMapping("/saveOrderStatus")
+    public Boolean saveOrderStatus(OrderStatus orderStatus){
+        OrderStatus save = mongoTemplate.save(orderStatus);
+        return save != null;
+    }
 }

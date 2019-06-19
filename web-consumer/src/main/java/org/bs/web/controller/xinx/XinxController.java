@@ -4,8 +4,12 @@ import org.bs.web.common.CommonConf;
 import org.bs.web.pojo.movie.PaiQiSeatBean;
 import org.bs.web.pojo.movie.PaiqiBean;
 import org.bs.web.pojo.movie.SeatBean;
+import org.bs.web.pojo.order.OrderMessage;
 import org.bs.web.service.xinx.XinxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,11 +28,17 @@ public class XinxController {
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
 
+    @Resource
+    private RedisTemplate<String, String> redisTemplate2;
+
     @Autowired
     private XinxService xinxService;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
     /**
-     *
+     *      进入选座页面    将排期Id 带进页面
      * @param id        排期Id
      * @return
      */
@@ -38,6 +48,11 @@ public class XinxController {
         return "xinx/seat/seat";
     }
 
+    /**
+     *      初始化页面
+     * @param id
+     * @return
+     */
     @RequestMapping("init")
     @ResponseBody
     public Map<String,Object> init(Integer id){
@@ -55,7 +70,25 @@ public class XinxController {
         List<SeatBean> seatBeans = new ArrayList<>();
         List<PaiQiSeatBean> paiQiSeatBeans = (List)redisTemplate.opsForHash().entries(CommonConf.PAI_QI_SEATS_KEY+paiqiBean.getId()).values().stream().collect(Collectors.toList());
         for (PaiQiSeatBean paiQiSeatBean : paiQiSeatBeans){
+            //判断当前排期座位 状态是否为 已售
+            if (paiQiSeatBean.getStatus() == 2){
+                //判断是否未付款
+                String s = redisTemplate2.opsForValue().get(paiQiSeatBean.getPaiQiId() + "-" + paiQiSeatBean.getSeatId());
+                System.out.println(s);
+                if (!"yes".equals(s)){
+                    //如果没有未付款信息  判断是否已付款
+                    Integer paiQiId = paiQiSeatBean.getPaiQiId();
+                    System.out.println(paiQiId);
+                    Integer seatId = paiQiSeatBean.getSeatId();
+                    System.out.println(seatId);
+                    String key = CommonConf.ORDER_NUM_KEK_P + paiQiId + CommonConf.ORDER_NUM_KEK_S + seatId;
+                    System.out.println(key);
+                    Object object =  redisTemplate.opsForHash().get(CommonConf.ORDER_NUM_KEK,key);
+                    if (object == null)//如果也没有   将状态改为  可选
+                        changeStatus(paiQiSeatBean.getPaiQiId(),""+paiQiSeatBean.getSeatId(),0);
+                }
 
+            }
             SeatBean seatBean = (SeatBean) redisTemplate.opsForHash().get(CommonConf.HALL_SEATS_KEY + paiqiBean.getHallId(), CommonConf.SEATS_INFO_KEY + paiQiSeatBean.getSeatId());
             paiQiSeatBean.setSeatBean(seatBean);
         }

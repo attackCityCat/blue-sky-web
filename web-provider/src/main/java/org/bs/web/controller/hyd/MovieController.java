@@ -143,6 +143,10 @@ public class MovieController {
             return 4;
         }
 
+        Integer beanMovieId = paiqiBean.getMovieId();
+        double price = movieMapper.findMoviePriceById(beanMovieId);
+        paiqiBean.setPrice(price);
+
         //计算票价
         countPrice(paiqiBean);
 
@@ -155,7 +159,6 @@ public class MovieController {
 
 
         //将所有排期座位信息 缓存至redis
-
         for (SeatBean seatBean : seatBeans){
 
             PaiQiSeatBean paiQiSeatBean = new PaiQiSeatBean();
@@ -239,6 +242,8 @@ public class MovieController {
             return seatBeans;
         }
     }
+
+
 
     //将指定PaiQiSeatBean  缓存至redis
     public void cachePaiQiSeatBean(PaiQiSeatBean paiQiSeatBean){

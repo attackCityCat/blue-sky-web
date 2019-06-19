@@ -60,8 +60,6 @@ public class EsConfig {
             logger.error("ElasticSearch初始化失败：" +  e.getMessage(),e);
 
         }
-
         return transportClient;
     }
 }
-

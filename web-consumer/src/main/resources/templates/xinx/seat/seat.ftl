@@ -943,7 +943,7 @@
         changeStatus(paiQiId,seatIds,2);
 
         $.ajax({
-            url:'http://192.168.1.134:8082/queryOrderRJF',
+            url:'/queryOrderRJF',
             data:{
                 phone:phone,
                 paiqiId:paiQiId,
@@ -952,7 +952,7 @@
             },
             success:function (data) {
                 if (data)
-                    location.href="http://192.168.1.134:8082/page/toOrder";
+                    location.href="/page/toOrder";
             }
         })
 

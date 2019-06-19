@@ -1,8 +1,8 @@
 package org.bs.web.controller.llp;
 
 import org.bs.web.mapper.llp.UserMapper;
-import org.bs.web.pojo.OrderMessage;
 import org.bs.web.pojo.UserBean;
+import org.bs.web.pojo.order.OrderMessage;
 import org.bs.web.util.LayuiPage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;

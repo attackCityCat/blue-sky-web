@@ -1,9 +1,9 @@
 package org.bs.web.controller.dyl;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.bs.web.pojo.SeatBean;
 import org.bs.web.pojo.movie.HallBean;
 import org.bs.web.pojo.movie.HallTypeBean;
+import org.bs.web.pojo.movie.SeatBean;
 import org.bs.web.service.dyl.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,7 +75,7 @@ public class HallController {
     @RequestMapping("addSeat")
     public Boolean addSeat(Integer hellSeatId,SeatBean seatBean){
         String row = seatBean.getSeatRow();
-        String column = seatBean.getSeatColumn();
+        String column = seatBean.getSeatCol();
         Integer SeatId = hellSeatId;
         System.out.println("===放映厅id==="+SeatId);
         Integer hallCount = hallService.queryHallCount(SeatId);
@@ -88,7 +88,7 @@ public class HallController {
                 if (seatBean1.size() != 0 ){
                     if(column != null && !"".equals(column)){
                         for (int i = 0;i < seatBean1.size();i++){
-                            if (seatBean1.get(i).getSeatColumn().equals(column)){
+                            if (seatBean1.get(i).getSeatCol().equals(column)){
                                 return false;
                             }else {
                                 try {
