@@ -3,6 +3,7 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/movie-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/CheckBean.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/easyui/easyui1.5" charset="GBK" />
     <file url="file://$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/easyui/easyui_util.js" charset="GBK" />

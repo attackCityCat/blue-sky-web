@@ -24,6 +24,11 @@ spring:
   thymeleaf:
     cache: false
     enabled: true
+  data:
+    mongodb:
+      host: 192.168.1.134
+      port: 27017
+      database: 1810A
 feign:
   hystrix:
     enabled: true
