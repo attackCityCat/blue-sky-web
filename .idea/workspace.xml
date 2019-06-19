@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3f84353-f5b2-4018-a282-7cdd0fb5bbb5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/CheckBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/TickerBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/pojo/CheckBean.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/movie-api/target/classes/org/bs/web/pojo/TickerBean.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/service/dyl/TicketService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/JTicket.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/controller/dyl/TicketController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-provider/src/main/java/org/bs/web/mapper/dyl/TicketMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_1_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_core_5_1_6_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_1_6_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/movie-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/movie-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-provider/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-provider/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -54,18 +37,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/HallController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="88" column="59" selection-start-line="88" selection-start-column="41" selection-end-line="88" selection-end-column="59" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/addHall.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="550">
@@ -87,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="34" column="51" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+            <state relative-caret-position="389">
+              <caret line="68" column="48" lean-forward="true" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#822#838#0" expanded="true" />
@@ -168,8 +139,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -209,10 +180,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/dyl/pojo/MovieAboutBean.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/view/Main.html" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/jquery.flexslider.min.js" />
@@ -261,8 +234,9 @@
         <option value="$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/CheckBean.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/toJTicket.html" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/page.java" />
-        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" />
         <option value="$PROJECT_DIR$/web-consumer/src/main/resources/templates/dyl/view/JTicket.html" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/util/DateUtils.java" />
+        <option value="$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java" />
       </list>
     </option>
   </component>
@@ -307,9 +281,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="507" />
-    <option name="y" value="126" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="303" />
+    <option name="y" value="146" />
     <option name="width" value="1334" />
     <option name="height" value="763" />
   </component>
@@ -320,7 +294,73 @@
     <panes>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blue-sky-web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blue-sky-web" type="462c0819:PsiDirectoryNode" />
+              <item name="web-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="dyl" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -332,11 +372,11 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web-consumer/src/main/resources/static/dyl/js/easyui" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web-consumer" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -440,7 +480,7 @@
       <workItem from="1560841199161" duration="2647000" />
       <workItem from="1560843866253" duration="1584000" />
       <workItem from="1560856282179" duration="10289000" />
-      <workItem from="1560906164716" duration="11966000" />
+      <workItem from="1560906164716" duration="21312000" />
     </task>
     <task id="LOCAL-00001" summary="段毓霖第一次提交代码6——13">
       <created>1560429879370</created>
@@ -484,11 +524,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560907232136</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="段毓霖第七次提交代码6——19">
+      <created>1560928686424</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1560928686424</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130607000" />
+    <option name="totallyTimeSpent" value="139953000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -500,9 +547,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="507" y="126" width="1334" height="763" extended-state="0" />
+    <frame x="-8" y="-8" width="1843" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25588697" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18283792" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -525,7 +573,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="12" weight="0.32952183" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.32952183" />
-      <window_info anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.354531" />
+      <window_info active="true" anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.23180874" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -550,91 +598,10 @@
     <MESSAGE value="段毓霖第四次提交代码6——18" />
     <MESSAGE value="段毓霖第五次提交代码6——18" />
     <MESSAGE value="段毓霖第六次提交代码6——19" />
-    <option name="LAST_COMMIT_MESSAGE" value="段毓霖第六次提交代码6——19" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java</url>
-          <line>26</line>
-          <properties class="org.bs.web.controller.dyl.TicketController" method="JianTicket">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="段毓霖第七次提交代码6——19" />
+    <option name="LAST_COMMIT_MESSAGE" value="段毓霖第七次提交代码6——19" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/pojo/MovieBean.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1550#1551#0" expanded="true" />
-            <element signature="e#1589#1590#0" expanded="true" />
-            <element signature="e#1619#1620#0" expanded="true" />
-            <element signature="e#1644#1645#0" expanded="true" />
-            <element signature="e#1681#1682#0" expanded="true" />
-            <element signature="e#1709#1710#0" expanded="true" />
-            <element signature="e#1740#1741#0" expanded="true" />
-            <element signature="e#1767#1768#0" expanded="true" />
-            <element signature="e#1807#1808#0" expanded="true" />
-            <element signature="e#1839#1840#0" expanded="true" />
-            <element signature="e#1869#1870#0" expanded="true" />
-            <element signature="e#1895#1896#0" expanded="true" />
-            <element signature="e#1933#1934#0" expanded="true" />
-            <element signature="e#1963#1964#0" expanded="true" />
-            <element signature="e#1997#1998#0" expanded="true" />
-            <element signature="e#2026#2027#0" expanded="true" />
-            <element signature="e#2071#2072#0" expanded="true" />
-            <element signature="e#2107#2108#0" expanded="true" />
-            <element signature="e#2142#2143#0" expanded="true" />
-            <element signature="e#2173#2174#0" expanded="true" />
-            <element signature="e#2221#2222#0" expanded="true" />
-            <element signature="e#2261#2262#0" expanded="true" />
-            <element signature="e#2295#2296#0" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2369#2370#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-            <element signature="e#2439#2440#0" expanded="true" />
-            <element signature="e#2471#2472#0" expanded="true" />
-            <element signature="e#2519#2520#0" expanded="true" />
-            <element signature="e#2561#2562#0" expanded="true" />
-            <element signature="e#2597#2598#0" expanded="true" />
-            <element signature="e#2628#2629#0" expanded="true" />
-            <element signature="e#2677#2678#0" expanded="true" />
-            <element signature="e#2717#2718#0" expanded="true" />
-            <element signature="e#2750#2751#0" expanded="true" />
-            <element signature="e#2779#2780#0" expanded="true" />
-            <element signature="e#2823#2824#0" expanded="true" />
-            <element signature="e#2859#2860#0" expanded="true" />
-            <element signature="e#2891#2892#0" expanded="true" />
-            <element signature="e#2919#2920#0" expanded="true" />
-            <element signature="e#2961#2962#0" expanded="true" />
-            <element signature="e#2995#2996#0" expanded="true" />
-            <element signature="e#3032#3033#0" expanded="true" />
-            <element signature="e#3064#3065#0" expanded="true" />
-            <element signature="e#3115#3116#0" expanded="true" />
-            <element signature="e#3157#3158#0" expanded="true" />
-            <element signature="e#3194#3195#0" expanded="true" />
-            <element signature="e#3226#3227#0" expanded="true" />
-            <element signature="e#3277#3278#0" expanded="true" />
-            <element signature="e#3319#3320#0" expanded="true" />
-            <element signature="e#3355#3356#0" expanded="true" />
-            <element signature="e#3386#3387#0" expanded="true" />
-            <element signature="e#3435#3436#0" expanded="true" />
-            <element signature="e#3475#3476#0" expanded="true" />
-            <element signature="e#3511#3512#0" expanded="true" />
-            <element signature="e#3542#3543#0" expanded="true" />
-            <element signature="e#3591#3592#0" expanded="true" />
-            <element signature="e#3631#3632#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/movie-api/src/main/java/org/bs/web/pojo/MovieTimeBean.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="875">
@@ -1125,10 +1092,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/util/DateUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#246#247#0" expanded="true" />
+            <element signature="e#1398#1399#0" expanded="true" />
+            <element signature="e#1443#1444#0" expanded="true" />
+            <element signature="e#10304#10305#0" expanded="true" />
+            <element signature="e#10363#10364#0" expanded="true" />
+            <element signature="e#10404#10405#0" expanded="true" />
+            <element signature="e#10493#10494#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web-consumer/src/main/java/org/bs/web/controller/dyl/TicketController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="34" column="51" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+        <state relative-caret-position="389">
+          <caret line="68" column="48" lean-forward="true" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#822#838#0" expanded="true" />
