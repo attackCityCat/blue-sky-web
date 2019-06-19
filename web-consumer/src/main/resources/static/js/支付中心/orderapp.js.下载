@@ -1,0 +1,802 @@
+﻿
+/***
+ * 大眼睛支付确认页票卡计算
+ * www.daeyes.com
+ * laobai
+ *
+ *   ———          /\         ——————    \       /   ——————      —————
+ *  |    \       /  \       |           \     /   |           |
+ *  |     |     /    \      |            \   /    |           |
+ *  |     |    / ---- \     |——————       \ /     |——————      ——————
+ *  |    /    /        \    |              |      |                  |
+ *   ——      /          \    ——————        |       ——————      ——————
+ *      
+ */
+var vm = new Vue({
+    el: '#mpay',
+    data: {
+        expandDetail: false,
+        waitPay: false,
+        canPay: true,
+        overPay: false,
+        useTicket: false,
+        useWh: false,
+        couponAmount: 0,
+        couponPayDetail: "",
+        whMsg: '',
+        whChecked: false,
+        payAmount: payAmount,
+        coupons: [],
+        couponLoading: true,
+        loading: false,
+        payParams: payParams,
+        couponShow: false,
+        ticketShow: false,
+        orderData: orderData,
+        sentValidCode: false,
+        sentSecond: 120
+    },
+    computed: {
+        urlPayParams: function() {
+            //查询字符串形式的支付参数
+            var params = Object.assign({}, this.payParams);
+            params.CouponJson = "";
+            params.Coupons = null;
+            return $.param(params);
+        }
+    },
+    created: function () {
+        var vueObj = this;
+        //this.$toast.loading();
+        if (this.orderData.disableTicket) {
+            this.couponLoading = false;
+        } else {
+            //加载票卡数据
+            axios.get('/paycenter/GetUserCoupons', { params: { tradeNo: this.payParams.TradeNo } })
+                .then(function (response) {
+                    //console.log(response);
+                    if (response.data.length > 0) {
+                        vueObj.coupons = response.data;
+                    }
+                    vueObj.couponLoading = false;
+                })
+                .catch(function (error) {
+                    vueObj.couponLoading = false;
+                });
+        }
+        //vueObj.couponLoading = false;
+        //vueObj.coupons = coups;
+    },
+    methods: {
+        confirmPay: function () {//确认支付
+            var vueObj = this;
+            vueObj.payParams.CouponJson = JSON.stringify(vueObj.payParams.Coupons);
+            vueObj.payParams.CouponAmount = this.couponAmount;
+
+            //if (this.couponAmount > 0 && this.payParams.PayPassword.length === 0) {
+            //    this.$Message.error('请输入支付密码！');
+            //    this.$refs['payPassword'].focus();
+            //    return;
+            //}
+            if (this.couponAmount > 0 && this.payParams.ValidCode.length === 0) {
+                //this.$Message.error('请输入验证码！');
+                this.showMessage("error", "请输入验证码！");
+                this.$refs['ValidCode'].focus();
+                return;
+            }
+            //是否禁用第三方支付
+            if (vueObj.orderData.disableCash) {
+                if (vueObj.payAmount > 0) {
+                    //this.$Message.error('支付金额不足，请确认后再支付！');
+                    this.showMessage("error", "支付金额不足，请确认后再支付！");
+                    return;
+                }
+            }
+            //超额确认
+            if (this.overPay) {
+                this.confirmOverPay(this.submitPay, null);
+            } else {
+                this.submitPay();
+            }
+        },
+        submitPay: function () {
+            var vueObj = this;
+            vueObj.loading = true;
+            axios.post('/paycenter/paycheck', vueObj.payParams)
+                .then(function (response) {
+                    //console.log(response);
+                    if (response.data.code === "10000") {
+                        document.getElementById("cform").submit();
+                    } else {
+                        vueObj.showMessage("error", response.data.msg);
+                        vueObj.loading = false;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    vueObj.showMessage("error", error.message);
+                    vueObj.loading = false;
+                });
+
+        },
+        checkPayStatus: function (channel) {//验证支付状态
+            var vueObj = this;
+            axios.post('/paycenter/checktradestatus', { tradeNo: this.payParams.TradeNo, payChannel: channel })
+                .then(function (response) {
+                    //console.log(response);
+                    if (response.data.result === "10000") {
+                        if (response.data.data.status === 2) {
+                            window.location.href = "/paycenter/paysuccess?" +vueObj.urlPayParams;
+                        }
+                    } else {
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+        },
+        checkWhCoupon: function () {//检查文惠券
+            var vueObj = this;
+            if (this.payParams.WhCouponCode.length > 0) {
+                axios.post('/paycenter/checkwhcoupon',
+                    { code: this.payParams.WhCouponCode })
+                    .then(function (response) {
+                        //console.log(response);
+                        var res = response.data;
+                        //console.log(res);
+                        if (res.IsSuccess) {
+                            //判断是否可用
+                            if (res.MinConsume > vueObj.payParams.TotalAmount) {
+                                vueObj.whChecked = false;
+                                vueObj.whMsg = '该券不适用满减规则，请更换其它文惠券。';
+                            } else {
+                                vueObj.whChecked = true;
+                                vueObj.whMsg = "";
+                                vueObj.payParams.WhCouponAmount = res.Amount;
+                                vueObj.payParams.WhCouponMinConsume = res.MinConsume;
+                                vueObj.couponShow = false;
+                            }
+                        } else {
+                            vueObj.whChecked = false;
+                            vueObj.whMsg = res.FailMessage;
+
+                            //if (res.FailCode === "126") {
+                            //    //已使用
+                            //    vueObj.whMsg = res.FailMessage;
+                            //} else if (res.FailCode === "125") {
+                            //    //不存在
+                            //    vueObj.whMsg = "未查询到该券，请确认券号无误。";
+                            //} else if (res.FailCode === "128") {
+                            //    //已过期
+                            //    vueObj.whMsg = "该券已过期。";
+                            //} else {
+                            //    vueObj.whMsg = res.FailMessage;
+                            //}
+                        }
+                        //清空已经选择的票卡，避免先选票卡后使用文惠券
+                        vueObj.clearChecked();
+                        //计算
+                        vueObj.calcAmount();
+                    })
+                    .catch(function (error) {
+                        //console.log(error);
+                    });
+            } else {
+                //聚焦
+            }
+        },
+        onUseTicket: function (chk) {
+            if (!chk) {
+                this.payParams.Coupons = [];
+                //清空选择
+                this.coupons.forEach(function (item, index) {
+                    item.Checked = false;
+                    item.Selectable = true;
+                    item.Tickets.forEach(function (tic, i) {
+                        tic.Checked = false;
+                        tic.Selectable = true;
+                    });
+                });
+                this.couponAmount = 0;
+                this.calcAmount();
+            }
+        },
+        onUseWhCoupon: function (chk) {
+            if (!chk) {
+                this.payParams.WhCouponAmount = 0;
+                this.payParams.WhCouponMinConsume = 0;
+                this.payParams.WhCouponCode = "";
+                this.whChecked = false;
+                this.calcAmount();
+            }
+        },
+        onTicketGroupChecked: function (item, chk) {
+            if (!chk) {
+                //将票卡设置为未选中，值为0
+                item.Tickets.forEach(function (tic, index) {
+                    tic.Checked = false;
+                    tic.Selectable = true;
+                    tic.Locked = false;
+                    tic.CouponValue = 0;
+                });
+                //计算价格
+                this.calcAmount();
+            } else {
+                //智能选择票卡
+                this.intelligentSelect(item);
+                item.View = true;
+
+            }
+            //混合检查
+            this.checkMixed(item);
+        },
+        onTicketClick: function (item, ticket) {
+            //console.log(ticket);
+            //提示不可用票卡或不可选票卡信息
+            if (item.Enable) {
+                if (item.Selectable) {
+                    if (ticket.Enable) {
+                        if (!ticket.Selectable) {
+                            this.showMessage("info", "请先取消已勾选票卡再进行选择");
+                        } else {
+                            if (ticket.Locked) {
+                                this.showMessage("info", "请先取消已勾选票卡再进行选择");
+                            }
+                        }
+                    }
+                } else {
+                    //不可混合
+                    this.showMessage("info", "不可混合支付，请先取消已勾选票卡再进行选择");
+                }
+
+            } else {
+                this.showMessage("info", "当前订单不可用");
+            }
+        },
+        onTicketChecked: function (item, ticket, chk) {
+            //选择票卡时判断
+            //console.log(item);
+            //console.log(chk);
+            var vueObj = this;
+            if (chk) {
+                //对于一次性卡值直接为1不显示数字选择
+                if (ticket.CouponCount === 1) {
+                    ticket.CouponValue = 1;
+                } else {
+                    this.intelligentTicketValue(ticket);
+                }
+            } else {
+                //对于一次性卡值直接为1不显示数字选择
+                if (ticket.CouponCount === 1) {
+                    ticket.CouponValue = 0;
+                } else {
+                    ticket.CouponValue = 0;
+                }
+            }
+            var parentChecked = false;
+            var selectedCount = 0;
+            var selectedValue = 0;
+            //判断选中组
+            item.Tickets.forEach(function (tic, index) {
+                if (tic.Checked) {
+                    item.Checked = true;
+                    parentChecked = true;
+                    vueObj.useTicket = true;
+                    selectedCount++;
+                    selectedValue += tic.CouponValue;
+                }
+            });
+            item.SelectCount = selectedCount;
+            item.SelectValue = selectedValue;
+            //若全未选取消选中组
+            if (!parentChecked) {
+                item.Checked = false;
+            }
+            //检查最大选择数量
+            this.checkMaxCount(item);
+            //混合检查
+            this.checkMixed(item);
+            //检查票卡金额
+            this.checkMaxAmount(item, ticket);
+            //计算价格
+            //this.calcAmount(ticket);
+        },
+        confirmTicket: function (item) {
+            //确认票卡
+            this.checkMaxAmount(item, null);
+            //计算价格
+            this.calcAmount();
+        },
+        cancelTicket: function (item) {
+            //计算价格
+            this.calcAmount();
+        },
+        checkMaxCount: function (item) {
+            if (item.MaxCount === 0) {
+                //不限制
+            } else {
+                //限制数量
+                var count = 0;
+                item.Tickets.forEach(function (tic, index) {
+                    if (tic.Checked) {
+                        count++;
+                    }
+                });
+                if (count >= item.MaxCount) {
+                    //其他不可选
+                    item.Tickets.forEach(function (tic, index) {
+                        if (!tic.Checked) {
+                            tic.Selectable = false;
+                        }
+                    });
+                } else {
+                    //所有可选
+                    item.Tickets.forEach(function (tic, index) {
+                        tic.Selectable = true;
+                    });
+                }
+            }
+        },
+        onTimeOut: function () {
+            this.canPay = false;
+            this.couponShow = false;
+            this.coupons.forEach(function (item, i) {
+                item.View = false;
+            });
+            //关闭弹框
+            if (this.$Modal) {
+                this.$Modal.remove();
+            }
+        },
+        checkMixed: function (item) {
+            var vueObj = this;
+            //判断是否可混合支付
+            this.coupons.forEach(function (tg, index) {
+                if (item.Mixed && item.Checked) {
+                    if (!tg.Mixed) {
+                        tg.Selectable = false;
+                    }
+                }
+                else if (item.Mixed && !item.Checked) {
+                    //已经有选择可混合的
+                    var hasM = false;
+                    vueObj.coupons.forEach(function (g, i) {
+                        if (g.Mixed && g.Checked) {
+                            hasM = true;
+                        }
+                    });
+                    //console.log(hasM);
+                    if (hasM) {
+                        //不做处理
+
+                    } else {
+                        //没有选择可混合的，所有可选
+                        tg.Selectable = true;
+                    }
+
+                }
+                else if (!item.Mixed && item.Checked) {
+                    //不可选除自己的
+                    if (item.TypeCode !== tg.TypeCode) {
+                        tg.Selectable = false;
+                    }
+                }
+                else if (!item.Mixed && !item.Checked) {
+                    //所有可选
+                    tg.Selectable = true;
+                }
+                else {
+
+                }
+            });
+        },
+        checkMaxAmount: function (item, ticket) {
+            var vueObj = this;
+            var itemSum = 0;
+            var sum = 0;
+            var whAmount = vueObj.whChecked ? vueObj.payParams.WhCouponAmount : 0;
+            //计算票卡金额
+            this.coupons.forEach(function (tg, index) {
+                if (tg.Checked) {
+                    //改变锁定状态
+                    tg.Tickets.forEach(function (tic, i) {
+                        if (tic.Checked) {
+                            tic.CouponCharge = tic.CouponValue - Math.floor((tic.CouponValue*100)  / ((1*100 + tic.CouponChargeRate*100)));  //根据费率计算的手续费
+                            //减去手续费
+                            sum = sum + (tic.CouponPrice * (tic.CouponValue - tic.CouponCharge));
+                        }
+                    });
+                }
+            });
+            //判断已选票卡金额是否超出订单支付金额
+            var payAmount = vueObj.payParams.TotalAmount - sum - whAmount;
+            if (payAmount <= 0) {
+                if (ticket) {
+                    this.changeLockedStatus(true);
+                }
+                //调整金额，只调整可输入用量的票卡
+                var balance = Math.abs(payAmount); //超支额
+                //console.log(balance);
+                for (var i = 0; i < item.Tickets.length; i++) {
+                    var tic = item.Tickets[i];
+                    if (tic.Checked && tic.CouponValue > 0 && tic.CouponCount > 0) {
+                        var curA = tic.CouponPrice * (tic.CouponValue - tic.CouponCharge);//减去手续费
+                        //当前票卡可平衡支出
+                        if (curA > balance) {
+                            var cv = Math.floor(balance / tic.CouponPrice);
+                            var rv = Math.floor((tic.CouponValue - cv) / (1 + tic.CouponChargeRate)); //实际使用量
+                            var rc = Math.ceil(rv * tic.CouponChargeRate);
+                            //console.log(cv);
+                            //console.log(rv);
+                            //console.log(rc);
+                            tic.CouponValue = rv + rc;
+                            break;
+                        } else {
+
+                        }
+                    }
+                }
+            } else {
+                //this.overPay = false;
+                this.changeLockedStatus(false);
+            }
+        },
+        clearChecked: function (item) {
+            var vueObj = this;
+            //清空所有选择的票卡或清空指定类型的票卡
+            if (item) {
+                //取消指定分类票卡
+                item.SelectCount = 0;
+                item.SelectValue = 0;
+                item.SelectCharge = 0;
+                item.SelectTotalPrice = 0;
+
+                item.Tickets.forEach(function (ticket, i) {
+                    ticket.Checked = false;
+                    ticket.CouponValue = 0;
+                });
+                item.Checked = false;
+                vueObj.checkMixed(item);
+            } else {
+                vueObj.coupons.forEach(function (itemTicket, index) {
+                    //用量
+                    itemTicket.SelectCount = 0;
+                    itemTicket.SelectValue = 0;
+                    itemTicket.SelectCharge = 0;
+                    itemTicket.SelectTotalPrice = 0;
+
+                    if (itemTicket.Checked) {
+                        itemTicket.Tickets.forEach(function (ticket, i) {
+                            ticket.Checked = false;
+                            ticket.CouponValue = 0;
+                        });
+                    }
+                    itemTicket.Checked = false;
+                    //混合检查
+                    vueObj.checkMixed(itemTicket);
+                });
+            }
+        },
+        calcAmount: function (ticket) {//计算票卡金额
+            var vueObj = this;
+            var sum = 0;
+            var whAmount = vueObj.whChecked ? vueObj.payParams.WhCouponAmount : 0;
+            vueObj.payParams.Coupons = [];
+            var couponDetail = [];
+
+            //计算票卡抵扣金额
+            vueObj.coupons.forEach(function (item, index) {
+                //用量
+                item.SelectCount = 0;
+                item.SelectValue = 0;
+                item.SelectCharge = 0;
+                item.SelectTotalPrice = 0;
+
+                if (item.Checked) {
+                    item.Tickets.forEach(function (ticket, i) {
+                        if (ticket.Checked && ticket.CouponValue > 0) {
+
+                            ticket.CouponCharge = ticket.CouponValue - Math.floor((ticket.CouponValue*100) / ((1*100 + ticket.CouponChargeRate*100)));  //根据费率计算的手续费
+                            //扣除手续费
+                            sum = sum + (ticket.CouponPrice * (ticket.CouponValue - ticket.CouponCharge)); //减去手续费点数
+                            //避免只扣手续费情况
+                            if (ticket.CouponValue > ticket.CouponCharge) {
+                                vueObj.payParams.Coupons.push(ticket);
+                            }
+                            ticket.CouponValue = ticket.CouponValue;
+                            //更新用量
+                            item.SelectValue += ticket.CouponValue;
+                            item.SelectCharge += ticket.CouponCharge;
+                            item.SelectTotalPrice += ticket.CouponPrice * ticket.CouponValue;
+                            item.SelectCount++;
+                        } else {
+                            //为0取消选中
+                            ticket.Checked = false;
+                            ticket.CouponCharge = 0;
+                        }
+                    });
+                }
+                if (item.SelectValue > 0)
+                    couponDetail.push(item.TypeName + (item.SelectValue) + item.Unit);
+
+
+            });
+            vueObj.couponAmount = sum;
+            vueObj.couponPayDetail = couponDetail.join(',');
+            //判断已选票卡金额是否超出订单支付金额
+            var payAmount = vueObj.payParams.TotalAmount - vueObj.couponAmount - whAmount;
+            //console.log(payAmount);
+            if (payAmount < 0) {
+                this.overPay = true;
+                this.changeLockedStatus(true);
+            }
+            else if (payAmount === 0) {
+                //刚好抵扣时锁定其他可用票卡
+                this.changeLockedStatus(true);
+            }
+            else {
+                this.overPay = false;
+                this.changeLockedStatus(false);
+            }
+            if (this.overPay) {
+                vueObj.payAmount = "0.00";
+            } else {
+                vueObj.payAmount = (vueObj.payParams.TotalAmount - vueObj.couponAmount - whAmount).toFixed(2);
+            }
+        },
+        changeLockedStatus: function (lock) {
+            //超额后锁定票卡
+            this.coupons.forEach(function (tg, index) {
+                if (tg.Enable) {
+                    //改变锁定状态
+                    tg.Tickets.forEach(function (tic, i) {
+                        if (tic.Enable) {
+                            //将未选中的都锁定
+                            if (lock && !tic.Checked) {
+                                tic.Locked = lock;
+                            }
+                            else if (!lock) {
+                                tic.Locked = lock;
+                            }
+                        }
+                    });
+                }
+            });
+        },
+        intelligentTicketValue: function (ticket) {
+            var vueObj = this;
+            var whAmount = vueObj.whChecked ? vueObj.payParams.WhCouponAmount : 0;
+            //计算已选金额
+            var sum = 0;
+            //只设置储值类
+            if (ticket.CouponCount > 1) {
+                this.coupons.forEach(function (tg, index) {
+                    if (tg.Checked) {
+                        //改变锁定状态
+                        tg.Tickets.forEach(function (tic, i) {
+                            if (tic.Checked) {
+                                tic.CouponCharge = tic.CouponValue - Math.floor((tic.CouponValue*100)  / ((1*100 + tic.CouponChargeRate*100)));  //根据费率计算的手续费
+                                //减去手续费
+                                sum = sum + (tic.CouponPrice * (tic.CouponValue - tic.CouponCharge));
+                            }
+                        });
+                    }
+                });
+                //判断金额是否已选够
+                var remainderAmount = vueObj.payParams.TotalAmount - sum - whAmount;
+                if (remainderAmount > 0) {
+                    //智能设置数
+                    if (ticket.Checked) {
+                        var value = Math.ceil(remainderAmount / ticket.CouponPrice);
+                        //根据费率计算手续费
+                        if (value >= ticket.MaxCouponValue) {
+                            //不能全部扣除
+                            ticket.CouponValue = ticket.CouponCount;
+                            ticket.CouponCharge = Math.ceil(ticket.CouponValue * ticket.CouponChargeRate);  //根据费率计算的手续费
+                        } else {
+                            //全部扣除
+                            ticket.CouponCharge = Math.ceil(value * ticket.CouponChargeRate);  //根据费率计算的手续费
+                            ticket.CouponValue = value + ticket.CouponCharge; //加上手续费
+                        }
+
+                    }
+                }
+            }
+        },
+        intelligentSelect: function (item) {//智能票卡选择
+            var obj = this;
+            //票卡自动选择,
+            if (item) {
+                //张数限定
+                var curCount = 0;
+                var curAmount = 0;
+                //文惠券
+                var whAmount = obj.whChecked ? obj.payParams.WhCouponAmount : 0;
+                var remainPayAmount = obj.payParams.TotalAmount - whAmount;
+                //console.log(remainPayAmount);
+                //目前只在未选择其他票卡时生效
+                if (this.couponAmount === 0) {
+                    for (var i = 0; i < item.Tickets.length; i++) {
+                        var tic = item.Tickets[i];
+                        //判断票卡可选
+                        if (tic.Enable && tic.Selectable && !tic.Locked) {
+                            //数量限定
+                            if (curCount < item.MaxCount || item.MaxCount === 0) {
+                                var value = 0;
+                                //计算
+                                if (tic.CouponCount === 1) {
+                                    //一次性卡
+                                    value = Math.ceil((remainPayAmount - curAmount) / tic.CouponPrice);
+                                    //console.log(value);
+                                    if (value >= 1) {
+                                        tic.Checked = true;
+                                        item.Checked = true; //选择分类
+                                        tic.CouponValue = 1;
+                                        curAmount += tic.CouponPrice;
+                                        //可继续选择
+                                        curCount++;
+                                    } else if (value === 1) {
+                                        //tic.Checked = true;
+                                        //item.Checked = true; //选择分类
+                                        //tic.CouponValue = 1;
+                                        //curAmount += tic.CouponPrice;
+                                        break;
+                                    }
+                                    else {
+                                        //超额跳出
+                                        break;
+                                    }
+                                } else {
+                                    //储值型
+                                    value = Math.ceil((remainPayAmount - curAmount) / tic.CouponPrice);
+                                    //根据费率计算手续费
+                                    //var maxValue = Math.floor(tic.CouponCount / (1 + tic.CouponChargeRate));
+                                    //console.log(value);
+                                    if (value >= tic.MaxCouponValue) {
+                                        //不能全部扣除
+                                        tic.Checked = true;
+                                        item.Checked = true; //选择分类
+                                        tic.CouponValue = tic.CouponCount;
+                                        tic.CouponCharge = Math.ceil(tic.CouponValue * tic.CouponChargeRate);  //根据费率计算的手续费
+                                        curAmount += (tic.CouponPrice * (tic.CouponValue - tic.CouponCharge));//减去手续费
+                                        //可继续选择
+                                        curCount++;
+                                    } else {
+                                        //全部扣除
+                                        tic.Checked = true;
+                                        item.Checked = true; //选择分类
+                                        tic.CouponCharge = Math.ceil(value * tic.CouponChargeRate);  //根据费率计算的手续费
+                                        tic.CouponValue = value + tic.CouponCharge; //加上手续费
+                                        curAmount += (tic.CouponPrice * (tic.CouponValue - tic.CouponCharge));
+                                        break;
+                                    }
+
+                                }
+
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                    //检查最大选择数量
+                    this.checkMaxCount(item);
+                    //混合检查
+                    this.checkMixed(item);
+                    //总价计算
+                    this.calcAmount();
+                }
+            }
+        },
+        closeSelectView: function () {
+            this.coupons.forEach(function (item, i) {
+                item.View = false;
+            });
+            this.ticketShow = false;
+            this.couponShow = false;
+        },
+        openSelectView: function (item) {
+            item.View = true;
+            this.ticketShow = true;
+            this.intelligentSelect(item);
+        },
+        openWhCoupon: function () {
+            this.couponShow = true;
+            this.ticketShow = true;
+        },
+        confirmOverPay: function (okCallback, cancelCallback) {//票卡支付超额确认
+            if (this.$Modal) {
+                this.$Modal.confirm({
+                    title: '支付确认',
+                    okText: '确认支付',
+                    cancelText: '重新选择',
+                    content: '<p>当前订单已选票卡支付金额已超出订单应付金额，请确认是否继续支付？</p>',
+                    onOk: () => {
+                        okCallback();
+                    },
+                    onCancel: () => {
+
+                    }
+                });
+            } else {
+                this.$dialog.confirm({
+                    title: '支付确认',
+                    message: '当前订单已选票卡支付金额已超出订单应付金额，请确认是否继续支付？',
+                    confirmButtonText: '确认支付',
+                    cancelButtonText: '重新选择'
+                }).then(() => {
+                    //on ok
+                    okCallback();
+                }).catch(() => {
+                    // on cancel
+                });
+            }
+        },
+        sendCode: function () {//发送支付验证码
+            var obj = this;
+            obj.sentValidCode = true;
+            obj.sentSecond = 120;
+            axios.post('/paycenter/SendValidationCode', this.payParams)
+                .then(function (response) {
+                    //console.log(response);
+                    if (response.data.code === "10000") {
+                        //倒计时
+                        obj._interval = setInterval(function () {
+                            if (obj.sentSecond > 0) {
+                                obj.sentSecond--;
+
+                            } else {
+                                clearInterval(obj._interval);
+                                obj.sentValidCode = false;
+                            }
+
+                        }, 1000);
+                    } else {
+
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+        },
+        h5ConfirmTicket: function (item) {
+            this.confirmTicket(item);
+            item.View = false;
+            this.ticketShow = false;
+        },
+        showMessage: function (type, msg) {
+            //消息提示
+            if (type === "error") {
+                if (this.$Message) {
+                    this.$Message.error(msg);
+                } else {
+                    this.$toast(msg);
+                }
+            }
+            else if (type === "success") {
+                if (this.$Message) {
+                    this.$Message.success(msg);
+                } else {
+                    this.$toast.success(msg);
+                }
+            }
+            else {
+                if (this.$Message) {
+                    this.$Message.info(msg);
+                } else {
+                    this.$toast(msg);
+                }
+            }
+        },
+        getUsableTickets: function (tickets) {
+            return tickets.filter(function (ticket) {
+                return ticket.CouponState === 0 && ticket.Enable === true;
+            });
+        },
+        getUnusableTickets: function (tickets) {
+            return tickets.filter(function (ticket) {
+                return ticket.CouponState === 1 || ticket.Enable === false;
+            });
+        }
+
+    }
+});

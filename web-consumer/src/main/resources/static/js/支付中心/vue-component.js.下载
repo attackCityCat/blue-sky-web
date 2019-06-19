@@ -1,0 +1,61 @@
+﻿//倒计时组件
+Vue.component('count-down',
+    {
+        props: ['expireTime', 'startTime'],
+        data: function () {
+            return {
+                eptime: this.expireTime,
+                sTime: this.startTime,
+                time: null,
+                day: 0,
+                hr: 0,
+                min: 0,
+                sec: 0
+            }
+        },
+        created: function () {
+            var obj = this;
+            this.countdown();
+            this._interval = setInterval(function () {
+                obj.countdown();
+                obj.time = obj.time - 1;
+            }, 1000);
+        },
+        destoryed: function () {
+            clearInterval(this._interval);
+        },
+        methods: {
+            countdown: function () {
+                if (this.time === null) {
+                    var end = Date.parse(this.eptime.replace(/-/g, '/'));
+                    //var now = Date.parse(new Date());
+                    var now = Date.parse(this.startTime.replace(/-/g, '/'));
+                    this.time = (end - now) / 1000;//秒
+                }
+                var msec = this.time;
+                //console.log(this.time);
+                //倒计时结束
+                if (msec <= 0) {
+                    this.min = '00';
+                    this.sec = '00';
+                    //自定义事件
+                    this.$emit('time-out');
+                    //console.log('ddd');
+                    clearInterval(this._interval);
+                    return;
+                }
+                //var day = parseInt(msec / 1000 / 60 / 60 / 24);
+                //var hr = parseInt(msec / 1000 / 60 / 60 % 24);
+                var min = parseInt(msec / 60);
+                var sec = parseInt(msec % 60);
+                //this.day = day;
+                //this.hr = hr > 9 ? hr : '0' + hr;
+                this.min = min > 9 ? min : '0' + min;
+                this.sec = sec > 9 ? sec : '0' + sec;
+
+            }
+        },
+        template: '<span>{{min}}:{{sec}}</span>'
+        //template: '<div class="count-down"><div class= "title">支付剩余时间</div><div class="time"><span>{{ min }}</span>分<span>{{ sec }}</span>秒</div></div>'
+    });
+

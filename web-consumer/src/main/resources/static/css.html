@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var mobile = getCookie("Mobile");
+    var orderNo = getQueryString("orderNo");
+
+    checkLogin();
+    checkParam("orderNo");
+
+    $(function () {
+        //获取订单信息
+        $.ajax({
+            url: '/local.asmx/QueryOrderByNo',
+            type: 'post',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify({
+                "pMobile": mobile,
+                "pOrderNO": orderNo
+            }),
+            success: function (respDate) {
+                var data = respDate.d;
+                if (data.ResultCode == "0") {
+                    if (data.OrderCount > 0) {
+                        var orderDate = data.OrderList[0];
+                        var cutTime = orderDate.Append ? Math.ceil(parseFloat(orderDate.Append)) : 0;
+                        var filmName = orderDate.FilmName;
+                        var logo = orderDate.Post_Path;
+                        var lang = orderDate.Lang;
+                        var showCopyType = orderDate.ShowCopyType;
+                        var duration = orderDate.Duration
+                        var cinemaName = orderDate.CinemaName;
+                        var hallName = orderDate.HallName;
+                        var showDate = orderDate.ShowDate;
+                        var showTime = orderDate.ShowTime;
+                        var seatInfo = orderDate.SeatInfo;
+                        var standPrice = orderDate.StandPrice;
+                        var seatNum = orderDate.SeatNum;
+                        var sumPayMoney = orderDate.SumPayMoney;
+                        var smsMobile = orderDate.SmsMobile;
+                        var createTime = orderDate.CreateTime;
+                        var regDate = /^\/Date\(([-\d]*)\)\/$/;
+                        createTime = createTime.match(regDate)[1];
+
+                        if (cutTime > 0) {
+                            _incrementTimer1 = cutTime;
+                            countDown();
+                        } else {
+                            $(".time-wrap").html("您的订单超过10分钟未支付，已经过期请重新下单，谢谢！");
+                            $(".submit-order").attr("data-flag","2").addClass("disable").text("订单已过期，请重新下单");
+                        }
+
+                        var htmlFilm = '<h2>' + filmName + '</h2>';
+                        if (!isNull(lang) && !isNull(showCopyType)) {
+                            htmlFilm += '<p>语言版本：' + lang + '/' + showCopyType + '</p>';
+                        } else if (!isNull(lang)){
+                            htmlFilm += '<p>语言版本：' + lang +'</p>';
+                        } else if (!isNull(showCopyType)) {
+                            htmlFilm += '<p>语言版本：' + showCopyType + '</p>';
+                        } else {
+                            htmlFilm += '<p>语言版本：</p>';
+                        }
+                        htmlFilm += '<p>时长：' + duration + '分钟</p>';
+                        htmlFilm += '<span class="flim-pic"><img src="' + logo + '" width="100%" /></span>';
+                        $(".film").html(htmlFilm);
+                        $(".cinemaname .name").text(cinemaName);
+                        $(".hallname-wrap .hallname").text(hallName);
+                        $(".showtime").html(showDate + "&nbsp;" + showTime);
+
+                        if (seatNum > 0) {
+                            var htmlSeatList = "";
+                            var seatArray = seatInfo.split(",");
+                            for (var i = 0; i < seatNum; i++) {
+                                htmlSeatList += '<li>' + seatArray[i] + '</li>';
+                            }
+                            $(".seat-list").html(htmlSeatList);
+                        }
+                        $(".ticket-price .num").text(standPrice + "元/张（含手续费）");
+                        $(".ticket-num .num").text(seatNum + "张");
+                        $(".total .num").text("¥" + sumPayMoney);
+                        $(".mobile .num").text(smsMobile);
+                        $(".paymoney .num").text(sumPayMoney + "元");
+                        $(".order-no .no").text(orderNo);
+                        var createTimeObj = new Date();
+                        createTimeObj.setTime(createTime);
+                        $(".paytime .time").text(formatTime("yyyy-MM-dd HH:mm:ss", createTimeObj));
+
+                        $(".coupon-list li").hover(function () {
+                            $(this).addClass("act");
+                        }, function () {
+                            $(this).removeClass("act");
+                        });
+                        //提交订单
+                        $(".submit-order").on("click", function () {
+                            if ($(this).attr("data-flag") == "2") return false;
+                            var backUrl = window.location.protocol + "//" + window.location.host + "/paysuccess.html";
+                            layer.load(2);
+                            var postUrl='/local.asmx/PayByCenter_Web';
+                            $.ajax({
+                                url: postUrl,
+                                type: 'post',
+                                contentType: 'application/json; charset=utf-8',
+                                data: JSON.stringify({
+                                    "pMobile": mobile,
+                                    "pOrderNO": orderNo,
+                                    "pCallbackUrl": backUrl,
+                                    "pEventJson":  ''
+                                }),
+                                success: function (respDate) {
+                                    var data = respDate.d;
+                                    if (data.ResultCode == "0") {
+                                        if(sumPayMoney==0){
+                                            window.location.href = backUrl;
+                                        }else{
+                                            if (!isNull(data.RedirectUrl)) {
+                                                setCookie("redirectUrl", data.RedirectUrl, true);
+                                                window.location.href = data.RedirectUrl;
+                                            } else {
+                                                alert("订单错误，请稍后再试！")
+                                            }
+                                        }
+                                    } else {
+                                        alert(data.ErrMsg);
+                                    }
+                                },
+                                error: function () {
+                                    //alert(msgErrorGlobal);
+                                },
+                                complete: function () {
+                                    layer.closeAll();
+                                }
+                            })
+                            return false;
+                        });
+
+                    } else {
+                        //没有查到订单信息
+                    }
+                } else {
+                    alert(data.ErrMsg);
+                }
+            },
+            error: function () {
+                //alert(msgErrorGlobal);
+            },
+            complete: function () {
+
+            }
+        })
+
+        var djstimer;
+        var _incrementTimer1 = 0;
+
+        //倒计时
+        function countDown() {
+            if (djstimer != null) return;
+            $(".time").removeClass("hide");
+            djstimer = window.setInterval(function () {
+                if (_incrementTimer1 < 1) {
+                    window.clearInterval(djstimer);
+                    $(".time-wrap").html("您的订单超过10分钟未支付，已经过期请重新下单，谢谢！");
+                    $(".submit-order").attr("data-flag", "2").addClass("disable").text("订单已过期，请重新下单");
+                }
+                else {
+                    var min = Math.floor(_incrementTimer1 / 60 % 60);
+                    var sec = Math.floor(_incrementTimer1 % 60);
+                    $(".time .min").html(min+"：");
+                    $(".time .sec").html(sec);
+                    _incrementTimer1--;
+                }
+            }, 1000);
+        }
+
+        var lastFired = new Date().getTime();
+        setInterval(function () {
+            var nowDt = new Date().getTime();
+            if (nowDt - lastFired > 2000) {
+                _incrementTimer1 -= Math.floor((nowDt - lastFired) / 1000);
+            }
+            lastFired = nowDt;
+        }, 200);
+    })
+</script>
+</body>
+</html>

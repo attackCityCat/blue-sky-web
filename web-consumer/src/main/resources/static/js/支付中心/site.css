@@ -1,0 +1,600 @@
+﻿body {
+    background-color: #eff0f1;
+}
+
+li {
+    list-style: none;
+}
+
+em, i, u {
+    font-style: normal;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+
+.count-down {
+    height: 50px;
+}
+
+    .count-down .title {
+        text-align: center;
+    }
+
+    .count-down .time {
+        text-align: center;
+    }
+
+        .count-down .time span {
+            background-color: #c01733;
+            color: #fff;
+            margin: 0 3px;
+            padding: 0 3px;
+        }
+
+
+.lb-ck {
+    font-weight: normal;
+}
+
+/*头部*/
+.header {
+    height: 70px;
+    padding-top: 5px;
+    background-color: #fff;
+    /*margin-top: 10px;*/
+}
+
+.header-title {
+    float: left;
+    width: 300px;
+    height: 50px;
+}
+
+.logo {
+    height: 46px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    float: left;
+    width: 200px;
+    background-image: url(images/logo.png);
+    -ms-background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    -ms-background-size: auto 100%;
+    background-size: auto 100%;
+    -moz-background-size: auto 100%;
+    -webkit-background-size: auto 100%;
+}
+
+.logo-title {
+    font-size: 14px;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-left: 1px solid #5f5f5f;
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.count-down-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.count-down-box {
+    height: 40px;
+    /*width: 200px;*/
+    position: relative;
+    top: 20px;
+    float: right;
+    right: 0;
+    /*background-color: #d73388;*/
+}
+
+.count-down-img {
+    height: 30px;
+    width: 30px;
+    float: left;
+    border-radius: 15px;
+    background-color: #ddd;
+    background-image: url(images/clock-w.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.count-down-time {
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    display: inline-block;
+    background-color: #c01733;
+    border-radius: 15px;
+    min-width: 110px;
+    padding-left: 40px;
+    /*margin-left: -15px;*/
+    padding-right: 15px;
+    background-image: url(images/clock-w.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    font-size: 18px;
+    font-weight: 600;
+}
+/*支付页*/
+.order-timeout {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    background-color: #ff9900;
+    margin: 5px 0;
+}
+
+.order-area {
+    margin-top: 10px;
+}
+
+.order-header {
+    position: relative;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 800;
+    border-bottom: 2px solid #888;
+}
+
+.order-price {
+    font-weight: bold;
+    color: #e4393c;
+}
+.order-ext-trigger {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    background-color: #888;
+    color: #fff;
+    width: 80px;
+    cursor: pointer;
+}
+.ivu-modal {
+    top: 200px;
+}
+.order-detail {
+    padding: 10px 15px;
+    background-color: #fff;
+}
+
+    .order-detail table tr td {
+        height: 20px;
+        line-height: 20px;
+    }
+
+        .order-detail table tr td:first-child {
+            width: 65px;
+        }
+
+    .order-detail .inline {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+        .order-detail .inline span {
+            margin-right: 5px;
+        }
+
+.order-amount {
+    margin-top: 10px;
+    height: 35px;
+    line-height: 35px;
+}
+
+.order-item-title {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.order-pay-amount {
+    font-size: 30px;
+    color: #f60;
+    font-weight: 600;
+}
+
+.coupon-area {
+    padding: 10px 15px 5px 15px;
+    margin-top: 5px;
+    border-top: 2px solid #ddd;
+    background-color: #fff;
+}
+
+.coupon-pwdarea {
+    padding: 10px 22px;
+    margin-top: 5px;
+    /*border-top: 2px solid #ddd;*/
+    background-color: #fff;
+}
+
+    .coupon-pwdarea p {
+        margin-bottom: 10px;
+    }
+
+.coupon-select {
+    height: 25px;
+    line-height: 25px;
+}
+
+    .coupon-select a {
+        float: right;
+    }
+
+.coupon-whmsg {
+    color: red;
+    height: 32px;
+    display: inline-block;
+    line-height: 32px;
+    padding-left: 15px;
+}
+
+.fr {
+    float: right;
+}
+
+.fl {
+    float: left;
+}
+
+.da-clear {
+    clear: both;
+}
+
+.over-pay {
+    text-align: right;
+    padding: 0 15px 5px 0;
+    color: #ed4014;
+}
+
+.order-summary {
+    overflow: hidden;
+    background-color: #fff;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+}
+
+    .order-summary:after {
+        clear: both;
+    }
+
+    .order-summary .statistic {
+        width: 300px;
+        margin-right: 5px;
+        margin-bottom: 10px;
+    }
+
+        .order-summary .statistic .list {
+            height: 20px;
+            line-height: 20px;
+            margin-bottom: 5px;
+            overflow: hidden;
+            zoom: 1;
+        }
+
+        .order-summary .statistic span {
+            width: 130px;
+            float: left;
+            text-align: right;
+        }
+
+        .order-summary .statistic .price {
+            width: 150px;
+            float: left;
+            text-align: right;
+            color: #333;
+        }
+
+        .order-summary .statistic .yfprice {
+            width: 150px;
+            float: left;
+            text-align: right;
+            color: #e4393c;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+    .order-summary .btn-list {
+        text-align: right;
+        padding-right: 20px;
+    }
+
+
+
+
+.vertical-center-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .vertical-center-modal .ivu-modal {
+        top: 0;
+    }
+
+.icon-info {
+    background-image: url(images/info.png);
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    height: 60px;
+    width: 60px;
+    display: inline-block;
+    position: absolute;
+    left: 30px;
+}
+
+/*票卡*/
+.ticket-h {
+    text-align: center;
+    color: #c01733 !important;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    /*margin-bottom: 5px;*/
+}
+
+    .table th {
+        text-align: left;
+    }
+
+    .table > thead > tr > th,
+    .table > tbody > tr > th,
+    .table > tfoot > tr > th,
+    .table > thead > tr > td,
+    .table > tbody > tr > td,
+    .table > tfoot > tr > td {
+        padding: 8px;
+        line-height: 20px;
+        vertical-align: middle;
+        border-top: 1px solid #ddd;
+    }
+
+    .table > thead > tr > th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #ddd;
+    }
+
+    .table > thead:first-child > tr:first-child > th,
+    .table > thead:first-child > tr:first-child > td {
+        border-top: 0;
+    }
+
+.table-coupon.table > tbody > tr > td {
+    height: 45px;
+}
+
+.table-coupon.table > tbody > tr:first-child td {
+    border-top: none;
+}
+
+.d-table-header {
+    overflow: hidden;
+}
+
+.d-table-body {
+    overflow-y: auto;
+    max-height: 300px;
+}
+
+.table-fixed-h tbody {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
+    max-height: 300px;
+}
+
+.table-centerh > thead > tr > th,
+.table-centerh > tbody > tr > td {
+    text-align: center;
+}
+
+    .table-centerh > tbody > tr > td:first-child {
+        text-align: left;
+    }
+
+.table > tbody > tr > th .ivu-checkbox-default {
+    margin-top: 5px;
+}
+
+.unuse {
+    color: #aaa;
+}
+
+
+
+/*支付页*/
+.pay-select {
+    overflow: hidden;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-top: 1px solid #ddd;
+}
+
+.weixin-qrcode {
+    width: 200px;
+    margin: 0 auto;
+}
+
+.weixin-qr {
+    overflow: hidden;
+}
+
+    .weixin-qr .modal-left {
+        float: left;
+        width: 240px;
+    }
+
+        .weixin-qr .modal-left p {
+            text-align: center;
+            line-height: 26px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+    .weixin-qr .modal-right {
+        float: left;
+    }
+
+.pay-list {
+    padding: 5px 10px;
+}
+
+    .pay-list ul {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        /*float: left;*/
+    }
+
+    .pay-list li {
+        float: left;
+    }
+
+        .pay-list li img {
+            height: 30px;
+            vertical-align: middle;
+        }
+
+.pay-btns {
+    text-align: right;
+    padding: 5px;
+}
+
+.pay-btn {
+    width: 120px;
+    height: 38px;
+}
+
+.pay-btns .info {
+    color: #f60;
+    height: 50px;
+    line-height: 50px;
+    padding-right: 10px;
+}
+
+.pay-btns .money {
+    font-size: 26px;
+    /*font-weight: 600;*/
+}
+
+
+/*底部*/
+
+footer span {
+    margin-right: 5px;
+}
+
+footer {
+    color: #999;
+    margin-top: 30px;
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+}
+
+    footer a {
+        color: #999;
+    }
+
+        footer a:hover {
+            color: #aaaaaa;
+            text-decoration: #aaa;
+        }
+
+
+
+
+
+
+
+@media(max-width: 768px) {
+    .header {
+        height: 55px;
+        padding-left: 5px;
+    }
+
+    .header-title {
+        height: 40px;
+    }
+
+    .logo {
+        height: 35px;
+        width: 150px;
+    }
+
+    .logo-title {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+    
+    .count-down-box {
+        height: 30px;
+        /*width: 200px;*/
+        position: relative;
+        top: 15px;
+        float: right;
+        right: 0;
+        /*background-color: #d73388;*/
+    }
+
+    .count-down-time {
+        height: 26px;
+        line-height: 26px;
+        color: #fff;
+        display: inline-block;
+        background-color: #c01733;
+        background-size: 26px 26px;
+        border-radius: 13px 0 0 13px;
+        min-width: 60px;
+        padding-left: 30px;
+        /*margin-left: -15px;*/
+        padding-right: 10px;
+        background-image: url(images/clock-w.png);
+        background-repeat: no-repeat;
+        background-position: left center;
+        font-size: 14px;
+        font-weight: 600;
+    }
+}

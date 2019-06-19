@@ -6,7 +6,7 @@ eureka:
       defaultZone: http://localhost:8080/eureka
 spring:
   application:
-    name: front-user-consumer
+    name: web-consumer
 
   profiles: default
   freemarker:
@@ -30,4 +30,9 @@ feign:
   httpclient:
     connection-timeout: 30000
 
-
+elasticsearch:
+  thirdPort: 9302
+  secondPort: 9301
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300
