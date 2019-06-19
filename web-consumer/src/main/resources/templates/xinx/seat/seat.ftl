@@ -659,7 +659,6 @@
                 <div class="form">
                     <p class="item tip">输入取票的手机号码</p>
                     <p class="item"><span>手机号：</span><span class="mobile"><input type="text" id="phone" placeholder="请输入手机号码" /></span></p>
-                    <p class="item checkcode clearfix"><span class="tt">验证码：</span><span><input id="checkcode" type="text" /></span><span class="imgshow"><a href="javascript:void(0);"><img src="/verificationCode" width="100%" alt="验证码" /></a></span></p>
                     <p class="item submit"><a class="btn" href="javascript:submitOrder(1);" id="confirmOrder">完成选择</a></p>
                 </div>
                 <div class="choose-changci clearfix hide">

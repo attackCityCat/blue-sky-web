@@ -16,4 +16,9 @@ public class page {
     public String toIndex(){
         return "dyl/view/index";
     }
+
+    @RequestMapping("toAddHall")
+    public String toAddHall(){
+        return "dyl/view/addHall";
+    }
 }
