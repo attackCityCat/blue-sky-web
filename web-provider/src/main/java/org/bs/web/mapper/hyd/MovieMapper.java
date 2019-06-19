@@ -25,7 +25,7 @@ public interface MovieMapper {
             "LEFT JOIN t_hall th ON tp.hallId = th.id " +
             "where DATE_FORMAT(tp.startTime,'%Y-%m-%d') = (SELECT str_to_date(#{movieDate}, '%Y-%m-%d') ) " +
             "and tp.movieId = #{movieId}")
-    List<PaiqiBean> findMoviePaiqi(@Param("movieDate") String movieDate,@Param("movieId") Integer movieId);
+    List<PaiqiBean> findMoviePaiqi(@RequestParam("movieDate") String movieDate,@RequestParam("movieId") Integer movieId);
 
     @Select("select * from t_business_time")
     BusinessTimeBean findBusinessTime();
@@ -54,4 +54,19 @@ public interface MovieMapper {
     @Select("SELECT coe from t_hall th left join t_hall_type tht on th.typeId = tht.id " +
             "where th.id = #{value}")
     Float findHallTypeCoeByHallId(Integer hallId);
+
+    @Select("SELECT " +
+            "tp.id,  " +
+            "tp.startTime,  " +
+            "tmd.language,  " +
+            "tp.movieId,  " +
+            "tp.hallId, " +
+            "th.name as hallName, " +
+            " tmd.price  " +
+            "FROM  " +
+            "t_paiqi tp  " +
+            "LEFT JOIN t_movie_detail tmd ON tp.movieId = tmd.id " +
+            "LEFT JOIN t_hall th ON tp.hallId = th.id " +
+            "where  tp.movieId = #{movieId}")
+    List<PaiqiBean> findPaiQiById(@RequestParam("id") Integer id);
 }

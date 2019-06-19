@@ -57,11 +57,16 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!-- thymeleaf 模板依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
+
+        <!-- thymeleaf 模板依赖 -->
+<!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

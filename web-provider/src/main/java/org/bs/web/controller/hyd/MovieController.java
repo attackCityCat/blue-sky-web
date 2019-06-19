@@ -6,12 +6,14 @@ import org.bs.web.pojo.movie.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -183,7 +185,7 @@ public class MovieController {
      * 查询排期    应该根据当前日期 和 电影ID  查询 排期信息
      * @return
      */
-    @RequestMapping(value = "/movie/findMoviePaiqi",method = RequestMethod.GET)
+    @RequestMapping(value = "/movie/findMoviePaiqi")
     public List<PaiqiBean> findMoviePaiqi(String movieDate,Integer movieId) throws ParseException {
         //获取时间转化对象  时分秒
         SimpleDateFormat sim = new SimpleDateFormat("HH:mm:ss");
@@ -242,5 +244,12 @@ public class MovieController {
         calendar.setTime(when);
         calendar.add(Calendar.MINUTE, m);
         return calendar.getTime();
+    }
+
+    @RequestMapping("/page/toDetail")
+    public List<PaiqiBean> toDetail(Model model, HttpSession session){
+        Integer id = 2;
+        List<PaiqiBean> paiqiBean = movieMapper.findPaiQiById(id);
+        return paiqiBean;
     }
 }

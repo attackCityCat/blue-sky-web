@@ -15,7 +15,7 @@ import java.util.Map;
 @RequestMapping("hyd")
 public class MovieController {
     @Autowired
-    private MovieServiceApi movieService;
+    private MovieServiceApi movieServiceApi;
 
     /**
      * 新增排期
@@ -25,7 +25,7 @@ public class MovieController {
     @RequestMapping(value = "/movie/saveMovie")
     public Map<String,Object> saveMovie(PaiqiBean paiqiBean){
         HashMap<String, Object> map = new HashMap<>();
-        Integer code = movieService.saveMovie(paiqiBean);
+        Integer code = movieServiceApi.saveMovie(paiqiBean);
         map.put("code",code);
         if (code == 1)
             map.put("msg","不符合营业时间");
@@ -44,8 +44,13 @@ public class MovieController {
      * 查询排期
      * @return
      */
-    @RequestMapping(value = "/movie/findMoviePaiqi",method = RequestMethod.GET)
+    @RequestMapping(value = "/movie/findMoviePaiqi")
     public List<PaiqiBean> findMoviePaiqi(){
-        return movieService.findMoviePaiqi();
+        //String movieDate = "2019-06-22";
+        Integer movieId = 2;
+        List<PaiqiBean> moviePaiqi = movieServiceApi.findMoviePaiqi(movieId);
+
+        return moviePaiqi;
     }
+
 }

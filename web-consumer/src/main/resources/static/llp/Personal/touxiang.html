@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!-- saved from url=(0069)http://www.daeyes.com/portal/eyes/personal/user/touxiang/touxiang.jsp -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>设置头像</title>
+        <meta http-equiv="pragma" content="no-cache">
+        <meta http-equiv="cache-control" content="no-cache">
+        <meta http-equiv="expires" content="0">            
+        
+
+
+
+
+
+ 
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<!--全局-->
+
+<link rel="stylesheet" type="text/css" href="./iconfont.css">
+<link rel="stylesheet" type="text/css" href="./common.css">
+<link href="http://www.daeyes.com/portal/eyes/favicon.ico" mce_href="favicon.ico" rel="bookmark" type="image/x-icon"> 
+<link href="http://www.daeyes.com/portal/eyes/favicon.ico" mce_href="favicon.ico" rel="icon" type="image/x-icon"> 
+<link href="http://www.daeyes.com/portal/eyes/favicon.ico" mce_href="favicon.ico" rel="shortcut icon" type="image/x-icon"> 
+<script charset="UTF-8" type="text/javascript" src="./jquery.js.下载"></script>
+<script charset="UTF-8" type="text/javascript" src="./jquery-form.js.下载"></script>
+<script charset="UTF-8" type="text/javascript" src="./jquery.cookie.js.下载"></script>
+<script charset="UTF-8" type="text/javascript" src="./layer.js.下载"></script><link rel="stylesheet" href="./layer.css" id="layuicss-skinlayercss">
+<script charset="UTF-8" type="text/javascript" src="./public.js.下载"></script>
+<script language="javascript">
+    //js文件全局变量
+    var G_Scheme = "http://www.daeyes.com"
+    var G_sysBasePath = "";  //当前系统相对目录
+    $(document).ready(function () {//更改连接的默认操作
+        $("A.anolink").attr("href", "javascript:void(0);");
+        $(".clearfix").after("<div class='dclear'></div>");
+        $(".clearfix").append("<div class='dclear'></div>");
+//        $("input[type=text],input[type=password]").addClass("normal");
+    });
+</script>
+
+        
+
+<link rel="stylesheet" type="text/css" href="./jquery.Jcrop.css">
+<script charset="UTF-8" type="text/javascript" src="./jquery.Jcrop.js.下载"></script>
+
+        <link href="./uploadify.css" type="text/css" rel="stylesheet">
+        <script charset="UTF-8" type="text/javascript" src="./jquery.uploadify-3.1.js.下载"></script>
+        
+    <style>
+        .abc{
+            border:0px #ffffff solid;background-color:#ffffff;margin:0px;
+        }
+
+        .disimg img {  
+            /*设置图片垂直居中*/  
+            position:static; top:-50%; left:-50%; vertical-align:middle;
+        }  
+
+        .DTuPian {WIDTH: 270px;height:50px;	  ZOOM: 1; POSITION: relative;white-space:nowrap;}
+        .DTuPian .LeftBotton {	BACKGROUND: url(images/left.jpg) no-repeat; LEFT: 0px; FLOAT: left; WIDTH: 12px; CURSOR: pointer; POSITION: absolute; TOP: 13px; HEIGHT: 23px}
+        .DTuPian .RightBotton {	RIGHT: 0px; BACKGROUND: url(images/right.jpg) no-repeat; FLOAT: right; WIDTH: 12px; CURSOR: pointer; POSITION: absolute; TOP: 13px; HEIGHT: 23px}
+        .DTuPian .Cont {	MARGIN: 0px auto;overflow:hidden;  WIDTH:235px; white-space:nowrap}
+        .DTuPian .box {	  WIDTH: 50px; TEXT-ALIGN: center}
+        .DTuPian .box IMG {	BORDER: #e1e1e1 1px solid;   DISPLAY: inline; BACKGROUND: #fff;  MARGIN: 0px auto;PADDING: 1px;}
+        .DTuPian .box A:hover IMG {	BORDER: #31A0CC 1px solid; }
+        #biankuang img{
+            max-width:400px;max-height:400px;
+        }
+
+    </style><script language="javascript">
+        var jcrop_api, boundx, boundy, selx, sely, swidth, sheight;
+        function checkCoords() {
+            if (!parseInt(swidth)) {
+                layer.msg("请选择图片区域!")
+                return;
+            }
+            $.post("../ops.jsp", {op: "UPDATE_TOUXIANG", x: selx, y: sely, w: swidth, h: sheight, huiyuanid: 805745},
+            function (data) {
+                layer.msg("修改头像成功!")
+                //更新当前用户的头像
+
+                var opener = artDialog.open.origin;
+                var img = opener.document.getElementById("mytouxiang");
+                img.src = "/file/touxiang/805745_180.jpg?t=" + Date.parse(new Date());
+
+            }
+            );
+        }
+
+
+
+        $(document).ready(function () {
+
+            var scrollIncrement = 150;
+
+            $(".imgBorder").bind('click', function () {
+
+                var systouxiang = "sys" + $(this).attr('data') + ".jpg";
+
+                $.post("../ops.jsp?t="+new Date(), {op: "TOUXIANG_FUZHI", src: systouxiang, huiyuanid: 805745},
+                function (data) {
+                    toAddFileID("", data, "")
+                }
+                );
+
+            });
+            $("#LeftArr").bind('click', function () {
+                var scrollTo = $("#ISL_Cont_1").scrollLeft() - scrollIncrement;
+                if (scrollTo < scrollIncrement)//如果不够一个tab宽度，则滚动到头部
+                    scrollTo = 0;
+
+                $("#ISL_Cont_1").animate({
+                    scrollLeft: scrollTo
+                }, 500);
+            });
+            $("#RightArr").bind('click', function () {
+
+
+                var scrollTo = $("#ISL_Cont_1").scrollLeft() + scrollIncrement;
+
+                if (scrollTo + scrollIncrement > $("#ISL_Cont_1")[0].scrollWidth)
+                    scrollTo = $("#ISL_Cont_1")[0].scrollWidth;
+
+                $("#ISL_Cont_1").animate({
+                    scrollLeft: scrollTo
+                }, 500);
+            });
+
+
+            $("#uploadify").uploadify({
+                'swf': 'uploadify3.1/uploadify.swf',
+                'uploader': G_sysBasePath + '/portal/eyes/personal/user/touxiang/uploaddo.jsp',
+                'queueID': 'fileQueue', //和存放队列的DIV的id一致  
+                'auto': true, //是否自动开始  
+                'formData': {
+                    "huiyuanid": "805745"
+                },
+                'multi': true, //是否支持多文件上传  
+                'simUploadLimit': 1, //一次同步上传的文件数目  
+                'fileSizeLimit': '20MB',
+                'queueSizeLimit': 999, //队列中同时存在的文件个数限制  
+                'fileTypeExts': '*.png;*.jpg;*.jpeg;*.gif', //允许的格式
+                'fileTypeDesc': '图片文件', //如果配置了以下的'fileExt'属性，那么这个属性是必须的  
+                'wmode': 'transparent',
+                'buttonImage': 'btnbg.jpg',
+                'buttonClass': 'abc',
+                'height': 20,
+                'width': 70,
+                'onUploadSuccess': toAddFileID,
+                'onUploadError': function (event, queueID, fileObj) {
+//                    alert("文件:" + fileObj.name + "上传失败");
+                }
+            });
+
+            function toAddFileID(fileObj, data, response) {
+                //从附件记录中增加
+
+                var imgsrc = G_sysBasePath + '/file/cus/eyes/touxiang/0tmp/' + data;
+                $("#fileQueue").html("<img src='" + imgsrc + "?v="+ new Date()+"'   id='target'>")
+                $("#tx180").attr("src", imgsrc)
+                $("#tx50").attr("src", imgsrc)
+                $("#tx30").attr("src", imgsrc)
+                $("#tx20").attr("src", imgsrc)
+
+                $('#target').Jcrop({
+                    bgFade: true,
+                    bgOpacity: .4,
+                    onChange: showPreview,
+                    onSelect: showPreview,
+                    aspectRatio: 1
+                }, function () {
+                    jcrop_api = this;
+                    $("#btngengxin").show();
+                    // Use the API to get the real image size
+                    var bounds = jcrop_api.getBounds();
+                    boundx = bounds[0];
+                    boundy = bounds[1];
+                    selx = 50;
+                    sely = 50;
+                    swidth = 200;
+                    sheight = 200;
+                    jcrop_api.animateTo([50, 50, 250, 250]);
+                });
+            }
+
+
+            function showPreview(coords)
+            {
+                selx = coords.x;
+                sely = coords.y;
+                swidth = coords.w;
+                sheight = coords.h;
+                $pcnt = $('#div180');
+                xsize = $pcnt.width(), ysize = $pcnt.height()
+                var rx = xsize / coords.w;
+                var ry = ysize / coords.h;
+                $('#tx180').css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+
+                $pcnt = $('#div50');
+                xsize = $pcnt.width(), ysize = $pcnt.height()
+                var rx = xsize / coords.w;
+                var ry = ysize / coords.h;
+                $('#tx50').css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+
+
+                $pcnt = $('#div30');
+                xsize = $pcnt.width(), ysize = $pcnt.height()
+                var rx = xsize / coords.w;
+                var ry = ysize / coords.h;
+                $('#tx30').css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+
+
+
+
+
+                $pcnt = $('#div20');
+                xsize = $pcnt.width(), ysize = $pcnt.height()
+                var rx = xsize / coords.w;
+                var ry = ysize / coords.h;
+                $('#tx20').css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+                    marginTop: '-' + Math.round(ry * coords.y) + 'px'
+                });
+            }
+
+        });
+
+    </script></head>
+       
+       
+
+    <body marginwidth="0" marginheight="0">
+
+        <iframe src="./saved_resource(1).html" border="0" height="0" width="0" frameborder="0" framespacing="0" scrolling="no" id="myfrm" name="myfrm"></iframe>
+
+        <div style="position:relative;">
+            <div style="position:absolute;width:300px;height:30px;line-height:30px;left:45px;top:20px;color:#858585;" id="biankuang" class="disimg">
+                <input type="file" name="uploadify" id="uploadify">
+            </div>             
+
+            <div id="fileQueue" style="position:absolute;width:412px;height:412px;line-height:412px;left:50px;top:45px;border:1px #E1E1E1 solid;background:#F5F5F5;color:#858585;vertical-align:middle;text-align:center;overflow:hidden;" class="disimg">
+                支持jpg、jpeg、gif、png格式
+            </div>
+            <div style="position:absolute;width:300px;height:250px;left:480px;top:25px;border:0px #E1E1E1 solid;background:#ffffff;color:#858585;vertical-align:top">
+                注意不同尺寸头像是否清晰
+
+                <div id="div180" style="position:absolute;left:0px;top:30px;width:180px;height:180px;background:#E1E1E1; OVERFLOW: hidden;" class="disimg"><img id="tx180" src="./m_180.jpg" width="180px" height="180px"></div>
+                <div style="position:absolute;left:0px;top:215px;width:180px;height:20px;">大头像</div>
+ <!--//                <div  style="position:absolute;left:0px;top:245px;width:180px;height:20px;"><a href="" class="anormal anolink" onclick="toAddFileID('','805745_0.jpg', '')">编辑当前头像</a></div>-->
+
+                <div id="div50" style="position:absolute;left:200px;top:30px;width:50px;height:50px;background:#E1E1E1;OVERFLOW: hidden;" class="disimg"><img id="tx50" src="./m_180.jpg" width="50px" height="50px"></div>
+                <div style="position:absolute;left:200px;top:83px;width:180px;height:20px;">中头像</div>
+
+                <div id="div30" style="position:absolute;left:200px;top:110px;width:30px;height:30px;background:#E1E1E1;OVERFLOW: hidden;" class="disimg"><img id="tx30" src="./m_180.jpg" width="30px" height="30px"></div>
+                <div style="position:absolute;left:200px;top:143px;width:180px;height:20px;">小头像</div>
+
+                <div id="div20" style="position:absolute;left:200px;top:170px;width:20px;height:20px;background:#E1E1E1;OVERFLOW: hidden;" class="disimg"><img id="tx20" src="./m_180.jpg" width="20px" height="20px"></div>
+                <div style="position:absolute;left:200px;top:193px;width:180px;height:20px;">微头像</div>
+
+<!--                <div  style="position:absolute;left:0px;top:250px;width:180px;height:20px;color:#333333;">系统头像:</div>
+                <DIV class=DTuPian  style="position:absolute;left:0px;top:270px;">
+                    <DIV class=LeftBotton id=LeftArr></DIV>
+                    <DIV class=Cont id=ISL_Cont_1> 图片列表 begin 
+                   
+                                
+
+                    </DIV>
+                    <DIV class=RightBotton id=RightArr></DIV>
+                </DIV>    -->
+            </div>
+
+            <div id="btngengxin" style="position:absolute;width:300px;height:30px;line-height:30px;left:10px;top:13px;border:0px #E1E1E1 solid;color:#858585;vertical-align:middle;text-align:right;">
+                <a href="javascript:;" style="margin-right:15px;" class="   btna   " onclick="checkCoords();"><span>保存</span></a>
+                <a href="http://www.daeyes.com/portal/eyes/personal/user/touxiang/touxiang.jsp" style="margin-right:15px;" class="   btna   "><span>取消</span></a>
+            </div>
+        </div>
+
+
+    
+
+</body></html>

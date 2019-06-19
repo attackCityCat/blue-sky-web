@@ -15,7 +15,8 @@ public class PaiqiBean implements Serializable {
     private String  hallName; // 放映厅名称
     private Integer movieId; // 放映电影ID
     private Integer seats; // 剩余座位数
-    private double  price; // 电影票价
+    private double  price; // 电影票价本身原价
+
 
     private String startDate; // 档期开始时间
     private String endDate;  // 档期结束时间
