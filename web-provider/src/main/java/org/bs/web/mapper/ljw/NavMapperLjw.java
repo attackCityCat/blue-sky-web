@@ -8,13 +8,13 @@ import java.util.List;
 
 /**
  * @author Lenovo
- * @title: NavMapper
+ * @title: NavMapperLjw
  * @projectName blueskyweb
  * @description: TODO
  * @date 2019/6/1321:07
  */
 @Mapper
-public interface NavMapper {
+public interface NavMapperLjw {
 
     @Select("select * from t_tree where pid = #{value}")
     List<NavBean> findTreeList(int i);

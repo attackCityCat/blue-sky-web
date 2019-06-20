@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = "page")
-public class PageController {
+public class PageControllerLjw {
 
     @RequestMapping(value = "/toList")
     public String toList(){

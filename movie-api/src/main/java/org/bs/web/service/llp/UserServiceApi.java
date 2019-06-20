@@ -7,6 +7,7 @@ import org.bs.web.util.LayuiPage;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import sun.awt.SunHints;
 
 import java.util.List;
@@ -64,6 +65,13 @@ public interface UserServiceApi {
     @RequestMapping(value = "/findHitMoviesMain")
     List<HitMovies> findHitMoviesMain();
 
+
+    /**
+     * 查询非热映电影（首页展示使用十条）
+     * @return
+     */
+    @RequestMapping(value = "/findNotHitMoviesMain")
+    public List<HitMovies> findNotHitMoviesMain();
     /**
      * 根据ID查询电影
      * @param id

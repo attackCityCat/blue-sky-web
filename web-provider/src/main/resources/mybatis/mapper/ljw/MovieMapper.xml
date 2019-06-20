@@ -54,14 +54,14 @@
 
 	<insert id="saveDetailLjw">
 		insert into t_movie_detail(movieId,director,length,firstTime,detail,price,type,language)
-			values(#{id},#{director},#{length},#{firstTime},#{detail},#{price},#{type},#{language})
+			values(#{id},#{derector},#{length},#{firstTime},#{detail},#{price},#{type},#{language})
 	</insert>
 
 	<insert id="saveMovieLjw">
 		<selectKey keyProperty="id" order="AFTER" resultType="int">
 			select last_insert_id()
 		</selectKey>
-		insert into t_movie(name,img,status) values(#{name},#{img},1)
+		insert into t_movie(name,img,status,slideShow) values(#{name},#{img},1,0)
 	</insert>
 
     <select id="queryMovieLjw" resultType="org.bs.web.pojo.movie.MovieBean">
@@ -71,7 +71,7 @@
 			 tmd.price,
 			 tmd.length,
 			 tmd.firstTime,
-			 tmd.director,
+			 tmd.director as derector,
 			 tmd.detail,
 			 tmt.startDate,
 			 tmt.endDate,

@@ -1,8 +1,8 @@
 package org.bs.web.controller.dyl;
 
 
-import org.bs.web.dao.MovieRepository;
-import org.bs.web.pojo.MovieBean;
+import org.bs.web.dao.ljw.MovieRepository;
+import org.bs.web.pojo.movie.MovieBean;
 import org.bs.web.service.dyl.AboutService;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;

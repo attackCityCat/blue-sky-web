@@ -1,7 +1,7 @@
 package org.bs.web.controller.ljw.tree;
 
 import org.bs.web.pojo.tree.NavBean;
-import org.bs.web.service.ljw.NavService;
+import org.bs.web.service.ljw.NavServiceLjw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import java.util.List;
 public class NavController {
 
     @Autowired
-    private NavService navService;
+    private NavServiceLjw navService;
 
     @RequestMapping(value = "/findTree")
     @ResponseBody

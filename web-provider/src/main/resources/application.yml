@@ -38,6 +38,9 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*/*.xml
   config-locations: classpath:mybatis/confg.xml
 
-
-
-
+elasticsearch:
+  thirdPort: 9302
+  secondPort: 9301
+  clusterName: my-application
+  ip: 127.0.0.1
+  firstPort: 9300

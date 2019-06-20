@@ -1,4 +1,5 @@
 package org.bs.web.pojo.movie;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
@@ -6,6 +7,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.util.Date;
+
 
 @Document(indexName = "movie",type = "movie",shards = 5,replicas = 1)
 public class MovieBean implements Serializable {
@@ -20,6 +22,8 @@ public class MovieBean implements Serializable {
     private String img;
     @Field(type = FieldType.Integer)
     private Integer status;
+    @Field(type = FieldType.Integer)
+    private Integer slideShow;
 
     @Field(type = FieldType.Text)
     private String derector;
@@ -28,7 +32,7 @@ public class MovieBean implements Serializable {
     private Integer length;
 
     @Field(type = FieldType.Text)
-    private Date firstTime;
+    private String firstTime;
 
     @Field(type = FieldType.Integer)
     private Integer language;
@@ -48,8 +52,10 @@ public class MovieBean implements Serializable {
     @Field(type = FieldType.Text)
     private String typeName;
 
+    @Field(type = FieldType.Text)
     private String startDate;
 
+    @Field(type = FieldType.Text)
     private String endDate;
 
     @Field(type = FieldType.Text)
@@ -106,11 +112,19 @@ public class MovieBean implements Serializable {
         this.length = length;
     }
 
-    public Date getFirstTime() {
+    public Integer getSlideShow() {
+        return slideShow;
+    }
+
+    public void setSlideShow(Integer slideShow) {
+        this.slideShow = slideShow;
+    }
+
+    public String getFirstTime() {
         return firstTime;
     }
 
-    public void setFirstTime(Date firstTime) {
+    public void setFirstTime(String firstTime) {
         this.firstTime = firstTime;
     }
 

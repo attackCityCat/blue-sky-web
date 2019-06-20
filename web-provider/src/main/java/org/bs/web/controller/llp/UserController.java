@@ -52,6 +52,15 @@ public class UserController {
         return list;
     }
 
+    @RequestMapping(value = "/findNotHitMoviesMain")
+    @ResponseBody
+    public List<HitMovies> findNotHitMoviesMain() {
+
+        List<HitMovies> list = userMapper.findNotHitMoviesMain();
+
+        return list;
+    }
+
     /**
      * 根据ID查询电影以及演员
      * @param id

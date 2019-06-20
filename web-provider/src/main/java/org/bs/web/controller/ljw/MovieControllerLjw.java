@@ -2,16 +2,22 @@ package org.bs.web.controller.ljw;
 
 
 import org.bs.web.mapper.ljw.MovieMapperLjw;
+import org.bs.web.dao.ljw.MovieRepository;
 import org.bs.web.pojo.movie.*;
 import org.bs.web.util.PageModel;
 import org.bs.web.util.ResultUtil;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,7 +28,7 @@ import java.util.List;
  * @description: TODO
  * @date 2019/6/1411:00
  */
-@Controller
+@RestController
 @Transactional
 public class MovieControllerLjw {
 
@@ -32,38 +38,56 @@ public class MovieControllerLjw {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
+    @Autowired
+    private MovieRepository movieRepository;
+
+    @Autowired
+    private ElasticsearchTemplate elasticsearchTemplate;
+
+    //设置为轮播图
+    @RequestMapping(value = "/isSlideShowLjw")
+    public void isSlideShowLjw(@RequestParam(value = "id") Integer id){
+        movieMapperLjw.isSlideShowLjw(id);
+    }
+
+    //取消设置为轮播图
+    @RequestMapping(value = "/noSlideShowLjw")
+    public void noSlideShowLjw(@RequestParam(value = "id") Integer id){
+        movieMapperLjw.noSlideShowLjw(id);
+    }
+
     //动态加载标签
     @RequestMapping(value = "/getTagLjw")
-    @ResponseBody
     public List<TagBean> getTagLjw(){
         return movieMapperLjw.getTagLjw();
     }
 
     //动态加载演员
     @RequestMapping(value = "/getPerformerLjw")
-    @ResponseBody
     public List<PerformerBean> getPerformerLjw(){
         return movieMapperLjw.getPerformerLjw();
     }
 
     //动态加载type
     @RequestMapping(value = "/getTypeLjw")
-    @ResponseBody
     public List<MovieTypeBean> getTypeLjw(){
         return movieMapperLjw.getTypeLjw();
     }
 
     //动态加载language
     @RequestMapping(value = "/getLanguageLjw")
-    @ResponseBody
     public List<LanguageBean> getLanguageLjw(){
         return movieMapperLjw.getLanguageLjw();
     }
 
     //新增
     @RequestMapping(value = "/saveMovieLjw")
-    @ResponseBody
     public void saveMovieLjw(@RequestBody MovieBean movieBean){
+        //拼接首映时间
+        String firstDate = movieBean.getStartDate().concat(" "+movieBean.getFirstTime());
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //String format = sim.format(firstDate);
+        movieBean.setFirstTime(firstDate);
         //增电影
         Boolean a = movieMapperLjw.saveMovieLjw(movieBean);
 
@@ -74,7 +98,7 @@ public class MovieControllerLjw {
         }
 
         //新增索引
-
+        movieRepository.save(movieBean);
 
         //根据name去数据库查类型
         MovieTypeBean movieType = movieMapperLjw.queryTypeByNameLjw(movieBean.getTypeName());
@@ -172,7 +196,6 @@ public class MovieControllerLjw {
 
     //查询
     @RequestMapping(value = "/queryMovieLjw")
-    @ResponseBody
     public ResultUtil queryMovieLjw(@RequestParam(value = "page") Integer page,
                                     @RequestParam(value = "rows") Integer rows,
                                     @RequestBody MovieBean movieBean){

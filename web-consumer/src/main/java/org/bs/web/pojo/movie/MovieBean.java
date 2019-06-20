@@ -1,6 +1,7 @@
 package org.bs.web.pojo.movie;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -22,14 +23,17 @@ public class MovieBean implements Serializable {
     @Field(type = FieldType.Integer)
     private Integer status;
 
+    @Field(type = FieldType.Integer)
+    private Integer slideShow;
+
     @Field(type = FieldType.Text)
     private String derector;
 
     @Field(type = FieldType.Integer)
     private Integer length;
 
-    @Field(type = FieldType.Date)
-    private Date firstTime;
+    @Field(type = FieldType.Text)
+    private String firstTime;
 
     @Field(type = FieldType.Integer)
     private Integer language;
@@ -39,6 +43,36 @@ public class MovieBean implements Serializable {
 
     @Field(type = FieldType.Double)
     private Double price;
+
+    @Field(type = FieldType.Text)
+    private String typeName;
+
+    @Field(type = FieldType.Text)
+    private String languageName;
+
+    @Field(type = FieldType.Text)
+    private String startDate;
+
+    @Field(type = FieldType.Text)
+    private String endDate;
+
+    @Field(type = FieldType.Text)
+    private String tag;
+
+    @Field(type = FieldType.Text)
+    private String performer;
+
+    @Transient
+    private Integer minLength;
+
+    @Transient
+    private Integer maxLength;
+
+    @Transient
+    private Integer minPrice;
+
+    @Transient
+    private Integer maxPrice;
 
     public Integer getId() {
         return id;
@@ -88,11 +122,11 @@ public class MovieBean implements Serializable {
         this.length = length;
     }
 
-    public Date getFirstTime() {
+    public String getFirstTime() {
         return firstTime;
     }
 
-    public void setFirstTime(Date firstTime) {
+    public void setFirstTime(String firstTime) {
         this.firstTime = firstTime;
     }
 
@@ -118,5 +152,93 @@ public class MovieBean implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getMinLength() {
+        return minLength;
+    }
+
+    public void setMinLength(Integer minLength) {
+        this.minLength = minLength;
+    }
+
+    public Integer getMaxLength() {
+        return maxLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public Integer getMinPrice() {
+        return minPrice;
+    }
+
+    public void setMinPrice(Integer minPrice) {
+        this.minPrice = minPrice;
+    }
+
+    public Integer getMaxPrice() {
+        return maxPrice;
+    }
+
+    public void setMaxPrice(Integer maxPrice) {
+        this.maxPrice = maxPrice;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public String getPerformer() {
+        return performer;
+    }
+
+    public void setPerformer(String performer) {
+        this.performer = performer;
+    }
+
+    public Integer getSlideShow() {
+        return slideShow;
+    }
+
+    public void setSlideShow(Integer slideShow) {
+        this.slideShow = slideShow;
     }
 }

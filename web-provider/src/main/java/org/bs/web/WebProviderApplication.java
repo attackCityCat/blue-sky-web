@@ -24,7 +24,10 @@ import java.util.Properties;
 @MapperScan("org.bs.web.mapper")
 public class WebProviderApplication {
 
+
     public static void main(String[] args) {
+
+        System.setProperty("es.set.netty.runtime.available.processors","false");
         SpringApplication.run(WebProviderApplication.class, args);
     }
 

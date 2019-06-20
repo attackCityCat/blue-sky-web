@@ -1,6 +1,6 @@
 package org.bs.web.controller.ljw;
 
-import org.bs.web.mapper.ljw.NavMapper;
+import org.bs.web.mapper.ljw.NavMapperLjw;
 import org.bs.web.pojo.tree.NavBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,10 +18,10 @@ import java.util.List;
  * @date 2019/6/1321:06
  */
 @Controller
-public class NavController {
+public class NavControllerLjw {
 
     @Autowired
-    private NavMapper navMapper;
+    private NavMapperLjw navMapper;
 
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;

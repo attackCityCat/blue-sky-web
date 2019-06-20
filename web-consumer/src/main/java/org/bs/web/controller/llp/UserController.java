@@ -120,7 +120,9 @@ public class UserController {
 
         //首页只需要展示条数据即可
         List<HitMovies> list = userServiceApi.findHitMoviesMain();
+        List<HitMovies> not = userServiceApi.findNotHitMoviesMain();
         model.addAttribute("list", list);
+        model.addAttribute("not", not);
 
         return "llp/view/main";
     }

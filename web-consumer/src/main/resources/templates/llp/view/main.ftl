@@ -145,7 +145,7 @@
             <div class="films">
                 <ul class="clearfix">
                     <#assign index = 0 >
-                    <#list list as i>
+                    <#list not as i>
                         <#assign index = index+1>
                         <li class="wd${index}">
                             <img src="${i.img}" alt="" onclick="toDetail(${i.id})">
