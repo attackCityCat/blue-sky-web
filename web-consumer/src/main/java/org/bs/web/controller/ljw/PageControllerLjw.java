@@ -23,4 +23,9 @@ public class PageControllerLjw {
     public String toMain(){
         return "ljw/main";
     }
+
+    @RequestMapping(value = "/toLogin")
+    public String toLogin(){
+        return "ljw/login";
+    }
 }
