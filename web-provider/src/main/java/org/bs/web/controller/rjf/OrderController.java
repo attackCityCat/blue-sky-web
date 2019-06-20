@@ -146,17 +146,22 @@ public class OrderController {
 
             orderMessage.setPhone(phone);
             orderMessage.setUserId(userId);
+
             /*orderMessage.setAccount(1);*/
             /*Integer account = orderMessage.getAccount();*/
 
-            Double moviePrice = orderMessage.getMoviePrice();
-            /*orderMessage.setMoviePrice(22D);*/
-            Integer account = orderMessage.getAccount();
+
             orderMessage.setAccount(seatBeans.size());
+            Double moviePrice = orderMessage.getMoviePrice();
             orderMessage.setTotalPrice(seatBeans.size()*moviePrice);
+
+
+            /*orderMessage.setMoviePrice(22D);*/
+
             /*Double moviePrice = orderMessage.getMoviePrice();*/
 
-            orderMessage.setTotalPrice(moviePrice*account);
+            /*Integer account = orderMessage.getAccount();
+            orderMessage.setTotalPrice(moviePrice*account);*/
 
             //打折
             Double totalPrice = orderMessage.getTotalPrice();
@@ -202,7 +207,8 @@ public class OrderController {
             OrderMessage order = (OrderMessage) redisTemplate.opsForHash().get(CommonConf.ORDER_KEY, orderNum);
             /*System.out.println(order);
             rabbitTemplate.convertAndSend(RabbitConfig.EXCHANGE_A,RabbitConfig.ROUTINGKEY_A,order);*/
-
+            String orderNum1 = order.getOrderNum();
+            order.setDindanNum(orderNum1);
             List<SeatBean> seatBeans = order.getSeatBeans();
             for (SeatBean seatBean : seatBeans){
                 ArrayList<SeatBean> list = new ArrayList<>();

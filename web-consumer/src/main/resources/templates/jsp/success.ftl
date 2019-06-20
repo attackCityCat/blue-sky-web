@@ -67,7 +67,7 @@
             <div class="order-detail">
                 <div class="inline">
                     <span>电影票</span> <span>|</span> <span>订单号：${orders.orderNum}</span>
-                    <span>|</span> <span>订单详情：${orders.movieName} 103电影公园 ${orders.startDate} 2厅 4排10座,5排10座</span>
+                    <span>|</span> <span>订单详情：${orders.movieName}<span>|</span>${orders.startDate} ${orders.hallName} ${orders.seatName}</span>
                     <span>|</span> <span></span> <font color="red">已支付</font> <span>|</span>
                 </div> <!----></div>
         </div>

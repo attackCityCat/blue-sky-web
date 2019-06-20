@@ -6,6 +6,8 @@ import org.bs.web.common.CommonConf;
 import org.bs.web.config.HttpClientUtil;
 import org.bs.web.config.Md5Util;
 import org.bs.web.config.RabbitConfig;
+import org.bs.web.pojo.CheckBean;
+import org.bs.web.pojo.SeatBean;
 import org.bs.web.pojo.rjf.OrderMessage;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -16,8 +18,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -33,6 +37,8 @@ public class OrderRabbit {
     @RabbitHandler
     public   void   getOrder(OrderMessage orderMessage) {
 
+        CheckBean checkBean = new CheckBean();
+
         System.out.println(orderMessage);
 
         OrderMessage message = mongoTemplate.save(orderMessage);
@@ -43,7 +49,9 @@ public class OrderRabbit {
         if (message != null) {
             try {
 
-                Integer code = (int) ((Math.random() * 9 + 1) * 100000);
+                /*Integer code = (int) ((Math.random() * 9 + 1) * 100000);*/
+                String code = message.getDindanNum();//订单号作为验证码
+
                 System.out.println(code);
                 HashMap<String, Object> params = new HashMap<>();
 
@@ -73,6 +81,11 @@ public class OrderRabbit {
                     String cacheKey = CommonConf.SMS_CODE_CACHE_KEY + account;
 
                     redisTemplate.opsForValue().set(cacheKey, String.valueOf(code), CommonConf.SMS_CODE_TIME_OUT, TimeUnit.MINUTES);
+
+                    checkBean.setOrderNum(code);
+                    checkBean.setPhone(account);
+                    checkBean.setStatus("已付款");
+                    mongoTemplate.save(checkBean);
 
                     result.put("code", 0);
                     result.put("msg", "发送成功");

@@ -32,9 +32,9 @@ public class OrderMessage implements Serializable{
 
     private  String   orderNum;  //订单号
 
-    private  Date     endDate;   //结束时间
+    private  String   dindanNum;   //分单之前的订单号
 
-    private  String   cinemaName;  //影院名称
+    private  String   seatName;  //影院名称
 
     private  Integer  userId;  //用户ID (用于生成订单)
 
@@ -180,20 +180,20 @@ public class OrderMessage implements Serializable{
         this.orderNum = orderNum;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getDindanNum() {
+        return dindanNum;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setDindanNum(String dindanNum) {
+        this.dindanNum = dindanNum;
     }
 
-    public String getCinemaName() {
-        return cinemaName;
+    public String getSeatName() {
+        return seatName;
     }
 
-    public void setCinemaName(String cinemaName) {
-        this.cinemaName = cinemaName;
+    public void setSeatName(String seatName) {
+        this.seatName = seatName;
     }
 
     public Integer getUserId() {
@@ -220,7 +220,7 @@ public class OrderMessage implements Serializable{
         this.yuyan = yuyan;
     }
 
-    public OrderMessage(String id, String movieName, String movieImg, Integer language, String startDate, Double moviePrice, String phone, String hallName, List<SeatBean> seatBeans, String transaction, String orderNum, Date endDate, String cinemaName, Integer userId, String length, String yuyan, Integer account, Integer jibie, Double zk, Double totalPrice, Double fracturePrice) {
+    public OrderMessage(String id, String movieName, String movieImg, Integer language, String startDate, Double moviePrice, String phone, String hallName, List<SeatBean> seatBeans, String transaction, String orderNum, String dindanNum, String seatName, Integer userId, String length, String yuyan, Integer account, Integer jibie, Double zk, Double totalPrice, Double fracturePrice) {
         this.id = id;
         this.movieName = movieName;
         this.movieImg = movieImg;
@@ -232,8 +232,8 @@ public class OrderMessage implements Serializable{
         this.seatBeans = seatBeans;
         this.transaction = transaction;
         this.orderNum = orderNum;
-        this.endDate = endDate;
-        this.cinemaName = cinemaName;
+        this.dindanNum = dindanNum;
+        this.seatName = seatName;
         this.userId = userId;
         this.length = length;
         this.yuyan = yuyan;
@@ -261,8 +261,8 @@ public class OrderMessage implements Serializable{
                 ", seatBeans=" + seatBeans +
                 ", transaction='" + transaction + '\'' +
                 ", orderNum='" + orderNum + '\'' +
-                ", endDate=" + endDate +
-                ", cinemaName='" + cinemaName + '\'' +
+                ", dindanNum='" + dindanNum + '\'' +
+                ", seatName='" + seatName + '\'' +
                 ", userId=" + userId +
                 ", length='" + length + '\'' +
                 ", yuyan='" + yuyan + '\'' +

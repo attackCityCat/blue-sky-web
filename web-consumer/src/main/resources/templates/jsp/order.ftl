@@ -70,6 +70,9 @@
         .button2 {background-color: #1BA4E5;}
 
     </style>
+    <script type="text/javascript">
+
+    </script>
 </head>
 <body>
 <input type="hidden" value="${orders.orderNum}" id="orderNum">
@@ -122,11 +125,11 @@
                 <div class="film-wrap">
                     <div class="film"><h1>${orders.movieName}</h1><p>语言版本: ${orders.yuyan}</p><p>时长：${orders.length}分钟</p><span class="flim-pic"><img src="./订单支付_大眼睛票务.电影_files/20190523104552.jpg" width="100%"></span></div>
                     <p class="item cinemaname"><span class="tt">影院：</span><span class="name">XXXXXXXXX</span></p>
-                    <p class="item hallname-wrap"><span class="tt">影厅：</span><span class="hallname">${orders.hallName}</span></p>
+                    <p class="item hallnseatNameame-wrap"><span class="tt">影厅：</span><span class="hallname">${orders.hallName}</span></p>
                     <p class="item"><span class="tt">场次：</span><span class="showtime">${orders.startDate}</span></p>
                     <div class="item seats">
                         <span class="tt">座位：</span>
-                        <ul class="seat-list clearfix"><li></li></ul>
+                        <ul class="seat-list clearfix">${orders.}</ul>
                     </div>
                 </div>
                 <div class="price-wrap">

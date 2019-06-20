@@ -56,4 +56,5 @@ public class CommonConf {
 
     // 排期信息缓存键
     public static final String PAI_QI_KEY = "paiqi";
+
 }
