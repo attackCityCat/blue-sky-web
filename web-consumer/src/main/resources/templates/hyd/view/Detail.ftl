@@ -25,7 +25,6 @@
 
 <body>
 <script type="text/javascript">
-
     function loginOut() {
         location.href = "/llp/loginOut";
     }
@@ -87,33 +86,29 @@
     function toPersonal() {
         location.href = "/llp/toPersonal";
     }
-
     function toOrder() {
         location.href = "/llp/toOrder";
         //javascript:toOrder()
     }
-
-
     function toReying() {
         location.href = "/llp/toReYing"
         //javascript:toReying()
     }
-
     function toMain() {
         location.href = "/llp/toMain";
     }
-
     function tan() {
         layer.msg("功能正在开发中！~~")
     }
+
     function chakan() {
-       // screening hide   screen-hide hide 收起ID
-           var ulId = $("#ulId");
-           var shouqiId = $("#shouqi");
-           var chakanId = $("#chakanId");
-           ulId.attr("class","screening");
-           shouqiId.attr("class","screen-hide");
-           chakanId.attr("class","screen-show btn hide");
+        // screening hide   screen-hide hide 收起ID
+        var ulId = $("#ulId");
+        var shouqiId = $("#shouqi");
+        var chakanId = $("#chakanId");
+        ulId.attr("class","screening");
+        shouqiId.attr("class","screen-hide");
+        chakanId.attr("class","screen-show btn hide");
     }
     function shouqi() {
         var ulId = $("#ulId");
@@ -122,6 +117,14 @@
         ulId.attr("class","screening hide");
         shouqiId.attr("class","screen-hide hide");
         chakanId.attr("class","screen-show btn");
+    }
+
+    function toXuanZuo(id) {
+        location.href="选坐的路径"+id;
+    }
+
+    function toDetail(id){
+        location.href="/hyd/page/toDetail?id="+id;
     }
 
 </script>
@@ -139,17 +142,17 @@
 </div>-->
 
 <div class="main filmdetailpage">
-    <div class="crumb"><p><span>大眼睛</span><i>&gt;</i><span>热映影片</span><i>&gt;</i><span>数据库查出的数据</span></p></div>
+    <div class="crumb"><p><span>大眼睛</span><i>&gt;</i><span>热映影片</span><i>&gt;</i><span>${MoviesDetail.name}</span></p></div>
     <div class="film-introduction clearfix">
         <div class="information">
-            <h2>数据库查出来的电影名称</h2>
+            <h2>${MoviesDetail.name}</h2>
             <p><strong>导演：
-                </strong>数据库查出来的</p>
-            <p><strong>主演：</strong>数据库查出来的</p>
-            <p><strong>类型：</strong>数据库查出来的</p>
-            <p><strong>片长：</strong>数据库查出来的</p>
-            <p><strong>影片详情：</strong>数据库查出来的</p>
-            <span class="logo"><img src="./大眼睛票务.电影_files/20190613162333.jpg" alt="数据库查出来的"></span></div>
+                </strong>${MoviesDetail.director}</p>
+            <p><strong>主演：</strong>${MoviesDetail.perName}</p>
+            <p><strong>类型：</strong>${MoviesDetail.typeName}</p>
+            <p><strong>片长：</strong>${MoviesDetail.length}</p>
+            <p><strong>影片详情：</strong>${MoviesDetail.detail}</p>
+            <span class="logo"><img src="${MoviesDetail.img}" alt="${MoviesDetail.name}"></span></div>
         <div class="worktime">
             <p class="tel">189-0310-0844</p>
             <p class="date">周一至周日 09:00-20:00</p>
@@ -166,19 +169,21 @@
             <div class="cinema-panel cinema-screening" style="display: block;">
                 <div class="date">
                     <div class="tt">观影日期：</div>
-                    <ul class="tabs-date clearfix">
-                        <li><a href="#" data-time="2019-06-27">06.27周四</a></li>
-                        <li><a href="#" data-time="2019-06-28">06.28周五</a></li>
-                        <li><a href="#" data-time="2019-06-29">06.29周六</a></li>
-                        <li><a href="#" data-time="2019-06-30">06.30周日</a></li>
-                        <li><a href="#" data-time="2019-07-01">07.01周一</a></li>
-                        <li><a href="#" data-time="2019-07-02">07.02周二</a></li>
-                        <li><a href="#" data-time="2019-07-03">07.03周三</a></li>
-                        <li><a href="#" data-time="2019-07-04">07.04周四</a></li>
-                    </ul>
+                    <#list paiqiBeans as i>
+                        <ul class="tabs-date clearfix">
+                            <li><a href="javascript:toDetail(${i.id});">06.20</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.21</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.22</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.23</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.24</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.25</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.26</a></li>
+                            <li><a href="javascript:toDetail(${i.id});">06.27</a></li>
+                        </ul>
+                    </#list>
                 </div>
             </div>
-            <#--观影厅内容-->
+           <#-- &lt;#&ndash;观影厅内容&ndash;&gt;
             <div class="area">
                 <div class="tt">观影厅：</div>
                 <ul class="clearfix">
@@ -197,6 +202,8 @@
                     <li><a href="javascript:;" data-citycode="110119">数据库查出替换</a></li>
                 </ul>
             </div>
+
+-->
 
             <#--排期内容-->
             <div class="screen-wrap">
@@ -240,7 +247,7 @@
                                     <p class="item stand-pric w4">¥${i.price}</p>
                                     <p class="item w5">¥${i.price}</p>
                                     <p class="item w6">
-                                        <a class="btn" href="#" target="_blank">选座购票</a>
+                                        <a class="btn" href="javascript:toXuanZuo(${i.id})" target="_blank">选座购票</a>
                                     </p>
                                 </li>
                             </#list>
@@ -250,64 +257,21 @@
             </div>
         </div>
         <div class="top-showing">
-            <h2>以下数据都要从数据库查出</h2>
+            <h2>热映排行榜</h2>
             <div class="film-list">
                 <ul>
+                    <#list list as i >
                     <li>
                         <h3>
-                            <a href="#">黑衣人：全球追缉</a></h3>
-                        <p>导演：F·加里·格雷</p>
-                        <p>207家影院上映5026场</p>
+                            <a href="#">${i.name}</a></h3>
+                        <p>${i.director}</p>
                         <span class="flogo">
-                                <img src="./大眼睛票务.电影_files/20190610102557.jpg" alt="数据库查出"></span>
+                                <img src="${i.img}" alt="${i.name}"></span>
                         <p class="buy">
-                            <a class="btn" href="#">选座购票</a>
+                            <a class="btn" href="javascript:toDetail(${i.id})">查看详情</a>
                         </p>
                     </li>
-                    <li>
-                        <h3>
-                            <a href="#">蜘蛛侠：英雄远征</a>
-                        </h3>
-                        <p>导演：乔·沃茨</p>
-                        <p>108家影院上映1728场</p>
-                        <span class="flogo">
-                                <img src="./大眼睛票务.电影_files/20190613162333.jpg" alt="数据库查出"></span>
-                        <p class="buy">
-                            <a class="btn" href="#">选座购票</a>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            <a href="#">哥斯拉2：怪兽之王</a>
-                        </h3>
-                        <p>导演：迈克尔·道赫蒂</p>
-                        <p>186家影院上映1553场</p>
-                        <span class="flogo">
-                                <img src="./大眼睛票务.电影_files/20190425101647.jpg" alt="数据库查出">
-                            </span>
-                        <p class="buy"><a class="btn" href="#">选座购票</a></p>
-                    </li>
-                    <li><h3>
-                            <a href="#">千与千寻</a>
-                        </h3>
-                        <p>导演：宫崎骏,柯克·维斯</p>
-                        <p>155家影院上映1456场</p><span class="flogo">
-                                <img src="./大眼睛票务.电影_files/20190527110841.jpg" alt="千与千寻"></span>
-                        <p class="buy">
-                            <a class="btn" href="#">选座购票</a>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            <a href="#">X战警：黑凤凰</a>
-                        </h3>
-                        <p>导演：西蒙·金伯格</p>
-                        <p>189家影院上映1420场</p>
-                        <span class="flogo">
-                                <img src="./大眼睛票务.电影_files/20190520111235.jpg" alt="X战警：黑凤凰"></span>
-                        <p class="buy"><a class="btn" href="#">选座购票</a>
-                        </p>
-                    </li>
+                    </#list>
                 </ul>
             </div>
         </div>

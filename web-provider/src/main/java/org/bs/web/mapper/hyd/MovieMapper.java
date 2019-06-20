@@ -69,4 +69,75 @@ public interface MovieMapper {
             "LEFT JOIN t_hall th ON tp.hallId = th.id " +
             "where  tp.movieId = #{movieId}")
     List<PaiqiBean> findPaiQiById(@RequestParam("id") Integer id);
+
+    @Select(" SELECT " +
+            " tm.*, " +
+            " tmd.price, " +
+            " tmd.detail, " +
+            " tmd.length, " +
+            " tmd.director, " +
+            " tmtp.NAME AS typeName, " +
+            " GROUP_CONCAT( tag.NAME ) AS tagName  " +
+            "FROM " +
+            " t_movie tm " +
+            " LEFT JOIN t_movie_tag tmt ON tm.id = tmt.movieId " +
+            " LEFT JOIN t_movie_detail tmd ON tm.id = tmd.movieId " +
+            " LEFT JOIN t_tag tag ON tag.id = tmt.tagId " +
+            " LEFT JOIN t_movie_type tmtp ON tmtp.id = tmd.type  " +
+            "WHERE " +
+            " tm.STATUS = 0  " +
+            " AND tm.id = #{value}  " +
+            "GROUP BY " +
+            " tm.id  " +
+            " LIMIT 10 ")
+    HitMovies findMoviesDetail(int id);
+
+    @Select(" SELECT " +
+            "   GROUP_CONCAT( tp.NAME ) AS perName  " +
+            " FROM " +
+            " t_movie tm " +
+            " LEFT JOIN t_movie_performer tmp ON tmp.movieId = tm.id " +
+            " LEFT JOIN t_performer tp ON tp.id = tmp.performerId " +
+            " WHERE " +
+            " tm.STATUS = 0  and tm.id = #{value} " +
+            " GROUP BY " +
+            " tm.id  ")
+    YanYuan findYanYuan(int id);
+
+    @Select(" SELECT " +
+            " tm.*, " +
+            " tmd.price, " +
+            " tmd.detail, " +
+            " tmd.length, " +
+            " tmd.director, " +
+            " tmtp.NAME AS typeName, " +
+            " GROUP_CONCAT( tag.NAME ) AS tagName  " +
+            "FROM " +
+            " t_movie tm " +
+            " LEFT JOIN t_movie_tag tmt ON tm.id = tmt.movieId " +
+            " LEFT JOIN t_movie_detail tmd ON tm.id = tmd.movieId " +
+            " LEFT JOIN t_tag tag ON tag.id = tmt.tagId " +
+            " LEFT JOIN t_movie_type tmtp ON tmtp.id = tmd.type  " +
+            "WHERE " +
+            " tm.STATUS = 0  " +
+            "GROUP BY " +
+            " tm.id  " +
+            " LIMIT 5 ")
+    List<HitMovies> findHitMovies();
+
+    @Select("SELECT " +
+            "tp.id,  " +
+            "tp.startTime,  " +
+            "tmd.language,  " +
+            "tp.movieId,  " +
+            "tp.hallId, " +
+            "th.name as hallName, " +
+            " tmd.price  " +
+            "FROM  " +
+            "t_paiqi tp  " +
+            "LEFT JOIN t_movie_detail tmd ON tp.movieId = tmd.id " +
+            "LEFT JOIN t_hall th ON tp.hallId = th.id " +
+            "where DATE_FORMAT(tp.startTime,'%Y-%m-%d') = (SELECT str_to_date(#{time}, '%Y-%m-%d') ) " +
+            "and tp.movieId = #{id}")
+    List<PaiqiBean> findPaiqiByIdAndByTime(@RequestParam("id") Integer id, @RequestParam("time") String time);
 }

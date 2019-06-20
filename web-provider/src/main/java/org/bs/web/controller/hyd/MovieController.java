@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -251,5 +248,45 @@ public class MovieController {
         Integer id = 2;
         List<PaiqiBean> paiqiBean = movieMapper.findPaiQiById(id);
         return paiqiBean;
+    }
+
+    /**
+     * 根据ID查询电影以及演员
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findMoviesDetail")
+    @ResponseBody
+    public HitMovies findMoviesDetail(@RequestParam(value = "id") Integer id){
+
+        System.out.println(id);
+        //查询电影详情
+        HitMovies moviesDetail = movieMapper.findMoviesDetail(id);
+
+        System.out.println(moviesDetail);
+
+        //查询电影的演员
+        YanYuan yuan = movieMapper.findYanYuan(id);
+
+        System.out.println(yuan);
+        //将查询出的演员放进moviesDetail一并返回
+        moviesDetail.setPerName(yuan.getPerName());
+
+        return moviesDetail;
+    }
+
+    @RequestMapping(value = "/findHitMovies")
+    @ResponseBody
+    public List<HitMovies> findHitMovies(){
+        return movieMapper.findHitMovies();
+    }
+
+
+    @RequestMapping(value = "findPaiqiByIdAndByTime")
+    @ResponseBody
+    public List<PaiqiBean> findPaiqiByIdAndByTime(){
+        Integer id = 2;
+        String time = "2019-06-24";
+        return movieMapper.findPaiqiByIdAndByTime(id,time);
     }
 }
