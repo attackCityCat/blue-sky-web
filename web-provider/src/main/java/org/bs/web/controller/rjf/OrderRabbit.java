@@ -33,8 +33,14 @@ public class OrderRabbit {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
+    public static int n = 0;
+
     @RabbitHandler
     public   void   getOrder(OrderMessage orderMessage) {
+
+        if(n >= 5){
+            return;
+        }
 
         OrderMessage message = mongoTemplate.save(orderMessage);
 
@@ -76,15 +82,23 @@ public class OrderRabbit {
                     OrderStatus orderStatus = new OrderStatus();
 
                     orderStatus.setOrderNum(orderMessage.getOrderNum());
-
-                    mongoTemplate.save(orderStatus);
-
+                    //保存订单状态   用于检票
+                    redisTemplate.opsForHash().put(CommonConf.ORDER_STATUS,CommonConf.ORDER_STATUS+orderMessage.getOrderNum(),orderStatus);
+                    redisTemplate.opsForHash().put(CommonConf.TIME,CommonConf.TIME+orderMessage.getOrderNum(),orderMessage.getStartTime());
+                    //将订单号缓存  用于判断是否支付
                     redisTemplate.opsForHash().put(CommonConf.ORDER_NUM_KEK,CommonConf.ORDER_NUM_KEK_P+orderMessage.getPaiQiId()+CommonConf.ORDER_NUM_KEK_S+orderMessage.getSeatId(),orderMessage.getOrderNum());
+
+                    //将排期座位总数减 1  用于判断是否继续卖票
+                    int object = (int) redisTemplate.opsForHash().get(CommonConf.PAI_SEAT_SUM,CommonConf.PAI_SEAT_SUM+orderMessage.getPaiQiId());
+                    if (object > 0)
+                        redisTemplate.opsForHash().put(CommonConf.SUM_SEATS_KEY, CommonConf.SUM_SEATS_KEY + orderMessage.getHallId(),object-1);
 
                     result.put("code", 0);
                     System.out.println("发送成功");
                     result.put("msg", "发送成功");
                 } else {
+                    n++;
+                    getOrder(orderMessage);
                     result.put("code", 1);
                     System.out.println("发送失败");
                     result.put("msg", "发送失败");

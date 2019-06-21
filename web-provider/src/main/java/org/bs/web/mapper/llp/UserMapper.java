@@ -1,9 +1,6 @@
 package org.bs.web.mapper.llp;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.UserBean;
 import org.bs.web.pojo.YanYuan;
@@ -31,6 +28,7 @@ public interface UserMapper {
             " tm.*, " +
             " tmd.price, " +
             " tmd.length, " +
+            " tmd.director, " +
             " GROUP_CONCAT( tag.NAME ) AS tagName " +
             "FROM " +
             " t_movie tm " +
@@ -39,8 +37,43 @@ public interface UserMapper {
             " LEFT JOIN t_tag tag ON tag.id = tmt.tagId  " +
             " WHERE " +
             " tm.STATUS = 0  " +
-            " GROUP BY tm.id  LIMIT 15")
-    List<HitMovies> findHitMovies();
+            " GROUP BY tm.id  LIMIT #{page},#{rows}")
+    List<HitMovies> findHitMovies(@Param("page")Integer page,@Param("rows") Integer rows);
+
+    @Select(" SELECT  " +
+            "    count(*)  " +
+            " " +
+            "FROM " +
+            "t_movie tm " +
+            "WHERE " +
+            "tm.STATUS = 0")
+    int findHitMoviesCount();
+
+    @Select(" SELECT " +
+            " tm.*, " +
+            " tmd.price, " +
+            " tmd.length, " +
+            " tmd.director, " +
+            " GROUP_CONCAT( tag.NAME ) AS tagName " +
+            "FROM " +
+            " t_movie tm " +
+            " LEFT JOIN t_movie_tag tmt ON tm.id = tmt.movieId " +
+            " LEFT JOIN t_movie_detail tmd ON tm.id = tmd.movieId " +
+            " LEFT JOIN t_tag tag ON tag.id = tmt.tagId  " +
+            " WHERE " +
+            " tm.STATUS = 1  " +
+            " GROUP BY tm.id  LIMIT #{page},#{rows}")
+    List<HitMovies> findNotHitMovies(@Param("page") Integer page,@Param("rows") Integer rows);
+
+    @Select(" SELECT  " +
+            "    count(*)  " +
+            " " +
+            "FROM " +
+            "t_movie tm " +
+            "WHERE " +
+            "tm.STATUS = 1")
+    int findNotHitMoviesCount();
+
     @Select(" SELECT " +
             " tm.*, " +
             " tmd.price, " +
@@ -86,8 +119,7 @@ public interface UserMapper {
             " LEFT JOIN t_tag tag ON tag.id = tmt.tagId " +
             " LEFT JOIN t_movie_type tmtp ON tmtp.id = tmd.type  " +
             "WHERE " +
-            " tm.STATUS = 0  " +
-            " AND tm.id = #{value}  " +
+            "tm.id = #{value}  " +
             "GROUP BY " +
             " tm.id  " +
             " LIMIT 10 ")
@@ -100,8 +132,13 @@ public interface UserMapper {
             " LEFT JOIN t_movie_performer tmp ON tmp.movieId = tm.id " +
             " LEFT JOIN t_performer tp ON tp.id = tmp.performerId " +
             " WHERE " +
-            " tm.STATUS = 0  and tm.id = #{value} " +
+            " tm.id = #{value} " +
             " GROUP BY " +
             " tm.id  ")
     YanYuan findYanYuan(int id);
+
+
+    @Select("select id,name,img from t_movie where slideShow = 1")
+    List<HitMovies> findImgs();
+
 }

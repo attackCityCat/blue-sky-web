@@ -3,6 +3,7 @@ package org.bs.web.controller.xinx;
 import org.bs.web.common.CommonConf;
 import org.bs.web.mapper.hyd.MovieMapper;
 import org.bs.web.mapper.xinx.XinxMapper;
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.movie.PaiQiSeatBean;
 import org.bs.web.pojo.movie.PaiqiBean;
 import org.bs.web.pojo.movie.SeatBean;
@@ -73,4 +74,11 @@ public class XinxController {
         OrderStatus save = mongoTemplate.save(orderStatus);
         return save != null;
     }
+
+    @RequestMapping("/getHallName")
+    String getHallName(@RequestParam("hallId") Integer hallId){
+        return xinxMapper.getHallName(hallId);
+    };
+
+
 }

@@ -2,7 +2,7 @@ package org.bs.web.pojo.order;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(value = "OrderNum")
+@Document(collection = "OrderNum")
 public class OrderNum {
 
     private String orderNum;

@@ -642,8 +642,8 @@
                         <span class="flim-pic"><img src="/resource/images/default_1.jpg" width="100%" /></span>-->
                     </div>
                     <p class="item cinemaname"><span class="tt">影院：</span><span class="name">蓝天影城</span></p>
-                    <p class="item hallname-wrap"><span class="tt">影厅：</span><span class="hallname"></span></p>
-                    <p class="item"><span class="tt">场次：</span><span class="showtime"></span><span class="chooseci hide">更换</span></p>
+                    <p class="item hallname-wrap"><span class="tt">影厅：</span><span class="hallname">${hallName}</span></p>
+                    <p class="item"><span class="tt">场次：</span><span class="showtime">${startTime}</span><span class="chooseci hide">更换</span></p>
                     <div class="item seats">
                         <span class="tt">座位：</span>
                         <ul class="seat-list clearfix" id="seatBox"></ul>
@@ -772,8 +772,8 @@
         </div>
     </div>
 
-<input type="" id="paiqiId" value=${id}>
-<input type="" id="seatId">
+<input type="text" id="paiqiId" value=${id}>
+<input type="text" id="seatId">
 
 </body>
 
@@ -788,9 +788,9 @@
                 id:$("#paiqiId").val()
             },
             success:function (result) {
-                if (result.hallType == 1)
-                    n = 10;
                 if (result.hallType == 2)
+                    n = 10;
+                if (result.hallType == 1)
                     n = 15
 
                 //定义单元格
@@ -860,11 +860,8 @@
         }
 
         if (obj.classList.contains('able')) {
-
-
-
             var id = obj.id;
-            $("#"+id).toggleClass('able').toggleClass('seled');
+
 
             var seatId = $("#"+id).attr('seatId');
             var seatIds = $("#seatId").val();
@@ -876,11 +873,11 @@
 
             var seats = $("#seatId").val().split(",");
 
-            if (seats.length >= 4){
+            if (seats.length > 4){
                 alert("一次最多选四个");
                 return;
             }
-
+            $("#"+id).toggleClass('able').toggleClass('seled');
             var row = arr[0];
             var col = arr[1];
             var li = $("#seatBox").html() + '<li id="a'+id+'">'+row+'排'+col+'座</li>'

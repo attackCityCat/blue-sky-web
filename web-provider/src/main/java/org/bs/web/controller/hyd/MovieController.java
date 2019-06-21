@@ -2,14 +2,14 @@ package org.bs.web.controller.hyd;
 
 import org.bs.web.common.CommonConf;
 import org.bs.web.mapper.hyd.MovieMapper;
+import org.bs.web.mapper.llp.UserMapper;
+import org.bs.web.pojo.HitMovies;
+import org.bs.web.pojo.YanYuan;
 import org.bs.web.pojo.movie.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 public class MovieController {
     @Autowired
     private MovieMapper movieMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
@@ -126,15 +129,14 @@ public class MovieController {
 
         // 最终条件都符合  获取该放映厅可用座位数量
         //生成  指定排期座位总数信息键    生成规则 ： 常量字符串 + 放映厅ID
-
         Boolean hasKey = redisTemplate.opsForHash().hasKey(CommonConf.SUM_SEATS_KEY, CommonConf.SUM_SEATS_KEY + paiqiBean.getHallId());
         int seats = 0;
         if (hasKey)
             seats = (int) redisTemplate.opsForHash().get(CommonConf.SUM_SEATS_KEY,CommonConf.SUM_SEATS_KEY + paiqiBean.getHallId());
-        else{
-            seats = movieMapper.findSeatsCountByHallId(paiqiBean.getHallId());
-            redisTemplate.opsForHash().put(CommonConf.SUM_SEATS_KEY,CommonConf.SUM_SEATS_KEY + paiqiBean.getHallId(),seats);
-        }
+        else
+            seats = 0;
+
+
 
         paiqiBean.setSeats(seats);
         int i = movieMapper.saveMovie(paiqiBean);
@@ -142,6 +144,10 @@ public class MovieController {
         if (i <= 0){
             return 4;
         }
+
+        //排期座位总数
+        redisTemplate.opsForHash().put(CommonConf.PAI_SEAT_SUM,CommonConf.PAI_SEAT_SUM+paiqiBean.getId(),seats);
+
 
         Integer beanMovieId = paiqiBean.getMovieId();
         double price = movieMapper.findMoviePriceById(beanMovieId);
@@ -172,55 +178,6 @@ public class MovieController {
         return 0;
     }
 
-    /**
-     * 查询排期    应该根据当前日期 和 电影ID  查询 排期信息
-     * @return
-     */
-    @RequestMapping(value = "/movie/findMoviePaiqi",method = RequestMethod.GET)
-    public List<PaiqiBean> findMoviePaiqi(String movieDate,Integer movieId) throws ParseException {
-        //获取时间转化对象  时分秒
-        SimpleDateFormat sim = new SimpleDateFormat("HH:mm:ss");
-        //获取收费标准时间段信息
-        List<PaiqiNormalTimeBean> paiqiNormalTimeBeans = movieMapper.findPaiqiNormalTimeBean();
-        //根据电影放映时间和电影ID  查询出排期信息
-        List<PaiqiBean> moviePaiqis = movieMapper.findMoviePaiqi(movieDate,movieId);
-        // 遍历查询到的信息  用来判断天剑是否对应
-        for (PaiqiBean paiqiBean : moviePaiqis){
-            for (PaiqiNormalTimeBean paiqiNormalTimeBean : paiqiNormalTimeBeans){
-                // 获取原有的价格
-                double price = paiqiBean.getPrice();
-                // 获取播映时间类型段的事件
-                Date beginTime = sim.parse(paiqiNormalTimeBean.getBeginTime());
-                Date endTime = sim.parse(paiqiNormalTimeBean.getEndTime());
-
-                // 取出放映时间作为判断条件
-                String startTime = paiqiBean.getStartTime();
-                // 根据空格分割  取出时分秒判断条件
-                String[] s = startTime.split(" ");
-                // 取出对应的时分秒
-                Date hms = sim.parse(s[1]);
-                System.out.println(hms);
-                boolean b = comparaDate(hms,beginTime) < 0 || comparaDate(hms,endTime) >0;
-                // 判断当前时间点处在某一个时间段  如果不在任何时间段 直接continue
-                if (comparaDate(hms,beginTime) < 0 || comparaDate(hms,endTime) >0){
-                    continue;
-                }
-                // 利用原有价格 * 价格对应的时间段系数 普通时间段 1  黄金时间段 1.5  夜场时间段  0.7
-                price = price * paiqiNormalTimeBean.getCoe();
-                // 计算出的价格存到返回体
-                paiqiBean.setPrice(price);
-            }
-            // 取出对应的放映厅ID 用来查询对应放映厅类型的排期信息
-            Integer hallId = paiqiBean.getHallId();
-            // 获取对应放映厅ID的放映厅类型系数 普通厅为 1  豪华厅为 1.5
-            Float coe = movieMapper.findHallTypeCoeByHallId(hallId);
-            // 计算对应放映厅类型的价格 并存在返回体中
-            paiqiBean.setPrice(paiqiBean.getPrice()*coe);
-        }
-        // 返回体
-        return moviePaiqis;
-    }
-
     //用于 根据 放映厅Id  hallId 获取放映厅所有座位信息
     public List<SeatBean> findSeatListByHallId(Integer hallId){
         //判断redis中是否存在 该 放映厅 相关 座位信息，若不存在 则去数据库中查找
@@ -242,8 +199,6 @@ public class MovieController {
             return seatBeans;
         }
     }
-
-
 
     //将指定PaiQiSeatBean  缓存至redis
     public void cachePaiQiSeatBean(PaiQiSeatBean paiQiSeatBean){
@@ -305,4 +260,120 @@ public class MovieController {
         calendar.add(Calendar.MINUTE, m);
         return calendar.getTime();
     }
+
+
+
+    /**
+     * 查询排期    应该根据当前日期 和 电影ID  查询 排期信息
+     * @return
+     */
+    @RequestMapping(value = "/movie/findMoviePaiqi",method = RequestMethod.GET)
+    public List<PaiqiBean> findMoviePaiqi(String movieDate,Integer movieId) throws ParseException {
+        //获取时间转化对象  时分秒
+        SimpleDateFormat sim = new SimpleDateFormat("HH:mm:ss");
+        //获取收费标准时间段信息
+        List<PaiqiNormalTimeBean> paiqiNormalTimeBeans = movieMapper.findPaiqiNormalTimeBean();
+        //根据电影放映时间和电影ID  查询出排期信息
+        List<PaiqiBean> moviePaiqis = movieMapper.findMoviePaiqi(movieDate,movieId);
+        // 遍历查询到的信息  用来判断天剑是否对应
+        for (PaiqiBean paiqiBean : moviePaiqis){
+            for (PaiqiNormalTimeBean paiqiNormalTimeBean : paiqiNormalTimeBeans){
+                // 获取原有的价格
+                double price = paiqiBean.getPrice();
+                // 获取播映时间类型段的事件
+                Date beginTime = sim.parse(paiqiNormalTimeBean.getBeginTime());
+                Date endTime = sim.parse(paiqiNormalTimeBean.getEndTime());
+
+                // 取出放映时间作为判断条件
+                String startTime = paiqiBean.getStartTime();
+                // 根据空格分割  取出时分秒判断条件
+                String[] s = startTime.split(" ");
+                // 取出对应的时分秒
+                Date hms = sim.parse(s[1]);
+                System.out.println(hms);
+                boolean b = comparaDate(hms,beginTime) < 0 || comparaDate(hms,endTime) >0;
+                // 判断当前时间点处在某一个时间段  如果不在任何时间段 直接continue
+                if (comparaDate(hms,beginTime) < 0 || comparaDate(hms,endTime) >0){
+                    continue;
+                }
+                // 利用原有价格 * 价格对应的时间段系数 普通时间段 1  黄金时间段 1.5  夜场时间段  0.7
+                price = price * paiqiNormalTimeBean.getCoe();
+                // 计算出的价格存到返回体
+                paiqiBean.setPrice(price);
+            }
+            // 取出对应的放映厅ID 用来查询对应放映厅类型的排期信息
+            Integer hallId = paiqiBean.getHallId();
+            // 获取对应放映厅ID的放映厅类型系数 普通厅为 1  豪华厅为 1.5
+            Float coe = movieMapper.findHallTypeCoeByHallId(hallId);
+            // 计算对应放映厅类型的价格 并存在返回体中
+            paiqiBean.setPrice(paiqiBean.getPrice()*coe);
+        }
+        // 返回体
+        return moviePaiqis;
+    }
+
+
+    /**
+     * 根据ID查询电影以及演员
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "findMoviesDetail")
+    @ResponseBody
+    public HitMovies findMoviesDetail(@RequestParam(value = "id") Integer id){
+
+        System.out.println(id);
+        //查询电影详情
+        HitMovies moviesDetail = userMapper.findMoviesDetail(id);
+
+        System.out.println(moviesDetail);
+
+        //查询电影的演员
+        YanYuan yuan = userMapper.findYanYuan(id);
+
+        System.out.println(yuan);
+        //将查询出的演员放进moviesDetail一并返回
+        moviesDetail.setPerName(yuan.getPerName());
+
+        return moviesDetail;
+    }
+
+    @RequestMapping(value = "/findHitMovies")
+    @ResponseBody
+    public List<HitMovies> findHitMovies(){
+        return userMapper.findHitMovies(1,5);
+    }
+
+
+    @RequestMapping(value = "findPaiqiByIdAndByTime")
+    @ResponseBody
+    public List<PaiqiBean> findPaiqiByIdAndByTime(){
+        Integer id = 2;
+        String time = "2019-06-24";
+        return movieMapper.findPaiqiByIdAndByTime(id,time);
+    }
+
+    @RequestMapping("/page/toDetail")
+    public List<PaiqiBean> toDetail(@RequestParam("id") Integer id){
+        List<PaiqiBean> paiqiBean = movieMapper.findPaiQiById(id);
+        return paiqiBean;
+    }
+
+    @RequestMapping("findPaiqiList")
+    public List<PaiqiBean> findPaiqiList(){
+        return movieMapper.findPaiqiList();
+    }
+
+    @RequestMapping(value = "/findHallList")
+    @ResponseBody
+    List<HallBean> findHallList(){
+        return movieMapper.findHallList();
+    };
+
+    @RequestMapping("/findMovieBeanList")
+    @ResponseBody
+    List<MovieBean> findMovieBeanList(){
+        return movieMapper.findMovieBeanList();
+    };
+
 }

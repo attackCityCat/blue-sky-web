@@ -1,8 +1,10 @@
 package org.bs.web.controller.ljw;
 
 
+import org.bs.web.common.CommonConf;
 import org.bs.web.mapper.ljw.MovieMapperLjw;
 import org.bs.web.dao.ljw.MovieRepository;
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.movie.*;
 import org.bs.web.util.PageModel;
 import org.bs.web.util.ResultUtil;
@@ -47,13 +49,24 @@ public class MovieControllerLjw {
     //设置为轮播图
     @RequestMapping(value = "/isSlideShowLjw")
     public void isSlideShowLjw(@RequestParam(value = "id") Integer id){
-        movieMapperLjw.isSlideShowLjw(id);
+
+        int i = movieMapperLjw.isSlideShowLjw(id);
+
+        if (i > 0){
+            HitMovies hitMovies = movieMapperLjw.findImgInfoById(id);
+            redisTemplate.opsForHash().put(CommonConf.IMGS_KEY,CommonConf.IMGS_KEY+id,hitMovies);
+        }
+
+
     }
 
     //取消设置为轮播图
     @RequestMapping(value = "/noSlideShowLjw")
     public void noSlideShowLjw(@RequestParam(value = "id") Integer id){
-        movieMapperLjw.noSlideShowLjw(id);
+        int i = movieMapperLjw.noSlideShowLjw(id);
+        if (i > 0){
+            redisTemplate.opsForHash().delete(CommonConf.IMGS_KEY,CommonConf.IMGS_KEY+id);
+        }
     }
 
     //动态加载标签
@@ -97,8 +110,7 @@ public class MovieControllerLjw {
             redisTemplate.opsForList().leftPush(movieKey,movieBean);
         }
 
-        //新增索引
-        movieRepository.save(movieBean);
+
 
         //根据name去数据库查类型
         MovieTypeBean movieType = movieMapperLjw.queryTypeByNameLjw(movieBean.getTypeName());
@@ -192,6 +204,12 @@ public class MovieControllerLjw {
         movieTimeBean.setEndDate(movieBean.getEndDate());
         movieTimeBean.setMovieId(movieBean.getId());
         movieMapperLjw.saveMovieTime(movieTimeBean);
+
+        MovieBean MovieInfo = movieMapperLjw.findMovieInfo(movieBean.getId());
+        String tag = movieMapperLjw.queryTagLjw(movieBean.getId());
+        MovieInfo.setTag(tag);
+        //新增索引
+        movieRepository.save(MovieInfo);
    }
 
     //查询

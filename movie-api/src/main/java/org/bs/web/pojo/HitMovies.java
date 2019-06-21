@@ -1,6 +1,9 @@
 package org.bs.web.pojo;
 
-public class HitMovies {
+import java.io.Serializable;
+
+public class HitMovies implements Serializable {
+    private static final long serialVersionUID = -6103281802384770731L;
     private Integer id;
 
     private String name;    //电影名

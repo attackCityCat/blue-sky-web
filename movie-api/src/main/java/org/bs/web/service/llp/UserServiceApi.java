@@ -21,6 +21,8 @@ public interface UserServiceApi {
     @RequestMapping(value = "/findByPhone")
     UserBean findByPhone(@RequestParam(value = "phone") String phone);
 
+
+
     /**
      * 新增用户信息
      * @param userBean
@@ -79,4 +81,23 @@ public interface UserServiceApi {
      */
     @RequestMapping(value = "findMoviesDetail")
     HitMovies findMoviesDetail(@RequestParam(value = "id") int id);
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping(value = "/findNotHitMovies")
+    List<HitMovies> findNotHitMovies(@RequestParam("page") Integer page,@RequestParam("rows")Integer rows);
+
+    @RequestMapping(value = "/findNotHitMoviesCount")
+    int findNotHitMoviesCount();
+
+    @RequestMapping(value = "/findHitMovies")
+    public List<HitMovies> findHitMovies(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows);
+
+    @RequestMapping(value = "/findHitMoviesCount")
+    int findHitMoviesCount();
+
+    @RequestMapping(value = "/findImgs")
+    List<HitMovies> findImgs();
 }

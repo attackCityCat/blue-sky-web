@@ -1,12 +1,18 @@
 package org.bs.web.controller.hyd;
 
+import org.bs.web.common.CommonConf;
+import org.bs.web.pojo.movie.HallBean;
+import org.bs.web.pojo.movie.MovieBean;
 import org.bs.web.pojo.movie.PaiqiBean;
+import org.bs.web.service.hyd.MovieService;
 import org.bs.web.service.hyd.MovieServiceApi;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +21,10 @@ import java.util.Map;
 @RequestMapping("hyd")
 public class MovieController {
     @Autowired
-    private MovieServiceApi movieService;
+    private MovieService movieService;
+
+    @Resource
+    private RedisTemplate<String,Object> redisTemplate;
 
     /**
      * 新增排期
@@ -48,4 +57,24 @@ public class MovieController {
     public List<PaiqiBean> findMoviePaiqi(){
         return movieService.findMoviePaiqi();
     }
+
+    @RequestMapping("findMovieList")
+    public List<MovieBean> findMovieBeanList(){
+        return movieService.findMovieBeanList();
+    }
+
+    @RequestMapping("findHallList")
+    public List<HallBean> findHallList(){
+        return movieService.findHallList();
+    }
+
+    @RequestMapping("findPaiSeatSum")
+    public Boolean findPaiSeatSum(Integer id){
+        int object = (int) redisTemplate.opsForHash().get(CommonConf.PAI_SEAT_SUM, CommonConf.PAI_SEAT_SUM + id);
+        if (object > 0)
+            return true;
+        else
+            return false;
+    }
+
 }

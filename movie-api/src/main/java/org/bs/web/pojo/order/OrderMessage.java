@@ -28,6 +28,8 @@ public class OrderMessage implements Serializable{
 
     private  String   phone; //取票手机号
 
+    private Integer hallId;
+
     private  String   hallName;  //放映厅名称
 
     private List<SeatBean> seatBeans;
@@ -278,5 +280,13 @@ public class OrderMessage implements Serializable{
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public Integer getHallId() {
+        return hallId;
+    }
+
+    public void setHallId(Integer hallId) {
+        this.hallId = hallId;
     }
 }

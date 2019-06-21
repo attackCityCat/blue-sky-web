@@ -31,12 +31,27 @@ public class UserController {
      */
     @RequestMapping(value = "/findHitMovies")
     @ResponseBody
-    public List<HitMovies> findHitMovies() {
+    public List<HitMovies> findHitMovies(@RequestParam("page") Integer page,@RequestParam("rows") Integer rows) {
 
-        List<HitMovies> list = userMapper.findHitMovies();
+        List<HitMovies> list = userMapper.findHitMovies((page-1)*rows,rows);
 
         return list;
     }
+
+    @RequestMapping(value = "/findHitMoviesCount")
+    int findHitMoviesCount(){
+        return userMapper.findHitMoviesCount();
+    };
+
+    @RequestMapping(value = "/findNotHitMovies")
+    List<HitMovies> findNotHitMovies(@RequestParam("page") Integer page,@RequestParam("rows")Integer rows){
+        return userMapper.findNotHitMovies((page-1)*rows,rows);
+    };
+
+    @RequestMapping(value = "/findNotHitMoviesCount")
+    int findNotHitMoviesCount(){
+        return userMapper.findNotHitMoviesCount();
+    };
 
     /**
      * 查询热映电影 首页展示（使用10条数据)
@@ -74,7 +89,7 @@ public class UserController {
 
         //查询电影的演员
         YanYuan yuan = userMapper.findYanYuan(id);
-
+        System.out.println(yuan.getPerName());
         //将查询出的演员放进moviesDetail一并返回
         moviesDetail.setPerName(yuan.getPerName());
 
@@ -152,4 +167,9 @@ public class UserController {
             return false;
         }
     }
+
+    @RequestMapping(value = "/findImgs")
+    List<HitMovies> findImgs(){
+        return userMapper.findImgs();
+    };
 }

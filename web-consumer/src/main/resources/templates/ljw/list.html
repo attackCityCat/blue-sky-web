@@ -47,7 +47,7 @@
     <form id="movieForm",enctype="multipart/form-data">
 
         电影名称:<input class="easyui-textbox" name="name" required="required"><br>
-        封面:<input type="text" id="testimg" name="img" />
+        封面:<input type="hidden" id="testimg" name="img" />
         <!-- projectfile -->
         <input type="file" multiple class="projectfile" accept="image/*" name="img" id="goodsImg">
         </label>
@@ -232,8 +232,9 @@
             toolbar:'#toolbar',
             method:'post',
             pagination:true,
-            pageList:[1,2,3,4,5,6,7,8],
-            pageSize:4,
+            pageList:[1,2,3,4,5,6,7,8,10],
+            pageSize:10,
+            pageNumber:1,
             columns:[
                 [
                     {field:"id",title:"编号"},
@@ -250,13 +251,13 @@
                         }},
                     {field:"firstTime",title:"首映时间"},
                     {field:"derector",title:"导演"},
-                    {field:"detail",title:"电影简介"},
+                    {field:"detail",title:"电影简介",width:"200px"},
                     {field:"startDate",title:"开始日期"},
                     {field:"endDate",title:"结束日期"},
                     {field:"typeName",title:"类型"},
                     {field:"languageName",title:"语言"},
                     {field:"tag",title:"标签"},
-                    {field:"performer",title:"演员"},
+                    {field:"performer",title:"演员",width:"200px"},
                     {field:"slideShow",title:"是否为轮播图",formatter:function (value,rows,index) {
                             return value==0?"否":"是";
                         }},

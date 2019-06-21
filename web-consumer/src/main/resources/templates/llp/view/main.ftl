@@ -21,6 +21,24 @@
     <script src="/llp/js/helper.js" type="text/javascript"></script>
     <script src="/llp/js/jquery.flexslider.min.js" type="text/javascript"></script>
 
+    <style type="text/css" >
+        .btn {
+            position: absolute;
+            width: 60px;
+            height: 20px;
+            *height: 33px;
+            background-color: #1ba4e5;
+            color: #fff;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 20px;
+            *line-height: 33px;
+            text-align: center;
+            right: 0;
+            top: 0;
+            *top: -2px
+        }
+    </style>
 </head>
 
 <body>
@@ -57,8 +75,8 @@
                         src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/logo.jpg" alt="大眼睛票务网"></a></div>
         <div class="search">
             <div class="search-input">
-                <input type="text" name="" placeholder="请输入电影进行搜索">
-                <span class="submit">搜索</span>
+                <input type="text" id="name" placeholder="请输入电影进行搜索">
+                <span class="btn"  onclick="search()">搜索</span>
             </div>
             <div class="search-hot hide">
                 <a href="javascript:void(0);">星际特工</a>
@@ -72,7 +90,7 @@
             <ul class="menu clearfix">
                 <li><a href="javascript:toMain()" data-index="index" class="act">首页</a></li>
                 <li><a href="javascript:toReying()" data-index="filmshowing">热映影片</a></li>
-                <li><a href="javascript:tan()" data-index="filmfeature">即将上映</a></li>
+                <li><a href="javascript:toNotRe()" data-index="filmfeature">即将上映</a></li>
                 <li><a href="javascript:tan()" data-index="cinemas">影院</a></li>
             </ul>
             <ul class="other clearfix">
@@ -94,8 +112,21 @@
     }
 
     function toReying() {
-        location.href = "/llp/toReYing"
-        //javascript:toReying()
+        $.ajax({
+            url:'/llp/toReYing',
+            success:function (data) {
+                $("#window").html(data);
+            }
+        })
+    }
+
+    toNotRe = function () {
+        $.ajax({
+            url:'/llp/toNotRe',
+            success:function (data) {
+                $("#window").html(data);
+            }
+        })
     }
 
     function toMain() {
@@ -103,15 +134,20 @@
     }
 
     function toDetail(id) {
-        location.href = "/llp/toDetail?id=" + id;
+        location.href = "/hyd/page/toDetail?id=" + id;
     }
 
 </script>
 <#--中间内容-->
-<div class="main homepage">
+<div class="main homepage" id="window">
     <div class="mbanner flexslider">
         <div class="layui-carousel" id="test1">
             <div carousel-item>
+
+                <#list imgs as i>
+                    <div><img src="${i.img}" alt="${i.name}" onclick="toDetail(${i.id})"></div>
+                </#list>
+
                 <div><img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/20190514095715.jpg" alt=""></div>
                 <div><img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/20190523094917.jpg" alt=""></div>
                 <div><img src="https://lantianjihua.oss-cn-beijing.aliyuncs.com/20190603095531.jpg" alt=""></div>
@@ -264,6 +300,26 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+    search = function () {
+        var name = $("#name").val();
+        var page = $("#page").val();
+        var rows = $("#rows").val();
+        if (name == '')
+            return;
+        
+        $.ajax({
+            url:'/dyl/queryMovieList',
+            data:{
+                name:name,
+                page:page,
+                rows:rows
+            },
+            success:function (data) {
+                $("#window").html(data);
+            }
+        })
+    }
+</script>
 </body>
 </html>

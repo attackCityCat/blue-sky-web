@@ -1,0 +1,86 @@
+ol, ul {
+    list-style: none;
+} 
+.fp_steps{
+    margin:10px 0px 20px 20px;font-size:12px;
+}
+.fp_steps li {
+    float: left;width: 105px;padding-top: 10px;
+    background: url(forgetpwd.png?t=201509142003) no-repeat -105px -150px;
+    text-align: center;color: #b1b1b1;
+}
+.fp_steps li.cur {
+    background-position: 0 -150px;color: green;
+}
+.itable{
+    font-size: 14px;color: #999;margin:10px auto;table-layout:fixed;width:450px;
+}
+.itable TD{
+    padding: 8px 3px;vertical-align:text-top;
+}
+
+.itable TD.tdbold{
+    font-weight:bold;font-size:16px;color: #666;
+}
+
+.itxt, .text {
+    height: 20px;width: 220px;padding: 5px 23px 5px 5px;font-size:12px;
+}
+.sysinfor{
+    font-size:12px;
+    color: #999;
+    margin-top: 5px;
+}
+.errorinfor{
+    color: red;
+}
+
+INPUT.btn-next {
+    width: 150px;
+    height: 35px;
+    border: 0;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    line-height: 33px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFF;
+    background-color: #e66e1e;
+    background: -webkit-gradient(linear,left top,left bottom,from(#ffa800),to(#e66e1e));
+    border-radius: 2px;
+    cursor: pointer;
+    zoom: 1;
+}
+INPUT.btn-next-hover {
+    text-decoration: none;
+    background-color: #f48f0d;
+    background: -webkit-gradient(linear,left top,left bottom,from(#ffb400),to(#f48f0d));
+}
+
+#step2 .btn-10{
+    padding: 8px 14px;
+    font-size: 14px;
+}
+
+
+.ui-tipbox-icon {
+    background: #fff;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 22px;
+    left: 48px;
+}
+
+ .iconfont {
+    color: green;
+    font-size: 36px;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 32px;
+    height: 32px;
+    line-height: 36px;
+    text-shadow: 0 1px 0 #fff;
+}

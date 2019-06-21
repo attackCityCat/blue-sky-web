@@ -7,6 +7,7 @@ import org.bs.web.pojo.movie.SeatBean;
 import org.bs.web.pojo.order.OrderMessage;
 import org.bs.web.service.xinx.XinxService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -43,8 +45,19 @@ public class XinxController {
      * @return
      */
     @RequestMapping("/page/toSeat")
-    public String toSeat(Integer id,Model model){
+    public String toSeat(Integer id, Model model, HttpSession session){
+
+        Object attribute = session.getAttribute(session.getId());
+        if (attribute == null){
+            return "llp/view/login";
+        }
+
         model.addAttribute("id",id);
+        PaiqiBean paiqiInfoById = xinxService.findPaiqiInfoById(id);
+        model.addAttribute("startTime",paiqiInfoById.getStartTime());
+        Integer hallId = paiqiInfoById.getHallId();
+        String hallName = xinxService.getHallName(hallId);
+        model.addAttribute("hallName",hallName);
         return "xinx/seat/seat";
     }
 
@@ -113,5 +126,17 @@ public class XinxController {
         }
 
         return b;
+    }
+
+
+    @RequestMapping("test")
+    @ResponseBody
+    public Boolean test(String str,String o){
+        try {
+            redisTemplate.opsForHash().put(CommonConf.TIME,CommonConf.TIME+o,str);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

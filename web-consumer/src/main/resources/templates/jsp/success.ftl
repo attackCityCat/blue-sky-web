@@ -18,7 +18,6 @@
     <script type="text/javascript">
         $(function(){
             var orderNum = $("#orderNum").val();
-            alert(orderNum);
             $.ajax({
                 url:'/saveOrderRJF',
                 type:'post',

@@ -17,6 +17,8 @@ public class PaiqiBean implements Serializable {
     private Integer seats; // 剩余座位数
     private double  price; // 电影票价
 
+    private double yprice;
+
     private String startDate; // 档期开始时间
     private String endDate;  // 档期结束时间
 
@@ -108,5 +110,11 @@ public class PaiqiBean implements Serializable {
         this.seats = seats;
     }
 
+    public double getYprice() {
+        return yprice;
+    }
 
+    public void setYprice(double yprice) {
+        this.yprice = yprice;
+    }
 }

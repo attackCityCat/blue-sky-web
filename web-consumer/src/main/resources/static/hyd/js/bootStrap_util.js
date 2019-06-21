@@ -313,7 +313,7 @@ submitForm = function(formId,url,tableId){
 						<div class="table" id="myTable"></div>
  * 
  */
-initTable = function(){
+/*initTable = function(){
 	$('#tableId').bootstrapTable({
 		toolbar:'#toolbar',
 		url:'user/findUserBeanListByPage.do',
@@ -372,7 +372,7 @@ initTable = function(){
 			}}
 		]
 	})
-}
+}*/
 
 
 /**

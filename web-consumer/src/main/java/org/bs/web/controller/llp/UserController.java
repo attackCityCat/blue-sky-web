@@ -7,6 +7,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.bs.web.common.CommonConf;
 import org.bs.web.constant.Conts;
 import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.UserBean;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("llp")
@@ -121,8 +123,10 @@ public class UserController {
         //首页只需要展示条数据即可
         List<HitMovies> list = userServiceApi.findHitMoviesMain();
         List<HitMovies> not = userServiceApi.findNotHitMoviesMain();
+        List<HitMovies> imgs = findImgs();
         model.addAttribute("list", list);
         model.addAttribute("not", not);
+        model.addAttribute("imgs", imgs);
 
         return "llp/view/main";
     }
@@ -134,16 +138,48 @@ public class UserController {
      * @return
      */
     @RequestMapping("toReYing")
-    public String toReYing(Model model, HttpSession session) {
+    public String toReYing(Integer page,Integer rows,Model model) {
 
-        UserBean attribute = (UserBean) session.getAttribute(session.getId());
-        model.addAttribute("user", attribute);
+        if (page == null)
+            page = 1;
+        if (rows == null)
+            rows = 15;
+        List<HitMovies> list = userServiceApi.findHitMovies(page,rows);
+        int total = userServiceApi.findHitMoviesCount();
+        model.addAttribute("count", list.size());
+        model.addAttribute("list", list);
+        model.addAttribute("page",page);
+        model.addAttribute("rows",rows);
+        model.addAttribute("total",total);
+        model.addAttribute("pageSize",(total-1)/rows+1);
+        return "llp/view/reying";
+    }
 
-        List<HitMovies> list = userServiceApi.findHitMovies();
+    /**
+     * 进入热映页面 并查询数据
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping("toNotRe")
+    public String toNotRe(Integer page,Integer rows,Model model) {
+
+        if (page == null)
+            page = 1;
+        if (rows == null)
+            rows = 15;
+
+        List<HitMovies> list = userServiceApi.findNotHitMovies(page,rows);
+        int total = userServiceApi.findNotHitMoviesCount();
 
         model.addAttribute("count", list.size());
         model.addAttribute("list", list);
-        return "llp/view/reying";
+
+        model.addAttribute("page",page);
+        model.addAttribute("rows",rows);
+        model.addAttribute("total",total);
+        model.addAttribute("pageSize",(total-1)/rows+1);
+        return "llp/view/notRe";
     }
 
     /**
@@ -398,5 +434,17 @@ public class UserController {
     public String loginOut(HttpSession session) {
         session.removeAttribute(session.getId());
         return "redirect:toMain";
+    }
+
+    private List<HitMovies> findImgs(){
+        Boolean hasKey = redisTemplate.hasKey(CommonConf.IMGS_KEY);
+        if (hasKey){
+            return  (List)redisTemplate.opsForHash().entries(CommonConf.IMGS_KEY).values().stream().collect(Collectors.toList());
+        }
+        List<HitMovies> imgs = userServiceApi.findImgs();
+        for (HitMovies hitMovies : imgs){
+            redisTemplate.opsForHash().put(CommonConf.IMGS_KEY,CommonConf.IMGS_KEY+hitMovies.getId(),hitMovies);
+        }
+        return imgs;
     }
 }

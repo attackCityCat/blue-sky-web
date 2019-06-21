@@ -21,4 +21,9 @@ public class page {
     public String toAddHall(){
         return "dyl/view/addHall";
     }
+
+    @RequestMapping("toJTicket")
+    public String toJTicket(){
+        return "dyl/view/JTicket";
+    }
 }

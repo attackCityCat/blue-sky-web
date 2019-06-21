@@ -158,7 +158,7 @@
         $.ajax({
             type: "POST",
             url: "/dyl/addSeat",
-            data: "seatRow=" + $("#seatRow").val() + "&seatColumn=" + $("#seatColumn").val() + "&hellSeatId=" + Windowid,
+            data: "seatRow=" + $("#seatRow").val() + "&seatCol=" + $("#seatColumn").val() + "&hellSeatId=" + Windowid,
             success: function (data) {
                 if(data){
                     $.messager.alert("提示！", "座位添加成功！");
@@ -214,7 +214,7 @@
                 {field:'id',title:'放映厅编号'},
                 {field:'name',title:'放映厅名称'},
                 {field:'typeName',title:'类型'},
-                {field:'seats',title:'座位总数'},
+                {field:'seats',title:'座位最大数'},
                 {field:'456',title:'操作',formatter:function(value,row,index){
                         var html = "<a href='javascript:querySeat("+row.id+");'>座位详情</a>&nbsp;&nbsp;&nbsp;";
                         html+= "<a href='javascript:addSeat("+row.id+");'>新增座位</a>";
@@ -266,7 +266,7 @@
                     {field: 'id', title: '放映厅编号'},
                     {field: 'hallId', title: '放映厅名称'},
                     {field: 'seatRow', title: '行'},
-                    {field: 'seatColumn', title: '列'},
+                    {field: 'seatCol', title: '列'},
                     {
                         field: 'isActive', title: '是否可用', formatter: function (value, row, index) {
                             return value == 0 ? "可用" : "不可以";

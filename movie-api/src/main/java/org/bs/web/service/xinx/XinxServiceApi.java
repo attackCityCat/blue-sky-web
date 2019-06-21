@@ -22,4 +22,6 @@ public interface XinxServiceApi {
     @RequestMapping("/xinx/changeStatus")
     Boolean changeStatus(@RequestParam(value = "paiQiId") Integer paiQiId,@RequestParam(value = "seatId") Integer seatId,@RequestParam(value = "flag") int flag);
 
+    @RequestMapping("/xinx/getHallName")
+    String getHallName(@RequestParam("hallId") Integer hallId);
 }

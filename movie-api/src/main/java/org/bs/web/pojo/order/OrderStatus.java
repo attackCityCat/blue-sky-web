@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 
 
-@Document(value = "OrderStatus")
+@Document(collection = "OrderStatus")
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 536662325622805042L;

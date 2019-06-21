@@ -58,4 +58,45 @@ public interface MovieMapper {
     @Select("SELECT tmd.price from t_movie tm left join t_movie_detail tmd on tmd.movieId = tm.id "+
             "where tm.id = #{value}")
     double findMoviePriceById(Integer beanMovieId);
+
+    @Select("SELECT " +
+            "tp.id,  " +
+            "tp.startTime,  " +
+            "tmd.language,  " +
+            "tp.movieId,  " +
+            "tp.hallId, " +
+            "th.name as hallName, " +
+            " tmd.price  " +
+            "FROM  " +
+            "t_paiqi tp  " +
+            "LEFT JOIN t_movie_detail tmd ON tp.movieId = tmd.id " +
+            "LEFT JOIN t_hall th ON tp.hallId = th.id " +
+            "where DATE_FORMAT(tp.startTime,'%Y-%m-%d') = (SELECT str_to_date(#{time}, '%Y-%m-%d') ) " +
+            "and tp.movieId = #{id}")
+    List<PaiqiBean> findPaiqiByIdAndByTime(@RequestParam("id") Integer id, @RequestParam("time") String time);
+
+
+    @Select("SELECT " +
+            "tp.id,  " +
+            "tp.startTime,  " +
+            "tmd.language,  " +
+            "tp.movieId,  " +
+            "tp.hallId, " +
+            "th.name as hallName, " +
+            " tmd.price  " +
+            "FROM  " +
+            "t_paiqi tp  " +
+            "LEFT JOIN t_movie_detail tmd ON tp.movieId = tmd.movieId " +
+            "LEFT JOIN t_hall th ON tp.hallId = th.id " +
+            "where  tp.movieId = #{movieId}")
+    List<PaiqiBean> findPaiQiById(@RequestParam("id") Integer id);
+
+    @Select("select * from t_paiqi")
+    List<PaiqiBean> findPaiqiList();
+
+    @Select("select * from t_hall")
+    List<HallBean> findHallList();
+
+    @Select("select * from t_movie")
+    List<MovieBean> findMovieBeanList();
 }

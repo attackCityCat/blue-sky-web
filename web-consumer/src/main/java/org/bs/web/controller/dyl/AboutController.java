@@ -1,6 +1,7 @@
 package org.bs.web.controller.dyl;
 
 
+import joptsimple.internal.Rows;
 import org.bs.web.dao.ljw.MovieRepository;
 import org.bs.web.pojo.movie.MovieBean;
 import org.bs.web.service.dyl.AboutService;
@@ -16,12 +17,15 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-@RestController
+@Controller
 @RequestMapping("dyl")
 public class AboutController {
 
@@ -35,11 +39,13 @@ public class AboutController {
     private AboutService aboutService;
 
     @RequestMapping("queryMovieByName")
+    @ResponseBody
     public MovieBean queryMovieBynMame(String name){
         return aboutService.queryMovieByName(name);
     }
 
     @RequestMapping("queryMovie")
+    @ResponseBody
     public List<MovieBean> queryMMovie(){
         return aboutService.queryMovie();
     }
@@ -48,7 +54,7 @@ public class AboutController {
 
     //es搜索
     @RequestMapping("queryMovieList")
-    public Map<String,Object> find(Integer page, Integer rows, MovieBean movieBean){
+    public String find(Integer page, Integer rows, MovieBean movieBean, Model model){
         //可以对 name  进行 模糊匹配  并且 高亮
         //对类型  型号  颜色  价格区间进行过滤
         //对价格进行排序  desc
@@ -58,7 +64,7 @@ public class AboutController {
         if (page == null)
             page = 1;
         if (rows == null)
-            rows = 50;
+            rows = 15;
 
 
         //创建 返回体
@@ -149,6 +155,8 @@ public class AboutController {
 
             product.setId((Integer) searchHit.getSourceAsMap().get("id"));
             product.setDerector((String) searchHit.getSourceAsMap().get("derector"));
+            product.setImg((String) searchHit.getSourceAsMap().get("img"));
+            product.setTag((String) searchHit.getSourceAsMap().get("tag"));
             product.setDetail((String) searchHit.getSourceAsMap().get("detail"));
             product.setLanguage((Integer) searchHit.getSourceAsMap().get("language"));
             product.setLength((Integer) searchHit.getSourceAsMap().get("length"));
@@ -159,9 +167,14 @@ public class AboutController {
             productBeans.add(product);
         }
 
-        result.put("total",totalHits);
-        result.put("rows",productBeans);
-        return result;
+        model.addAttribute("list",productBeans);
+        model.addAttribute("total",totalHits);
+        model.addAttribute("pageSize",(totalHits-1)/rows +1);
+        model.addAttribute("page",page);
+        model.addAttribute("rows",rows);
+
+
+        return "/dyl/view/search";
     }
 
     @RequestMapping("saveMovie")

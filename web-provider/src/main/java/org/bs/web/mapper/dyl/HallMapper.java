@@ -13,8 +13,6 @@ import java.util.List;
 @Component
 public interface HallMapper {
 
-
-    @Insert("insert into t_hall(name,typeId) values(#{name},#{typeId})")
     void addHoll(HallBean hallBean);
 
     @Select("select th.id,th.name,th.typeId,tht.name as typeName,tht.seats from t_hall th left join t_hall_type tht on th.typeId = tht.id")
@@ -23,7 +21,7 @@ public interface HallMapper {
     @Select("select * from t_seat where hallId = #{value}")
     List<SeatBean> querySeat(Integer hallId);
 
-    @Update("update t_seat set seatColumn =#{seatColumn},seatRow = #{seatRow},isActive = #{isActive},isLovers = #{isLovers} where hallId = #{hallId}")
+    @Update("update t_seat set seatCol =#{seatCol},seatRow = #{seatRow},isActive = #{isActive},isLovers = #{isLovers} where hallId = #{hallId}")
     void editSeat(SeatBean seatBean);
 
 
@@ -40,7 +38,7 @@ public interface HallMapper {
     List<SeatBean> queryRowCount(String row, Integer hallId);
 
 
-    @Insert("insert into t_seat(hallId,seatRow,seatColumn) values(#{hallSeatId},#{seatBean.seatRow},#{seatBean.seatColumn})")
+    @Insert("insert into t_seat(hallId,seatRow,seatCol) values(#{hallSeatId},#{seatBean.seatRow},#{seatBean.seatCol})")
     void addSeat(SeatBean seatBean,Integer hallSeatId);
 
     @Select("select th.id,th.name,th.typeId,tht.name as typeName,tht.seats from t_hall th left join t_hall_type tht on th.typeId = tht.id where th.id = #{value}")

@@ -73,4 +73,18 @@ public class CommonConf {
     public static final String ORDER_NUM_KEK = "orderNum";
     public static final String ORDER_NUM_KEK_P = "p";
     public static final String ORDER_NUM_KEK_S = "s";
+
+
+    //排期座位总数
+    public static final String PAI_SEAT_SUM = "paiSeatSum";
+
+    //短信发送成功后  存储订单状态
+    public static final String ORDER_STATUS = "orderStatus";
+
+    //轮播图缓存
+    public static final String IMGS_KEY = "imgs";
+    public static final long IMGS_TIME = 10L;
+
+
+    public static final String TIME = "time";
 }

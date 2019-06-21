@@ -4,7 +4,9 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.bs.web.pojo.HitMovies;
 import org.bs.web.pojo.movie.*;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +19,7 @@ import java.util.List;
  * @description: TODO
  * @date 2019/6/1411:01
  */
-@Mapper
+@Component
 public interface MovieMapperLjw {
 
     @Select("select count(1) " +
@@ -28,7 +30,7 @@ public interface MovieMapperLjw {
             " left join t_movie_type tmty on tmty.id = tmd.type " +
             " left join t_movie_language tml on tml.id = tmd.language")
     Integer queryMovieCountLjw(HashMap<String, Object> map);
-
+    
     List<MovieBean> queryMovieLjw(HashMap<String, Object> map);
 
     Boolean saveMovieLjw(MovieBean movieBean);
@@ -83,8 +85,37 @@ public interface MovieMapperLjw {
     String queryTagLjw(Integer movieId);
 
     @Update("update t_movie set slideShow = 1 where id = #{value}")
-    void isSlideShowLjw(Integer id);
+    int isSlideShowLjw(Integer id);
 
     @Update("update t_movie set slideShow = 0 where id = #{value}")
-    void noSlideShowLjw(Integer id);
+    int noSlideShowLjw(Integer id);
+
+    @Select("select " +
+            "tm.*, " +
+            "GROUP_CONCAT(tper.name) performer, " +
+            " tmd.price, " +
+            " tmd.length, " +
+            " tmd.firstTime, " +
+            " tmd.director as derector, " +
+            " tmd.detail, " +
+            " tmt.startDate, " +
+            " tmt.endDate, " +
+            " tmty.name as typeName, " +
+            " tmty.id as type, " +
+            " tml.name as languageName ," +
+            " tml.id as language " +
+            " from t_movie tm " +
+            " left join t_movie_detail tmd on tmd.movieId = tm.id " +
+            " left join t_movie_time tmt on tmt.movieId = tm.id " +
+            " left join t_paiqi tp on tp.movieId = tm.id " +
+            " left join t_movie_type tmty on tmty.id = tmd.type " +
+            " left join t_movie_language tml on tml.id = tmd.language " +
+            " left join t_movie_performer tmper on tmper.movieId = tm.id " +
+            " left join t_performer tper on tper.id = tmper.performerId " +
+            " where tm.id = #{id} " +
+            " group by tm.id")
+    MovieBean findMovieInfo(Integer id);
+
+    @Select("select id,name,img from t_movie where id = #{value}")
+    HitMovies findImgInfoById(Integer id);
 }
